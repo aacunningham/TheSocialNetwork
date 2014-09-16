@@ -3,7 +3,7 @@
     require_once "../assets/functions.php";
 
     class post {
-        public $user, $content, $dateTime, $category;
+        public $user, $content, $dateTime, $category, $folder;
         
         //Methods
         public function create () {
@@ -18,14 +18,9 @@
             
         }
         
-        public function listPosts () {
+        public function listBlogs () {
             
         }
-        
-        public function sortPosts () {
-            
-        }
-        
         
         public function display () {
             

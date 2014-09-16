@@ -1,7 +1,7 @@
 <?php
 
     require_once "../Layout/header.php";
-
+    echo "hello world";
     if (!empty($_POST['newUser'])) {
         if ($_POST['password1'] == $_POST['password2']) {
             $user->password = $_POST['password1'];
@@ -14,7 +14,7 @@
             $user->hobbies = $_POST['hobbies'];
             $user->bio = $_POST['bio'];
             $user->rel = $_POST['rel'];
-            $user->add ();
+            $user->create ();
         } else {
             $user->message = "Error: passwords don't match";
         }

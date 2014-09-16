@@ -14,7 +14,7 @@
             $this->usersJSON = decodeJSON($this->userDB);
         }
         
-        public function add () {
+        public function create () {
             $this->usersJSON[$this->email] = array (
                 "password" => md5($this->password),
                 "name" => $this->name,
@@ -35,7 +35,9 @@
             deleteFolder ("assets/$this->email"); //delete user's uploaded content (picture)
         }
         
-        
+        public function edit () {
+            
+        }
         
         
         
