@@ -1,41 +1,47 @@
 <?php
 
     require_once "../assets/functions.php";
+    require_once "../sql/sql.php";
 
     class user {
         //properties 
-        public $email, $password, $name, $picture, $interests, $hobbies, $bio, $rel;
-        public $message;
-        public $userDB = "users.json";
-        public $usersJSON = array ();
+        public $email, $password, $fname, $lname, $picture, $interests, $hobbies, $bio, $rel;
+        private $identifier = "uid";
+        public $table = "users";
+        public $id, $message;
         
         //methods
-        public function user () {
-            $this->usersJSON = decodeJSON($this->userDB);
+        public function get () {
+            $dao = new SQL ();
+            $results = $dao->select ($this->table, $this->identifier, $this->id);
+            foreach ($results[0] as $key => $value) {
+                if (property_exists($this, $key)) { //if it's a property of user (must be same names)
+                    $this->$key = $value; //set object's properties
+                }
+            }
         }
         
         public function create () {
-            $this->usersJSON[$this->email] = array (
-                "password" => md5($this->password),
-                "name" => $this->name,
-                "picture" => empty($this->picture) ? 
-                    "../assets/icons/default.png" : 
-                    $this->picture,
-                "interests" => $this->interests,
-                "hobbies" => $this->hobbies,
-                "bio" => $this->bio,
-                "rel" => $this->rel
-            );
-            encodeJSON($this->userDB, $this->usersJSON);
+            $columns = array ("password", "email", "fname", "lname", "picture", "interests", "hobbies", "bio", "rel");
+            $values = array ($this->password, $this->email, $this->fname, $this->lname, $this->picture, $this->interests, $this->hobbies, $this->bio, $this->rel);
+            $dao = new SQL ();
+            $this->id = $dao->insert ($this->table, $columns, $values);
+            $this->message = "User created!";
         } 
         
-        public function delete () {
-            delete($this->email, $this->usersJSON); //remove user from JSON DB
-            encodeJSON($this->userDB, $this->usersJSON); //save JSON DB
-            deleteFolder ("assets/$this->email"); //delete user's uploaded content (picture)
+        public function edit () {
+            $columns = array ("email", "fname", "lname", "picture", "interests", "hobbies", "bio", "rel");
+            $values = array ($this->email, $this->fname, $this->lname, $this->picture, $this->interests, $this->hobbies, $this->bio, $this->rel);
+            $dao = new SQL ();
+            $success = $dao->update ($this->table, $columns, $values, $this->identifier, $this->id);
+            if ($success) {
+                $this->message = "User updated!";
+            } else {
+                $this->message = "Oops - an error occurred.";
+            }
         }
         
-        public function edit () {
+        public function delete () {
             
         }
         

@@ -49,6 +49,12 @@ class SQL {
         else return false; //return false for failure
     }
     
+    //select fxn - return all column values from the table where identifier = id
+    public function select ($table, $identifier, $id) {
+        $query = "SELECT * FROM ".$table." WHERE ".$identifier."=".$id;
+        return $this->get($query);
+    }
+    
     //insert into table the columns listed with the values provided, return insert id
     public function insert ($table, $columns, $values) {
         $query = "INSERT INTO ".$table." ("; //build insert command

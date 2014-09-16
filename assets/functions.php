@@ -1,17 +1,12 @@
 <?php
 
-    function encodeJSON ($file, $json) {
-        $fp = fopen ($file, "w+");
-        fwrite ($fp, json_encode ($json, 128));
-        fclose ($fp);
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
-    
-    function decodeJSON ($file) {
-        $json = file_get_contents($file);
-        $json = json_decode($json, true);
-        return $json;
-    }
-    
+
     function getLastKey ($array) {
         end($array);
         return key($array);

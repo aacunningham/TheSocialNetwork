@@ -1,19 +1,21 @@
 <?php
 
     require_once "../Layout/header.php";
-    echo "hello world";
-    if (!empty($_POST['newUser'])) {
-        if ($_POST['password1'] == $_POST['password2']) {
-            $user->password = $_POST['password1'];
-            $user->email = $_POST['email'];
-            $user->name = $_POST['name'];
+    require_once "../assets/functions.php";
+    
+    if (!empty($_POST['submit'])) {
+        if (test_input($_POST['password1']) == test_input($_POST['password2'])) {
+            $user->password = test_input($_POST['password1']);
+            $user->email = test_input($_POST['email']);
+            $user->fname = test_input($_POST['fname']);
+            $user->lname = test_input($_POST['lname']);
             if (!empty($_FILES['picture']['tmp_name'])) {
                 $user->picture = saveFile ('picture', "assets/$user->email");
             }
-            $user->interests = $_POST['interests'];
-            $user->hobbies = $_POST['hobbies'];
-            $user->bio = $_POST['bio'];
-            $user->rel = $_POST['rel'];
+            $user->interests = test_input($_POST['interests']);
+            $user->hobbies = test_input($_POST['hobbies']);
+            $user->bio = test_input($_POST['bio']);
+            $user->rel = test_input($_POST['rel']);
             $user->create ();
         } else {
             $user->message = "Error: passwords don't match";
@@ -21,9 +23,13 @@
     }
 ?>
 
-
+<!-- Title -->
 <title>New User</title>
 
+<!-- Back Navigtion -->
+<a href="interface.php" target="_self">Home</a>
+
+<!-- Heading -->
 <h1>New User</h1>
 
 <?php if (!empty($user->message)) : ?>
@@ -32,45 +38,70 @@
 
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
     <table>
+        <!-- First Name -->
         <tr>
-            <td><b>Name:</b></td>
-            <td><input required type="text" name="name" value="<?php if (!empty($_POST['name'])) echo $_POST['name']; ?>"></td>
+            <td><b>First Name:</b></td>
+            <td><input required type="text" name="fname" value="<?php if (!empty($_POST['fname'])) echo $_POST['fname']; ?>"></td>
         </tr>
+        
+        <!-- Last Name -->
+        <tr>
+            <td><b>Last Name:</b></td>
+            <td><input required type="text" name="lname" value="<?php if (!empty($_POST['lname'])) echo $_POST['lname']; ?>"></td>
+        </tr>
+        
+        <!-- Email -->
         <tr>
             <td><b>Email:<b></td>
             <td><input required type="email" name="email" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>"></td>
         </tr>
+        
+        <!-- Password -->
         <tr>
             <td><b>Password:</b></td>
             <td><input required type="password" name="password1"></td>
         </tr>
+        
+        <!-- Retype Password -->
         <tr>
             <td><b>Retype Password:</b></td>
             <td><input required type="password" name="password2"></td>
         </tr>
+        
+        <!-- Picture -->
         <tr>
             <td><b>Picture:<b></td>
             <td><input type="file" name="picture" value="<?php if (!empty($_FILES['picture'])) echo $_FILES['picture']; ?>"></td>
         </tr>
+        
+        <!-- Interests -->
         <tr>
             <td><b>Interests:<b></td>
             <td><textarea name="interests"><?php if (!empty($_POST['interests'])) echo $_POST['interests']; ?></textarea></td>
         </tr>
+        
+        <!-- Hobbies -->
         <tr>
             <td><b>Hobbies:<b></td>
             <td><textarea name="hobbies"><?php if (!empty($_POST['hobbies'])) echo $_POST['hobbies']; ?></textarea></td>
         </tr>
+        
+        <!-- Bio -->
         <tr>
             <td><b>Bio:<b></td>
             <td><textarea name="bio"><?php if (!empty($_POST['bio'])) echo $_POST['bio']; ?></textarea></td>
         </tr>
+        
+        <!-- Relationship Status -->
         <tr>
             <td><b>Relationship Status:<b></td>
-            <td><input type="radio" name="rel" value="single" <?php if (!empty($_POST['rel']) and $_POST['rel'] == "single") echo "selected"; ?>>Single
-            <input type="radio" name="rel" value="taken" <?php if (!empty($_POST['rel']) and $_POST['rel'] == "taken") echo "selected"; ?>>Taken</td>
+            <td><input type="radio" name="rel" value="single" <?php if (!empty($_POST['rel']) and $_POST['rel'] == "single") echo "checked"; ?>>Single
+            <input type="radio" name="rel" value="taken" <?php if (!empty($_POST['rel']) and $_POST['rel'] == "taken") echo "checked"; ?>>Taken</td>
         </tr>
+        
+        <!-- Submit -->
         <tr>
-            <td><input type="submit" name="newUser"></td>
+            <td><input type="submit" name="submit"></td>
         </tr>
     </table>
 </form>
