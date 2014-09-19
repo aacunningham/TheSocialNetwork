@@ -1,15 +1,17 @@
 <?php
 
     require_once "../assets/functions.php";
-    date_default_timezone_set("America/Los_Angeles");
+    require_once "../sql/sql.php";
 
-    class blog {
-        public $user, $title, $content, $dateTime, $category, $folder;
-        private $identifier = "bid";
-        public $table = "blogs";
-        public $id;
+    class folder {
+        //properties 
+        private $identifier = "fid";
+        public $table = "folders";
+        public $name;
+        public $id, $message;
         
-        //Methods
+        
+        //methods
         public function get () {
             $dao = new SQL ();
             $results = $dao->select ($this->table, $this->identifier, $this->id);
@@ -21,20 +23,20 @@
         }
         
         public function create () {
-            $columns = array ("uid", "title", "content", "category", "folder");
-            $values = array ($_SESSION['uid'], $this->title, $this->content, $this->category, $this->folder);
+            $columns = array ("uid", "name");
+            $values = array ($_SESSION['uid'], $this->name);
             $dao = new SQL ();
             $this->id = $dao->insert ($this->table, $columns, $values);
-            $this->message = "Blog created!";
-        }
+            $this->message = "Folder created!";
+        } 
         
         public function edit () {
-            $columns = array ("title", "content", "category", "folder");
-            $values = array ($this->title, $this->content, $this->category, $this->folder);
+            $columns = array ("name");
+            $values = array ($this->name);
             $dao = new SQL ();
             $success = $dao->update ($this->table, $columns, $values, $this->identifier, $this->id);
             if ($success) {
-                $this->message = "Blog updated!";
+                $this->message = "Folder updated!";
             } else {
                 $this->message = "Oops - an error occurred.";
             }
@@ -44,7 +46,7 @@
             $dao = new SQL ();
             $success = $dao->delete ($this->table, $this->identifier, $this->id);
             if ($success) {
-                $this->message = "Blog deleted!";
+                $this->message = "Folder deleted!";
             } else {
                 $this->message = "Oops - an error occurred.";
             }
@@ -55,9 +57,10 @@
             return $dao->selectAll($this->table);
         }
         
-        public function display () {
-            
-        }
+        
+        
+        
+        
         
         
         

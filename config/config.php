@@ -1,0 +1,6 @@
+<?php
+
+global $rootdir;
+$rootdir = "";
+
+?>

@@ -19,7 +19,7 @@
         $user->edit ();
     } else {
         //Get User Information
-        $user->id = 2; //replace later with method to get user id
+        $user->id = $_SESSION['uid']; //replace later with method to get user id
         $user->get (); //get user info
     }
 ?>

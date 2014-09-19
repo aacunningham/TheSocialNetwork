@@ -1,13 +1,14 @@
 <?php
 
     require_once "../assets/functions.php";
+    date_default_timezone_set("America/Los_Angeles");
 
     class post {
         //Properties
         public $user, $content, $dateTime;
         private $identifier = "pid";
         public $table = "posts";
-        public $id;
+        public $id, $uid;
         
         //Methods
         public function get () {
@@ -21,8 +22,8 @@
         }
         
         public function create () {
-            $columns = array ("content", "dateTime");
-            $values = array ($this->content, $this->dateTime);
+            $columns = array ("uid", "content");
+            $values = array ($_SESSION['uid'], $this->content);
             $dao = new SQL ();
             $this->id = $dao->insert ($this->table, $columns, $values);
             $this->message = "Post created!";
@@ -30,7 +31,13 @@
         }
         
         public function delete () {
-            
+            $dao = new SQL ();
+            $success = $dao->delete ($this->table, $this->identifier, $this->id);
+            if ($success) {
+                $this->message = "Post deleted!";
+            } else {
+                $this->message = "Oops - an error occurred.";
+            }
         }
         
         public function edit () {
@@ -45,8 +52,9 @@
             }
         }
         
-        public function listPosts () {
-            
+        public function listAll () {
+            $dao = new SQL ();
+            return $dao->selectAll($this->table);
         }
         
         public function sortPosts () {

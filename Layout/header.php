@@ -3,11 +3,21 @@
     require_once "../assets/functions.php";
     require_once "../user/user.php";
     require_once "../post/post.php";
+    require_once "../blog/blog.php";
+    require_once "../folder/folder.php";
+    require_once "../category/category.php";
 
     $user = new user ();
     $post = new post ();
+    $blog = new blog ();
+    $folder = new folder ();
+    $category = new category ();
 
-
+    if (!$user->loggedIn() and $_SERVER['PHP_SELF'] != "/TestingSocialNetwork/user/login.php") { ?>
+        <script type="text/javascript">
+            redirect ("../user/login.php");
+        </script>
+    <?php }
 
 
 

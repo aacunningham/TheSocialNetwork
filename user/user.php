@@ -11,6 +11,13 @@
         public $id, $message;
         
         //methods
+        public function user () {
+            if ($this->loggedIn()) {
+                $this->id = $_SESSION['uid'];
+                $this->get ();
+            }
+        }
+                
         public function get () {
             $dao = new SQL ();
             $results = $dao->select ($this->table, $this->identifier, $this->id);
@@ -42,14 +49,38 @@
         }
         
         public function delete () {
-            
+            $dao = new SQL ();
+            $success = $dao->delete ($this->table, $this->identifier, $_SESSION['uid']);
+            if ($success) {
+                $this->message = "User deleted!";
+                $this->logout (); //user deleted their account, log them out
+            } else {
+                $this->message = "Oops - an error occurred.";
+            }
         }
         
+        public function login () {
+            $dao = new SQL (); 
+            $result = $dao->select ($this->table, "email", $this->email);
+            if ($result[0]["password"] == $this->password) {
+                $_SESSION['uid'] = $result[0]["uid"];
+                $this->message = "User logged in!";
+            }
+        }
         
+        public function logout () {
+            $_SESSION['uid'] = NULL;
+            $this->message = "User logged out!";
+        }
         
+        public function loggedIn () {
+            return !empty($_SESSION['uid']);
+        }
         
-        
-        
+        public function listAll () {
+            $dao = new SQL ();
+            return $dao->selectAll($this->table);
+        }
         
         
         

@@ -51,7 +51,12 @@ class SQL {
     
     //select fxn - return all column values from the table where identifier = id
     public function select ($table, $identifier, $id) {
-        $query = "SELECT * FROM ".$table." WHERE ".$identifier."=".$id;
+        $query = "SELECT * FROM ".$table." WHERE ".$identifier."='".$id."'";
+        return $this->get($query);
+    }
+    
+    public function selectAll ($table) {
+        $query = "SELECT * FROM ".$table;
         return $this->get($query);
     }
     
