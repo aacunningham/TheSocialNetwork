@@ -17,6 +17,8 @@
 <a href="../folder/interface.php" target="_self">Go to Folders</a>
 <br>
 <a href="../category/interface.php" target="_self">Go to Categories</a>
+<br>
+<a href="../profile/profile.php" target="_self">Go to Profile</a>
 
 
 

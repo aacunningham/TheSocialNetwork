@@ -37,7 +37,7 @@
         
         <!-- Submit -->
         <tr>
-            <td><input type="submit" name="submit" value="Delete" onclick="confirm('Are you sure you want to delete this folder?');"></td>
+            <td><input type="submit" name="submit" value="Delete" onclick="return confirm('Are you sure you want to delete this folder?');"></td>
         </tr>
     </table>
 </form>

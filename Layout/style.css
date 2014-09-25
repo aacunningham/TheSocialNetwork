@@ -8,39 +8,20 @@ table {
 }
 
 /* Profile module */
-div.profile_module {
-    border: 10px solid #3385FF;
+div.module {
+    border: 1px solid #000000;
     display: block;
-    margin: 10px;
-    padding: 10px;
+    margin: 5px;
+    padding: 5px;
     background-color: #ADCEFF;
     width: 40%;
     float: left;
 }
 
-div.profile_module .title {
-    display: block;
+div.module .title {
     font-weight: bold;
     text-align: left;
     font-size: 22px;
-    border: 2px solid black;
     padding: 5px;
-    background-color: white;
-}
-
-div.inner_module {
-    border: 2px solid black;
-    display: block;
-    margin: 10px auto;
-    padding: 5px; 
-    background-color: white;
-    width: 80%;
-}
-
-div.inner_module ul {
-    padding: 0;
-    list-style-type: none;
-    font-size: 18px;
-    text-align: center;
 }
 

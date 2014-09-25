@@ -8,14 +8,16 @@
         public $user, $content, $dateTime;
         private $identifier = "pid";
         public $table = "posts";
-        public $id, $uid;
+        public $pid, $uid;
         
         //Methods
-        public function get () {
+        public function get ($identifier=null, $id=null) {
+            if (empty($identifier)) $identifier = $this->identifier;
+            if (empty($id)) $id = $this->pid;
             $dao = new SQL ();
-            $results = $dao->select ($this->table, $this->identifier, $this->id);
+            $results = $dao->select ($this->table, $identifier, $id);
             foreach ($results[0] as $key => $value) {
-                if (property_exists($this, $key)) { //if it's a property of user (must be same names)
+                if (property_exists($this, $key)) { //if it's a property of the object (must be same names)
                     $this->$key = $value; //set object's properties
                 }
             }
@@ -25,14 +27,14 @@
             $columns = array ("uid", "content");
             $values = array ($_SESSION['uid'], $this->content);
             $dao = new SQL ();
-            $this->id = $dao->insert ($this->table, $columns, $values);
+            $this->pid = $dao->insert ($this->table, $columns, $values);
             $this->message = "Post created!";
         
         }
         
         public function delete () {
             $dao = new SQL ();
-            $success = $dao->delete ($this->table, $this->identifier, $this->id);
+            $success = $dao->delete ($this->table, $this->identifier, $this->pid);
             if ($success) {
                 $this->message = "Post deleted!";
             } else {
@@ -44,7 +46,7 @@
             $columns = array ("content");
             $values = array ($this->content);
             $dao = new SQL ();
-            $success = $dao->update ($this->table, $columns, $values, $this->identifier, $this->id);
+            $success = $dao->update ($this->table, $columns, $values, $this->identifier, $this->pid);
             if ($success) {
                 $this->message = "Post updated!";
             } else {

@@ -8,15 +8,17 @@
         private $identifier = "fid";
         public $table = "folders";
         public $name;
-        public $id, $message;
+        public $fid, $message;
         
         
         //methods
-        public function get () {
+        public function get ($identifier=null, $id=null) {
+            if (empty($identifier)) $identifier = $this->identifier;
+            if (empty($id)) $id = $this->fid;
             $dao = new SQL ();
-            $results = $dao->select ($this->table, $this->identifier, $this->id);
+            $results = $dao->select ($this->table, $identifier, $id);
             foreach ($results[0] as $key => $value) {
-                if (property_exists($this, $key)) { //if it's a property of user (must be same names)
+                if (property_exists($this, $key)) { //if it's a property of the object (must be same names)
                     $this->$key = $value; //set object's properties
                 }
             }
@@ -26,7 +28,7 @@
             $columns = array ("uid", "name");
             $values = array ($_SESSION['uid'], $this->name);
             $dao = new SQL ();
-            $this->id = $dao->insert ($this->table, $columns, $values);
+            $this->fid = $dao->insert ($this->table, $columns, $values);
             $this->message = "Folder created!";
         } 
         
@@ -34,7 +36,7 @@
             $columns = array ("name");
             $values = array ($this->name);
             $dao = new SQL ();
-            $success = $dao->update ($this->table, $columns, $values, $this->identifier, $this->id);
+            $success = $dao->update ($this->table, $columns, $values, $this->identifier, $this->fid);
             if ($success) {
                 $this->message = "Folder updated!";
             } else {
@@ -44,7 +46,7 @@
         
         public function delete () {
             $dao = new SQL ();
-            $success = $dao->delete ($this->table, $this->identifier, $this->id);
+            $success = $dao->delete ($this->table, $this->identifier, $this->fid);
             if ($success) {
                 $this->message = "Folder deleted!";
             } else {

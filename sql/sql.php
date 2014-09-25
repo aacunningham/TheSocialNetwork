@@ -10,10 +10,10 @@ class SQL {
     private $row;
     
     public function __construct() {
-        $user = "user"; //user
-        $pass = "password"; //password
-        $host = "localhost"; //host
-        $db = 'thesocialnetwork'; //databse name
+        $user = "user"; //user - root
+        $pass = "password"; //password - Aug3!
+        $host = "localhost"; //host - http://ec2-54-209-77-158.compute-1.amazonaws.com/
+        $db = 'thesocialnetwork'; //databse name - socialnetworkDB
         $this->connection = mysql_pconnect ($host, $user, $pass) or die(mysql_error()); //connect to DB
         mysql_select_db($db,$this->connection) or die(mysql_error()); //select DB
         unset($user);
@@ -51,7 +51,18 @@ class SQL {
     
     //select fxn - return all column values from the table where identifier = id
     public function select ($table, $identifier, $id) {
-        $query = "SELECT * FROM ".$table." WHERE ".$identifier."='".$id."'";
+        $query = "SELECT * FROM ".$table." WHERE ";
+        if (is_array($identifier) and is_array($id)) {
+            $i = 0;
+            foreach ($identifier as $col) {
+                $query .= $col."='".$id[$i]."'";
+                if (array_key_exists(++$i, $id)) {
+                    $query .= " AND ";
+                }
+            }
+        } else {
+            $query .= $identifier."='".$id."'";
+        }
         return $this->get($query);
     }
     

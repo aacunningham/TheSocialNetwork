@@ -10,6 +10,11 @@
        $user->password = test_input($_POST['password']);
        $user->email = test_input($_POST['email']);
        $user->login ();
+       if ($user->loggedIn()) { ?>
+           <script type="text/javascript">
+               redirect ("interface.php");
+           </script>
+   <?php }
     }
 ?>
 
@@ -46,3 +51,5 @@
         </tr>
     </table>
 </form>
+
+<a href="new.php" target="_self">Create an account.</a>

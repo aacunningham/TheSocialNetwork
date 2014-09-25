@@ -4,8 +4,8 @@
     require_once "../assets/functions.php";
     
     if (!empty($_POST['choose'])) {
-        $blog->id = $_POST['id'];
-        $blog->get (); //get blog info
+        $post->id = $_POST['id'];
+        $post->get (); //get post info
     } elseif (!empty($_POST['submit'])) {
         //Form Validation
         $post->id = $_POST['pid'];
@@ -31,7 +31,7 @@
 <?php if (!empty($post->id)) : ?>
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
     <table>
-        <!-- Hidden - User ID -->
+        <!-- Hidden - Post ID -->
         <input type="hidden" name="pid" value="<?php echo $post->id; ?>">
         
         <!-- Content -->

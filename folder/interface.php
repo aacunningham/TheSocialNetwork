@@ -17,6 +17,8 @@
 <a href="../blog/interface.php" target="_self">Go to Blogs</a>
 <br>
 <a href="../category/interface.php" target="_self">Go to Categories</a>
+<br>
+<a href="../profile/profile.php" target="_self">Go to Profile</a>
 
 
 
