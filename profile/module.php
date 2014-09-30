@@ -13,7 +13,7 @@
         
         //Methods
         public function module () {
-            $this->user = !empty($_SESSION['uid']) ? $_SESSION['uid'] : '';
+            $this->uid = !empty($_SESSION['uid']) ? $_SESSION['uid'] : '';
         }
         
         public function get ($identifier=null, $id=null) {
@@ -21,7 +21,6 @@
             if (empty($id)) $id = $this->mid;
             $dao = new SQL ();
             $results = $dao->select ($this->table, $identifier, $id);
-            print_r($results[0]);
             foreach ($results[0] as $key => $value) {
                 if (property_exists($this, $key)) { //if it's a property of the object (must be same names)
                     $this->$key = $value; //set object's properties
@@ -65,14 +64,14 @@
         }
         
         public function getName ($location) {
-            $this->get (array("uid", "location"), array($this->user, $location));
+            $this->get (array("uid", "location"), array($this->uid, $location));
             return $this->name;
         }
         
         //attempt at polymorphism
         public function display ($object, $location) {
             $class = get_class ($object);
-            $type = $this->get (array("uid", "location"), array($this->user, $location));
+            $type = $this->getName ($location);
             switch ($class) {
                 case "user":
                     $this->display_user ($object, $type);
@@ -86,18 +85,19 @@
             }
         }
         
-        private function display_user ($user, $type) {
+        public function display_user ($user, $type) {
             switch ($type) {
-                case "about_me":
+                case "about me":
                     $this->display_about_me ($user);
                     break;
                 case "contact":
                     $this->display_contact ($user);
+                    break;
             }
         }
         
-        private function display_about_me ($user) { 
-            $this->get(array("uid", "name"), array($user->id, "about me")); ?>
+        public function display_about_me ($user) { 
+            $this->get(array("uid", "name"), array($user->uid, "about me")); ?>
             <div class="module" id="about_me" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
                 <h1 class="title">About Me</h1>
                 <table>
@@ -109,9 +109,9 @@
             </div>
         <?php }
         
-        private function display_contact ($user) {
-            $this->get(array("uid", "name"), array($user->id, "contact")); ?>
-            <div class="module" id="about_me" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
+        public function display_contact ($user) {
+            $this->get(array("uid", "name"), array($user->uid, "contact")); ?>
+            <div class="module" id="contact" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
                 <h1 class="title">Contact</h1>
                 <table>
                     <tr>
