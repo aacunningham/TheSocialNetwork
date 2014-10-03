@@ -1,8 +1,7 @@
 <?php
     require_once "../Layout/header.php";
-    require_once "../assets/functions.php";
     
-    if (!empty($_POST['submit'])) {
+    if (!empty($_POST['submit'])) { //new blog submitted
         $blog->title = test_input($_POST['title']);
         $blog->content = test_input($_POST['content']);
         $blog->category = test_input ($_POST['category']);
@@ -10,8 +9,8 @@
         $blog->create ();
     }
     
-    $categoryList = $category->listCategories (); ////////////////////
-    $folderList = $folder->listFolders ();
+    $categoryList = $category->listAll (); //list all sitewide categories
+    $folderList = $folder->listFolders (); //list this user's folders
 ?>
 
 <!-- Title -->
@@ -23,11 +22,12 @@
 <!-- Heading -->
 <h1>New Blog</h1>
 
+<!-- Errors -->
 <?php if (!empty($blog->message)) : ?>
     <h3><?php echo $blog->message; ?></h3>
 <?php endif; ?>
 
-<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
     <table>
         <!-- Title -->
         <tr>

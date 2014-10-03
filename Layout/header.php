@@ -2,6 +2,7 @@
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
+    require_once "../config/config.php";
     require_once "../assets/functions.php";
     require_once "../user/user.php";
     require_once "../post/post.php";
@@ -17,9 +18,9 @@
     $category = new category ();
     $module = new module ();
 
-    if (!$user->loggedIn() and $_SERVER['PHP_SELF'] != "/user/login.php" and $_SERVER['PHP_SELF'] != "/TestingSocialNetwork/user/new.php") { ?>
+    if (!$user->loggedIn() and $_SERVER['PHP_SELF'] != $subdir."user/login.php" and $_SERVER['PHP_SELF'] != $subdir."user/new.php") { ?>
         <script type="text/javascript">
-            redirect ("/user/login.php");
+            redirect ("../user/login.php");
         </script>
     <?php } ?>
 

@@ -1,17 +1,18 @@
 <?php
 
     require_once "../Layout/header.php";
-    require_once "../assets/functions.php";
     
-    if (!empty($_POST['submit'])) {
+    if (!empty($_POST['submit'])) { //new user submitted
         if (test_input($_POST['password1']) == test_input($_POST['password2'])) {
             $user->password = test_input($_POST['password1']);
             $user->email = test_input($_POST['email']);
             $user->fname = test_input($_POST['fname']);
             $user->lname = test_input($_POST['lname']);
+            
             if (!empty($_FILES['picture']['tmp_name'])) {
-                $user->picture = saveFile ('picture', "assets/$user->email");
+                $user->picture = saveFile ('picture', "../assets/$user->email");
             }
+            
             $user->interests = test_input($_POST['interests']);
             $user->hobbies = test_input($_POST['hobbies']);
             $user->bio = test_input($_POST['bio']);
@@ -32,10 +33,12 @@
 <!-- Heading -->
 <h1>New User</h1>
 
+<!-- Errors -->
 <?php if (!empty($user->message)) : ?>
     <h3><?php echo $user->message; ?></h3>
 <?php endif; ?>
 
+<!-- New User Form -->
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
     <table>
         <!-- First Name -->

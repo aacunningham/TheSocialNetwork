@@ -1,8 +1,7 @@
 <?php
     require_once "../Layout/header.php";
-    require_once "../assets/functions.php";
     
-    $user->delete ();
+    $user->delete (); //delete this user
     if (empty($_SESSION['uid'])) { ?>
         <script type="text/javascript">
             redirect("login.php"); //redirect to landing page
@@ -19,6 +18,7 @@
 <!-- Heading -->
 <h1>Delete User</h1>
 
+<!-- Errors -->
 <?php if (!empty($user->message)) : ?>
     <h3><?php echo $user->message; ?></h3>
 <?php endif; ?>

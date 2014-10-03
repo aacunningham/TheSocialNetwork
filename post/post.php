@@ -1,40 +1,49 @@
 <?php
-
     require_once "../assets/functions.php";
     date_default_timezone_set("America/Los_Angeles");
 
     class post {
         //Properties
-        public $user, $content, $dateTime;
+        public $content, $dateTime;
         private $identifier = "pid";
         public $table = "posts";
         public $pid, $uid;
         
         //Methods
-        public function get ($identifier=null, $id=null) {
-            if (empty($identifier)) $identifier = $this->identifier;
-            if (empty($id)) $id = $this->pid;
-            $dao = new SQL ();
-            $results = $dao->select ($this->table, $identifier, $id);
-            foreach ($results[0] as $key => $value) {
+        public function get ($identifier=null, $id=null) { //get post info from SQL by id(s) at identifier(s) (can be arrays)
+            if (empty($identifier)) $identifier = $this->identifier; //default to pid
+            if (empty($id)) $id = $this->pid; //default to pid
+            
+            $dao = new SQL (); //data access object
+            $results = $dao->select ($this->table, $identifier, $id); //send query to SQL
+            
+            if (empty($results)) { //if empty
+                return NULL; //so we don't print errors
+            }
+           
+            foreach ($results[0] as $key => $value) { //if results
                 if (property_exists($this, $key)) { //if it's a property of the object (must be same names)
                     $this->$key = $value; //set object's properties
                 }
             }
+            
+            return $results;
         }
         
-        public function create () {
+        public function create () { //create a new post in the SQL
             $columns = array ("uid", "content");
             $values = array ($_SESSION['uid'], $this->content);
-            $dao = new SQL ();
-            $this->pid = $dao->insert ($this->table, $columns, $values);
+            
+            $dao = new SQL (); //data access object
+            $this->pid = $dao->insert ($this->table, $columns, $values); //send insert command
             $this->message = "Post created!";
         
         }
         
-        public function delete () {
-            $dao = new SQL ();
-            $success = $dao->delete ($this->table, $this->identifier, $this->pid);
+        public function delete () { //delete a row in the SQL
+            $dao = new SQL (); //data access object
+            $success = $dao->delete ($this->table, $this->identifier, $this->pid); //send delete command
+            
             if ($success) {
                 $this->message = "Post deleted!";
             } else {
@@ -42,11 +51,13 @@
             }
         }
         
-        public function edit () {
+        public function edit () { //Updates a post in the SQL
             $columns = array ("content");
             $values = array ($this->content);
-            $dao = new SQL ();
-            $success = $dao->update ($this->table, $columns, $values, $this->identifier, $this->pid);
+            
+            $dao = new SQL (); //data access object
+            $success = $dao->update ($this->table, $columns, $values, $this->identifier, $this->pid); //send update command
+            
             if ($success) {
                 $this->message = "Post updated!";
             } else {
@@ -54,18 +65,28 @@
             }
         }
         
-        public function listAll () {
-            $dao = new SQL ();
-            return $dao->selectAll($this->table);
+        public function listAll () { //list all posts for all users 
+            $dao = new SQL (); //data access object
+            return $dao->selectAll($this->table); //select all rows and columns of the table
         }
         
-        public function sortPosts () {
-            
+        public function listPosts () { //list all posts for this user
+            return $this->get ('uid', $_SESSION['uid']); //get this user's posts
         }
         
-        
-        public function display () {
+        public function sortPosts ($posts) { //sort posts by date and time of creation for display
+            if (empty($posts)) { //if empty
+                return NULL; //so we don't print errors
+            }
             
+            usort ($posts, function ($a, $b) {
+                return $a['dateTime'] - $b['dateTime'];
+            });
+            return $posts;
+        }
+        
+        public function display () { //returns list of posts for this user for display
+            return $this->sortPosts($this->listPosts());
         }
         
         

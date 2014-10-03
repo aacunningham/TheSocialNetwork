@@ -10,6 +10,8 @@
 <br>
 <a href="delete.php" target="_self">Delete Blog</a>
 <br>
+<a href="view.php" target="_self">View Blogs</a>
+<br>
 <a href="../post/interface.php" target="_self">Go to Posts</a>
 <br>
 <a href="../user/interface.php" target="_self">Go to User</a>
@@ -19,9 +21,6 @@
 <a href="../category/interface.php" target="_self">Go to Categories</a>
 <br>
 <a href="../profile/profile.php" target="_self">Go to Profile</a>
-
-
-
 
 
 

@@ -1,12 +1,11 @@
 <?php
     require_once "../Layout/header.php";
-    require_once "../assets/functions.php";
     
-    if (!empty($_POST['submit'])) {
+    if (!empty($_POST['submit'])) { //a blog has been chosen to be deleted
         $blog->id = $_POST['id'];
         $blog->delete();
     }
-    $list = $blog->listAll();
+    $list = $blog->listBLogs(); //list this user's blogs
     
 ?>
     
@@ -19,11 +18,13 @@
 <!-- Heading -->
 <h1>Delete Blog</h1>
 
+<!-- Errors -->
 <?php if (!empty($blog->message)) : ?>
     <h3><?php echo $blog->message; ?></h3>
 <?php endif; ?>
 
-<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
+<!-- Choose Form -->
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
     <table>
         <!-- Blog -->
         <tr>

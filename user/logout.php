@@ -4,9 +4,9 @@
     require_once "user.php";
 
     $user = new user ();
-    $user->logout ();
+    $user->logout (); //log the user out
 ?>
 
     <script type="text/javascript">
-        redirect ("login.php");
+        redirect ("login.php"); //redirect to login page
     </script>

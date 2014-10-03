@@ -1,8 +1,7 @@
 <?php
     require_once "../Layout/header.php";
-    require_once "../assets/functions.php";
     
-    if (!empty($_POST['submit'])) {
+    if (!empty($_POST['submit'])) { //if new folder submitted
         $folder->name = test_input ($_POST['name']);
         $folder->create ();
     }
@@ -17,10 +16,12 @@
 <!-- Heading -->
 <h1>New Folder</h1>
 
+<!-- Errors -->
 <?php if (!empty($folder->message)) : ?>
     <h3><?php echo $folder->message; ?></h3>
 <?php endif; ?>
 
+<!-- New Folder Form -->
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
     <table>
         <!-- Content -->

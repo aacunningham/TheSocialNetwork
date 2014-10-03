@@ -1,13 +1,11 @@
 <?php
     require_once "../Layout/header.php";
-    require_once "../assets/functions.php";
     
-    if (!empty($_POST['submit'])) {
+    if (!empty($_POST['submit'])) { //if category chosen for deletion
         $category->id = $_POST['id'];
         $category->delete();
     }
-    $list = $category->listAll();
-    
+    $list = $category->listAll(); //list all sitewide categories
 ?>
     
 <!-- Title -->
@@ -19,11 +17,13 @@
 <!-- Heading -->
 <h1>Delete Category</h1>
 
+<!-- Errors -->
 <?php if (!empty($category->message)) : ?>
     <h3><?php echo $category->message; ?></h3>
 <?php endif; ?>
 
-<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
+<!-- Choose Form -->
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
     <table>
         <!-- category -->
         <tr>

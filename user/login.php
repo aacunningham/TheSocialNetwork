@@ -1,18 +1,14 @@
 <?php
 
     require_once "../Layout/header.php";
-    require_once "../assets/functions.php";
-    require_once "user.php";
     
-    $user = new user ();
-    
-    if (!empty($_POST['submit'])) {
+    if (!empty($_POST['submit'])) { //if login info submitted
        $user->password = test_input($_POST['password']);
        $user->email = test_input($_POST['email']);
-       $user->login ();
+       $user->login (); //log the user in
        if ($user->loggedIn()) { ?>
            <script type="text/javascript">
-               redirect ("interface.php");
+               redirect ("interface.php"); //redirec to user interface after login
            </script>
    <?php }
     }
@@ -21,17 +17,21 @@
 <!-- Title -->
 <title>Login</title>
 
-<!-- Back Navigtion -->
-<a href="interface.php" target="_self">Home</a>
+<?php if (!empty($_SESSION['uid'])) : ?>
+    <!-- Back Navigtion -->
+    <a href="interface.php" target="_self">Home</a>
+<?php endif; ?>
 
 <!-- Heading -->
 <h1>Login</h1>
 
+<!-- Errors -->
 <?php if (!empty($user->message)) : ?>
     <h3><?php echo $user->message; ?></h3>
 <?php endif; ?>
 
-<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
+<!-- Login Form -->
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
     <table>
         <!-- Email -->
         <tr>
@@ -47,7 +47,7 @@
     
         <!-- Submit -->
         <tr>
-            <td><input type="submit" name="submit"></td>
+            <td><input type="submit" name="submit" value="Login"></td>
         </tr>
     </table>
 </form>

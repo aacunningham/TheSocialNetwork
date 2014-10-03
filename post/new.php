@@ -1,9 +1,8 @@
 <?php
 
     require_once "../Layout/header.php";
-    require_once "../assets/functions.php";
     
-    if (!empty($_POST['submit'])) {
+    if (!empty($_POST['submit'])) { //new post submitted
         $post->content = test_input($_POST['content']);
         $post->dateTime = date("m-d-Y H:i:s");
         $post->create ();
@@ -19,11 +18,13 @@
 <!-- Heading -->
 <h1>New Post</h1>
 
+<!-- Errors -->
 <?php if (!empty($post->message)) : ?>
     <h3><?php echo $post->message; ?></h3>
 <?php endif; ?>
 
-<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
+<!-- New Post Form -->
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
     <table>
         <!-- Content -->
         <tr>

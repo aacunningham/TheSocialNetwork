@@ -1,9 +1,8 @@
 <?php
 
     require_once "../Layout/header.php";
-    require_once "../assets/functions.php";
     
-    if (!empty($_POST['submit'])) {
+    if (!empty($_POST['submit'])) { //if edited user submitted
         //Form Validation
         $user->id = $_POST['uid'];
         $user->email = test_input($_POST['email']);
@@ -19,7 +18,7 @@
         $user->edit ();
     } else {
         //Get User Information
-        $user->id = $_SESSION['uid']; //replace later with method to get user id
+        $user->id = $_SESSION['uid'];
         $user->get (); //get user info
     }
 ?>
@@ -33,10 +32,12 @@
 <!-- Heading -->
 <h1>Edit User</h1>
 
+<!-- Errors -->
 <?php if (!empty($user->message)) : ?>
     <h3><?php echo $user->message; ?></h3>
 <?php endif; ?>
 
+<!-- Edit User Form -->
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
     <table>
         <!-- Hidden - User ID -->

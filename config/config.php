@@ -1,6 +1,7 @@
 <?php
 
-global $rootdir;
-$rootdir = "";
+global $subdir;
+$subdir = "/TheSocialNetwork/";
+
 
 ?>

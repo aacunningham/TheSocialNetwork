@@ -1,8 +1,7 @@
 <?php
     require_once "../Layout/header.php";
-    require_once "../assets/functions.php";
     
-    if (!empty($_POST['submit'])) {
+    if (!empty($_POST['submit'])) { //if new category submitted
         $category->name = test_input ($_POST['name']);
         $category->create ();
     }
@@ -17,10 +16,12 @@
 <!-- Heading -->
 <h1>New Category</h1>
 
+<!-- Errors -->
 <?php if (!empty($category->message)) : ?>
     <h3><?php echo $category->message; ?></h3>
 <?php endif; ?>
 
+<!-- Category Form -->
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
     <table>
         <!-- Content -->

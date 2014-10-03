@@ -10,6 +10,8 @@
 <br>
 <a href="delete.php" target="_self">Delete Category</a>
 <br>
+<a href="view.php" target="_self">View Categories</a>
+<br>
 <a href="../post/interface.php" target="_self">Go to Posts</a>
 <br>
 <a href="../user/interface.php" target="_self">Go to User</a>
