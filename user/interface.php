@@ -12,6 +12,8 @@
 <br>
 <a href="edit.php" target="_self">Edit User</a>
 <br>
+<a href="friends.php" target="_self">Make Friends</a>
+<br>
 <a href="delete.php" target="_self" onclick="return confirm('Are you sure you want to delete your account?');">Delete User</a>
 <br>
 <a href="../post/interface.php" target="_self">Go to Posts</a>
