@@ -10,7 +10,7 @@ class SQL {
     private $row;
     
     public function __construct() {
-        $user = "user"; //user - root
+        $user = "root"; //user - root
         $pass = "password"; //password - Aug3!
         $host = "localhost"; //host - http://ec2-54-209-77-158.compute-1.amazonaws.com/
         $db = 'thesocialnetwork'; //databse name - socialnetworkDB
@@ -49,7 +49,7 @@ class SQL {
         else return false; //return false for failure
     }
     
-    public function select ($table, $identifier, $id) { //select fxn - return all column values from the table where identifier = id
+    public function select ($table, $identifier, $id, $orderby=null) { //select fxn - return all column values from the table where identifier = id
         $query = "SELECT * FROM ".$table." WHERE "; //build query
         if (is_array($identifier) and is_array($id)) { //if multiple conditions
             $i = 0;
@@ -61,7 +61,10 @@ class SQL {
             }
         } else {
             $query .= $identifier."='".$id."'"; //single condition
-        }
+	}
+	if (!empty($orderby)) {
+	    $query .= " ORDER BY $orderby";
+	}
         return $this->get($query); //send query, return results
     }
     
