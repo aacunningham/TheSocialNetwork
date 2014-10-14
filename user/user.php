@@ -9,18 +9,19 @@
         //properties 
         public $email, $password, $fname, $lname, $picture, $interests, $hobbies, $bio, $rel;
         private $identifier = "uid";
-        public $table = "users";
+        private $table = "users";
+        private $friends = "friends";
         public $uid, $message;
         
         //methods
-        public function user () { //get current user's info at initialization of object
-            if ($this->loggedIn()) {
+        public function user ($blank=false) { //get current user's info at initialization of object
+            if (!$blank and $this->loggedIn()) {
                 $this->uid = $_SESSION['uid'];
                 $this->get ();
             }
         }
                 
-        public function get ($identifier=null, $id=null) { //fetch user's info from SQL using id(s) at identifier(s) (can be arrays)
+        public function get ($identifier=null, $id=null, $set=true) { //fetch user's info from SQL using id(s) at identifier(s) (can be arrays)
             if (empty($identifier)) $identifier = $this->identifier; //if none provided, use uid as default
             if (empty($id)) $id = $this->uid; //if none provided, use uid as default
             
@@ -31,9 +32,11 @@
                 return NULL; //so we don't print errors
             }
             
-            foreach ($results[0] as $key => $value) { //if results
-                if (property_exists($this, $key)) { //if it's a property of the object (must be same names)
-                    $this->$key = $value; //set object's properties
+            if ($set) {
+                foreach ($results[0] as $key => $value) { //if results
+                    if (property_exists($this, $key)) { //if it's a property of the object (must be same names)
+                        $this->$key = $value; //set object's properties
+                    }
                 }
             }
             
@@ -99,6 +102,41 @@
             return $dao->selectAll($this->table); //select all of them
         }
         
+        public function makeFriend ($email) {
+            $user = new User ();
+            $user->get ("email", $email);
+            $dao = new SQL ();
+            $dao->insert ($this->friends, array ("uid1", "uid2"), array ($this->uid, $user->uid));
+            $this->message = "Friend added!";
+        }
+        
+        public function unFriend ($email) {
+            $user = new User ();
+            $user->get ("email", $email);
+            $dao = new SQL ();
+            $dao->delete ($this->friends, array ("uid1", "uid2"), array ($this->uid, $user->uid));
+            $this->message = "Friend removed!";
+        }
+        
+        public function search ($search) {
+            if (strpos($search, "@") === false) { //the string is a name - could be first or last or both
+                $space = strpos($search, " ");
+                if ($space === false) { //no spaces - just one name
+                    $results = $this->get ("fname", $search, false);
+                    $results2 = $this->get ("lname", $search, false);
+                    if (count($results2) > 0) {
+                        $results = $results2;
+                    }
+                } else {
+                    $first = ucwords (substr ($search, 0, $space));
+                    $last = ucwords (substr ($search, $space, strlen($search) - $space));
+                    $results = $this->get (array("fname", "lname"), array($first, $last), false);
+                }
+            } else {
+                $results = $this->get ("email", $search, false); //string is a name
+            }
+            return $results;
+        }
         
         
         

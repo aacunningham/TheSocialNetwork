@@ -74,6 +74,9 @@ class SQL {
     }
     
     public function insert ($table, $columns, $values) { //insert into table the columns listed with the values provided, return insert id
+        $check = $this->select ($table, $columns, $values); //check if this exact row already exists
+        if ($check) return; //if so, don't do anything - avoid duplicate entries
+    
         $query = "INSERT INTO ".$table." ("; //build insert command
         foreach ($columns as $c) {
             $query .= $c.", "; //column names
@@ -100,7 +103,18 @@ class SQL {
     }
     
     public function delete ($table, $identifier, $id) { //delete from table where identifier = id
-        $query = "DELETE FROM ".$table." WHERE ".$identifier."=".$id; //build delete command
+        $query = "DELETE FROM ".$table." WHERE "; //build query
+        if (is_array($identifier) and is_array($id)) { //if multiple conditions
+            $i = 0;
+            foreach ($identifier as $col) {
+                $query .= $col."='".$id[$i]."'"; //add to query
+                if (array_key_exists(++$i, $id)) { //if more
+                    $query .= " AND "; //add an and
+                }
+            }
+        } else {
+            $query .= $identifier."=".$id; //single condition
+        }
         return $this->send($query); //send delete command
     }
     
