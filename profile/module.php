@@ -6,7 +6,7 @@
 
     class module {
         //Properties
-        public $name, $location, $background, $fontColor;
+        public $name, $background, $fontColor, $side, $order;
         private $identifier = "mid";
         public $table = "modules";
         public $mid, $uid;
@@ -27,10 +27,9 @@
                 }
             }
         }
-        
+
         public function create () {
-            $columns = array ("uid", "name", "location", "background", "fontColor");
-            $values = array ($_SESSION['uid'], $this->name, $this->location, $this->background, $this->fontColor);
+            $columns = array ("uid", "name", "side", "order", "background", "fontColor");            $values = array ($_SESSION['uid'], $this->name, $this->side, $this->order, $this->background, $this->fontColor);
             $dao = new SQL ();
             $this->mid = $dao->insert ($this->table, $columns, $values);
             $this->message = "Module created!";
@@ -47,8 +46,8 @@
         }
         
         public function edit () {
-            $columns = array ("location", "background", "fontColor");
-            $values = array ($this->location, $this->background, $this->fontColor);
+            $columns = array ("background", "fontColor");
+            $values = array ($this->background, $this->fontColor);
             $dao = new SQL ();
             $success = $dao->update ($this->table, $columns, $values, $this->identifier, $this->mid);
             if ($success) {
@@ -57,14 +56,41 @@
                 $this->message = "Oops - an error occurred.";
             }
         }
-        
+
+        public function print_page ($user) {
+            $dao = new SQL ();
+            $left_side = $dao->select ("modules", ["uid", "side"], [$user->uid, 0], "sequence");
+            $right_side = $dao->select ("modules", ["uid", "side"], [$user->uid, 1], "sequence");
+            echo "<div style=\"width:30%; float:left\">";
+            foreach ($left_side as $module) {
+                $this->print_module ($user, $module);
+            }
+            echo "</div>";
+            echo "<div style=\"width:30%; float:right\">";
+            foreach ($right_side as $modules) {
+                echo $modules[1];
+            }
+            echo "</div>";
+        }
+
+        public function print_module ($user, $module) {
+            switch ($module[1]) {
+            case "about me":
+                $this->display_about_me ($user);
+                break;
+            case "contact":
+                $this->display_contact ($user);
+                break;
+            }
+        }
+
         public function listAll () {
             $dao = new SQL ();
             return $dao->selectAll($this->table);
         }
         
-        public function getName ($location) {
-            $this->get (array("uid", "location"), array($this->uid, $location));
+        public function getName () {
+            $this->get (array("uid"), array($this->uid));
             return $this->name;
         }
         
@@ -85,20 +111,9 @@
             }
         }
         
-        public function display_user ($user, $type) {
-            switch ($type) {
-                case "about me":
-                    $this->display_about_me ($user);
-                    break;
-                case "contact":
-                    $this->display_contact ($user);
-                    break;
-            }
-        }
-        
         public function display_about_me ($user) { 
             $this->get(array("uid", "name"), array($user->uid, "about me")); ?>
-            <div class="module" id="about_me" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
+        <div class="module" id="about_me" style="background:#<?php echo $this->background; ?>;color:#<?php echo $this->fontColor; ?>;">
                 <h1 class="title">About Me</h1>
                 <table>
                     <tr>
@@ -111,7 +126,7 @@
         
         public function display_contact ($user) {
             $this->get(array("uid", "name"), array($user->uid, "contact")); ?>
-            <div class="module" id="contact" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
+        <div class="module" id="contact" style="background:#<?php echo $this->background; ?>;color:#<?php echo $this->fontColor; ?>;"?>
                 <h1 class="title">Contact</h1>
                 <table>
                     <tr>
