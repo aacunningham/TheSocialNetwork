@@ -82,7 +82,8 @@
             $dao = new SQL ();  //data access object
             $result = $dao->select ($this->table, "email", $this->email); //get their password by their email
             
-            if ($result[0]["password"] == $this->password) { //if their password is valid
+            //if ($result[0]["password"] == $this->password) { //if their password is valid
+            if (password_verify($this->password, $result[0]["password"])) { //if their password is valid
                 $_SESSION['uid'] = $result[0]["uid"]; //save their uid in session for use everywhere
                 $this->message = "User logged in!"; 
             }
