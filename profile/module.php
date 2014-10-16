@@ -6,7 +6,7 @@
 
     class module {
         //Properties
-        public $name, $background, $fontColor, $side, $order;
+        public $name, $background, $fontColor, $side, $sequence;
         private $identifier = "mid";
         public $table = "modules";
         public $mid, $uid;
@@ -29,12 +29,13 @@
         }
 
         public function create () {
-            $columns = array ("uid", "name", "side", "order", "background", "fontColor");            $values = array ($_SESSION['uid'], $this->name, $this->side, $this->order, $this->background, $this->fontColor);
+            $columns = array ("uid", "name", "side", "sequence", "background", "fontColor");
+            $values = array ($_SESSION['uid'], $this->name, $this->side, $this->order, $this->background, $this->fontColor);
             $dao = new SQL ();
             $this->mid = $dao->insert ($this->table, $columns, $values);
             $this->message = "Module created!";
         }
-        
+
         public function delete () {
             $dao = new SQL ();
             $success = $dao->delete ($this->table, $this->identifier, $this->mid);
@@ -61,14 +62,15 @@
             $dao = new SQL ();
             $left_side = $dao->select ("modules", ["uid", "side"], [$user->uid, 0], "sequence");
             $right_side = $dao->select ("modules", ["uid", "side"], [$user->uid, 1], "sequence");
+            echo "<a href=\"../user/interface.php\" target=\"_self\">Home</a>";
             echo "<div style=\"width:30%; float:left\">";
             foreach ($left_side as $module) {
                 $this->print_module ($user, $module);
             }
             echo "</div>";
             echo "<div style=\"width:30%; float:right\">";
-            foreach ($right_side as $modules) {
-                echo $modules[1];
+            foreach ($right_side as $module) {
+                $this->print_module ($user, $module);
             }
             echo "</div>";
         }
@@ -113,12 +115,24 @@
         
         public function display_about_me ($user) { 
             $this->get(array("uid", "name"), array($user->uid, "about me")); ?>
-        <div class="module" id="about_me" style="background:#<?php echo $this->background; ?>;color:#<?php echo $this->fontColor; ?>;">
+        <div class="module" id="about_me" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
                 <h1 class="title">About Me</h1>
-                <table>
+                <table style="width:100%">
                     <tr>
                         <td>Name:</td>
                         <td><?php echo $user->fname.' '.$user->lname; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Bio:</td>
+                        <td><?=$user->bio?></td>
+                    </tr>
+                    <tr>
+                        <td>Interests:</td>
+                        <td><?=$user->interests?></td>
+                    </tr>
+                    <tr>
+                        <td>Hobbies:</td>
+                        <td><?=$user->hobbies?></td>
                     </tr>
                 </table>
             </div>
@@ -126,7 +140,7 @@
         
         public function display_contact ($user) {
             $this->get(array("uid", "name"), array($user->uid, "contact")); ?>
-        <div class="module" id="contact" style="background:#<?php echo $this->background; ?>;color:#<?php echo $this->fontColor; ?>;"?>
+        <div class="module" id="contact" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <h1 class="title">Contact</h1>
                 <table>
                     <tr>

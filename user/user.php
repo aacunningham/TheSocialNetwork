@@ -49,9 +49,19 @@
             
             $dao = new SQL (); //data access object
             $this->uid = $dao->insert ($this->table, $columns, $values); //send insert to SQL
+            $this->create_default ($this->uid);
             $this->message = "User created!";
         } 
-        
+
+        public function create_default ($userid) {
+            $columns = array ("uid", "name", "side", "sequence", "background", "fontColor");
+            $values = array ($userid, "about me", 0, 0, "#FF00FF", "#000000");
+            $dao = new SQL ();
+            $dao->insert ("modules", $columns, $values);
+            $values = array ($userid, "contact", 1, 0, "#FF00FF", "#000000");
+            $dao->insert ("modules", $columns, $values);
+        }
+
         public function edit () { //updates a user in the SQL
             $columns = array ("email", "fname", "lname", "picture", "interests", "hobbies", "bio", "rel");
             $values = array ($this->email, $this->fname, $this->lname, $this->picture, $this->interests, $this->hobbies, $this->bio, $this->rel);
