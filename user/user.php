@@ -68,13 +68,17 @@
         
         public function delete () { //deletes a row in the SQL
             $dao = new SQL (); //data access object
-            $success = $dao->delete ($this->table, $this->identifier, $_SESSION['uid']);
-            
-            if ($success) {
-                $this->message = "User deleted!";
-                $this->logout (); //user deleted their account, log them out
+            $module_success = $dao->delete ("modules", $this->identifier, $_SESSION['uid']);
+            if ($module_success) {
+                $user_success = $dao->delete ($this->table, $this->identifier, $_SESSION['uid']);
+                if ($user_success) {
+                    $this->message = "User deleted!";
+                    $this->logout ();
+                } else {
+                    $this->message = "User could not be deleted.";
+                }
             } else {
-                $this->message = "Oops - an error occurred.";
+                $this->message = "Modules could not be deleted.";
             }
         }
         
