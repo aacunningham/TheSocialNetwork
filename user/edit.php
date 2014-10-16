@@ -15,6 +15,7 @@
         $user->hobbies = test_input($_POST['hobbies']);
         $user->bio = test_input($_POST['bio']);
         $user->rel = test_input($_POST['rel']);
+        $user->privacy = test_input($_POST['privacy']);
         $user->edit ();
     } else {
         //Get User Information
@@ -90,6 +91,16 @@
             <td><b>Relationship Status:<b></td>
             <td><input type="radio" name="rel" value="single" <?php if ((!empty($user->rel) and strtolower($user->rel) == "single") or (!empty($_POST['rel']) and $_POST['rel'] == "single")) echo "checked";?>>Single
             <input type="radio" name="rel" value="taken" <?php if ((!empty($user->rel) and strtolower($user->rel) == "taken") or (!empty($_POST['rel']) and $_POST['rel'] == "taken")) echo "checked";?>>Taken</td>
+        </tr>
+        
+        <!-- Privacy Settings -->
+        <tr>
+            <td><b>Privacy Setting:</b></td>
+            <td><select name='privacy'>
+                <option value="<?php echo $user->publicToUsers; ?>" <?php if (!empty($user->privacy) and $user->privacy == $user->publicToUsers) echo "selected"; ?>>Public, signed in users</option>
+                <option value="<?php echo $user->public; ?>" <?php if (!empty($user->privacy) and $user->privacy == $user->public) echo "selected"; ?>>Public, not signed in</option>
+                <option value="<?php echo $user->friendsOnly; ?>" <?php if (!empty($user->privacy) and $user->privacy == $user->friendsOnly) echo "selected"; ?>>Friends Only</option>
+            </select></td>
         </tr>
         
         <!-- Submit -->

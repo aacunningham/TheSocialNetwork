@@ -70,8 +70,9 @@
             return $dao->selectAll($this->table); //select all rows and columns of the table
         }
         
-        public function listPosts () { //list all posts for this user
-            return $this->get ('uid', $_SESSION['uid']); //get this user's posts
+        public function listPosts ($uid=NULL) { //list all posts for this user
+            if (empty($uid)) $uid = $_SESSION['uid'];
+            return $this->get ('uid', $uid); //get this user's posts
         }
         
         public function sortPosts ($posts) { //sort posts by date and time of creation for display

@@ -13,7 +13,7 @@ class SQL {
         $user = "root"; //user - root
         $pass = "Aug3!"; //password - Aug3!
         $host = "localhost"; //host - http://ec2-54-209-77-158.compute-1.amazonaws.com/
-        $db = 'thesocialnetwork'; //databse name - socialnetworkDB
+        $db = 'thesocialnetwork'; //databse name - thesocialnetwork
         
         $this->connection = mysql_pconnect ($host, $user, $pass) or die(mysql_error()); //connect to DB
         mysql_select_db($db,$this->connection) or die(mysql_error()); //select DB
