@@ -4,7 +4,7 @@
     
     if (!empty($_POST['submit'])) { //new user submitted
         if (test_input($_POST['password1']) == test_input($_POST['password2'])) {
-            $user->password = test_input($_POST['password1']);
+            $user->password = test_input(password_hash($_POST['password1'], PASSWORD_BCRYPT));
             $user->email = test_input($_POST['email']);
             $user->fname = test_input($_POST['fname']);
             $user->lname = test_input($_POST['lname']);
