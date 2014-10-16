@@ -81,7 +81,10 @@
         public function login () { //log the user into the system
             $dao = new SQL ();  //data access object
             $result = $dao->select ($this->table, "email", $this->email); //get their password by their email
-            
+            if (empty($result)) {
+                $this->message = "Error - email not in database.";
+                return;
+            } 
             if ($result[0]["password"] == $this->password) { //if their password is valid
                 $_SESSION['uid'] = $result[0]["uid"]; //save their uid in session for use everywhere
                 $this->message = "User logged in!"; 
@@ -138,7 +141,46 @@
             return $results;
         }
         
+        public function getFriends () {
+            $dao = new SQL ();
+            $results1 = $dao->select ("friends", "uid1", $this->uid);
+            $results2 = $dao->select ("friends", "uid2", $this->uid);
+            $results = array ();
+            foreach ($results1 as $r) {
+                $results[] = $r['uid2'];
+            }
+            foreach ($results2 as $r) {
+                $results[] = $r['uid1'];
+            }
+            return $results;
+        }
         
+        public function toArray () {
+            return array(
+                "uid" => $this->uid,
+                "email" => $this->email,
+                "password" => $this->password,
+                "fname" => $this->fname,
+                "lname" => $this->lname,
+                "picture" => $this->picture,
+                "interests" => $this->interests,
+                "hobbies" => $this->hobbies,
+                "bio" => $this->bio,
+                "rel" => $this->rel
+            );
+        }
+        
+        public function getOthers () {
+            $friends = $this->getFriends();
+            $all = $this->listAll ();
+            $notFriends = array ();
+            foreach ($all as $user) {
+                if (!in_array($user['uid'], $friends) and $user['uid'] != $this->uid) {
+                    $notFriends[] = $user;
+                }
+            }
+            return $notFriends;
+        }
         
     }
 ?>

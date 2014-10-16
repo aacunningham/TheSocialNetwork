@@ -14,6 +14,10 @@
 <br>
 <a href="friends.php" target="_self">Make Friends</a>
 <br>
+<a href="browse.php" target="_self">Browse Users</a>
+<br>
+<a href="../profile/feed.php" target="_self">View My Feed</a>
+<br>
 <a href="delete.php" target="_self" onclick="return confirm('Are you sure you want to delete your account?');">Delete User</a>
 <br>
 <a href="../post/interface.php" target="_self">Go to Posts</a>
