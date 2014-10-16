@@ -17,6 +17,7 @@
             $user->hobbies = test_input($_POST['hobbies']);
             $user->bio = test_input($_POST['bio']);
             $user->rel = test_input($_POST['rel']);
+            $user->privacy = test_input($_POST['privacy']);
             $user->create ();
         } else {
             $user->message = "Error: passwords don't match";
@@ -100,6 +101,16 @@
             <td><b>Relationship Status:<b></td>
             <td><input type="radio" name="rel" value="single" <?php if (!empty($_POST['rel']) and $_POST['rel'] == "single") echo "checked"; ?>>Single
             <input type="radio" name="rel" value="taken" <?php if (!empty($_POST['rel']) and $_POST['rel'] == "taken") echo "checked"; ?>>Taken</td>
+        </tr>
+        
+        <!-- Privacy Settings -->
+        <tr>
+            <td><b>Privacy Setting:</b></td>
+            <td><select name='privacy'>
+                <option value="<?php echo $user->publicToUsers; ?>">Public, signed in users</option>
+                <option value="<?php echo $user->public; ?>">Public, not signed in</option>
+                <option value="<?php echo $user->friendsOnly; ?>">Friends Only</option>
+            </select></td>
         </tr>
         
         <!-- Submit -->

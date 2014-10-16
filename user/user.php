@@ -7,10 +7,13 @@
 
     class user {
         //properties 
-        public $email, $password, $fname, $lname, $picture, $interests, $hobbies, $bio, $rel;
+        public $email, $password, $fname, $lname, $picture, $interests, $hobbies, $bio, $rel, $privacy;
         private $identifier = "uid";
         private $table = "users";
         private $friends = "friends";
+        public $publicToUsers = "Public, signed in";
+        public $public = "Public, not signed in";
+        public $friendsOnly = "Friends only";
         public $uid, $message;
         
         //methods
@@ -44,8 +47,8 @@
         }
         
         public function create () { //creates a new user in the SQL
-            $columns = array ("password", "email", "fname", "lname", "picture", "interests", "hobbies", "bio", "rel");
-            $values = array ($this->password, $this->email, $this->fname, $this->lname, $this->picture, $this->interests, $this->hobbies, $this->bio, $this->rel);
+            $columns = array ("password", "email", "fname", "lname", "picture", "interests", "hobbies", "bio", "rel", "privacy");
+            $values = array ($this->password, $this->email, $this->fname, $this->lname, $this->picture, $this->interests, $this->hobbies, $this->bio, $this->rel, $this->privacy);
             
             $dao = new SQL (); //data access object
             $this->uid = $dao->insert ($this->table, $columns, $values); //send insert to SQL
@@ -53,8 +56,8 @@
         } 
         
         public function edit () { //updates a user in the SQL
-            $columns = array ("email", "fname", "lname", "picture", "interests", "hobbies", "bio", "rel");
-            $values = array ($this->email, $this->fname, $this->lname, $this->picture, $this->interests, $this->hobbies, $this->bio, $this->rel);
+            $columns = array ("email", "fname", "lname", "picture", "interests", "hobbies", "bio", "rel", "privacy");
+            $values = array ($this->email, $this->fname, $this->lname, $this->picture, $this->interests, $this->hobbies, $this->bio, $this->rel, $this->privacy);
             
             $dao = new SQL (); //data access object
             $success = $dao->update ($this->table, $columns, $values, $this->identifier, $this->uid); //send update query
@@ -85,7 +88,7 @@
                 $this->message = "Error - email not in database.";
                 return;
             } 
-            if ($result[0]["password"] == $this->password) { //if their password is valid
+            if (password_verify($this->password, $result[0]["password"])) { //if their password is valid
                 $_SESSION['uid'] = $result[0]["uid"]; //save their uid in session for use everywhere
                 $this->message = "User logged in!"; 
             }
@@ -170,9 +173,15 @@
             );
         }
         
+        public function getPublic () {
+            $arr = $this->get ("privacy", $this->publicToUsers, false);
+            $arr2 = $this->get ("privacy", $this->public, false);
+            return array_merge ($arr, $arr2);
+        }
+        
         public function getOthers () {
             $friends = $this->getFriends();
-            $all = $this->listAll ();
+            $all = $this->getPublic ();
             $notFriends = array ();
             foreach ($all as $user) {
                 if (!in_array($user['uid'], $friends) and $user['uid'] != $this->uid) {
