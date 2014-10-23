@@ -11,7 +11,7 @@ class SQL {
     
     public function __construct() {
         $user = "root"; //user - root
-        $pass = "Aug3!"; //password - Aug3!
+        $pass = "password"; //password - Aug3!
         $host = "localhost"; //host - http://ec2-54-209-77-158.compute-1.amazonaws.com/
         $db = 'thesocialnetwork'; //databse name - thesocialnetwork
         
