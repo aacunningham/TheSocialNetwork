@@ -23,5 +23,3 @@
 <h1>test from Isaac</h1>
 
 <?php endif; ?>
-
-<?php endif; ?>

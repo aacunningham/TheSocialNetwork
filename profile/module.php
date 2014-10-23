@@ -59,8 +59,8 @@
 
         public function print_page ($user) {
             $dao = new SQL ();
-            $left_side = $dao->select ("modules", ["uid", "side"], [$user->uid, 0], "sequence");
-            $right_side = $dao->select ("modules", ["uid", "side"], [$user->uid, 1], "sequence");
+            $left_side = $dao->select ("modules", array("uid", "side"), array($user->uid, 0), "sequence");
+            $right_side = $dao->select ("modules", array("uid", "side"), array($user->uid, 1), "sequence");
             echo "<div style=\"width:30%; float:left\">";
             foreach ($left_side as $module) {
                 $this->print_module ($user, $module);

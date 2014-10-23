@@ -107,8 +107,8 @@
         <tr>
             <td><b>Privacy Setting:</b></td>
             <td><select name='privacy'>
-                <option value="<?php echo $user->publicToUsers; ?>">Public, signed in users</option>
                 <option value="<?php echo $user->public; ?>">Public, not signed in</option>
+                <option value="<?php echo $user->publicToUsers; ?>">Public, signed in users</option>
                 <option value="<?php echo $user->friendsOnly; ?>">Friends Only</option>
             </select></td>
         </tr>

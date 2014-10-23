@@ -1,20 +1,9 @@
 <?php
 
-    //done//friend relationship stored in SQL
-    //done//unfriend functionality
-    //done//search for friends by email, or by name
-    //done//feed pulled from friends' posts - get display of it
-    //add ability to link to a photo for profile photo
-    //done//browse users page - ppl they don't know
     //try to integrate with aaron's code
-    //privacy settings - view ability based on friend relationships
+    //add ability to link to a photo for profile photo
 
     require_once "../Layout/header.php";
-    
-    //$user->makeFriend("alex@gmail.com");
-    //$user->unFriend ("alex@gmail.com");
-    //echo $user->message;
-    //print_r ($user->getFriends ());
     
     $results = array ();
     

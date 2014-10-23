@@ -97,8 +97,8 @@
         <tr>
             <td><b>Privacy Setting:</b></td>
             <td><select name='privacy'>
-                <option value="<?php echo $user->publicToUsers; ?>" <?php if (!empty($user->privacy) and $user->privacy == $user->publicToUsers) echo "selected"; ?>>Public, signed in users</option>
                 <option value="<?php echo $user->public; ?>" <?php if (!empty($user->privacy) and $user->privacy == $user->public) echo "selected"; ?>>Public, not signed in</option>
+                <option value="<?php echo $user->publicToUsers; ?>" <?php if (!empty($user->privacy) and $user->privacy == $user->publicToUsers) echo "selected"; ?>>Public, signed in users</option>
                 <option value="<?php echo $user->friendsOnly; ?>" <?php if (!empty($user->privacy) and $user->privacy == $user->friendsOnly) echo "selected"; ?>>Friends Only</option>
             </select></td>
         </tr>
