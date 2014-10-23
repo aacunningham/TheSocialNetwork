@@ -1,7 +1,7 @@
 <?php
 
 global $subdir;
-$subdir = "/TheSocialNetwork/";
+$subdir = "/TheSocialNetwork/"; //this is your working directory.
 
 
 ?>
