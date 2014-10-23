@@ -53,3 +53,4 @@
 </form>
 
 <a href="new.php" target="_self">Create an account.</a>
+<a href="forgot_password.php" target="_self"> Forgot password.</a>
