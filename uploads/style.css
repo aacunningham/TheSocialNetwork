@@ -2,18 +2,27 @@
 	width: 30em;
 	margin: 2em auto;
 	padding:0 3em 3em 3em;
+	border:2px solid #bbb;
+	color: ;
+	font: ;
 }
 
 #Upload h1{
+	font: ;
 	margin: 0;
 	padding:2em 0;
+	text-align: left;
 }
 
 #Upload label{
-	
+	width: 5em;
 	
 }
 
 #Upload p {
 	
+}
+
+.blue{
+	color:blue;
 }
