@@ -38,7 +38,7 @@
             <!-- Content -->
             <tr>
                 <td><b>Content:</b></td>
-                <td><textarea required name="content"><?php if (!empty($user->content)) echo $user->content; elseif (!empty($_POST['content'])) echo $_POST['content']; ?></textarea></td>
+                <td><textarea required name="content"><?php echoInput('post', 'content'); ?></textarea></td>
             </tr>
             
             <!-- Submit -->

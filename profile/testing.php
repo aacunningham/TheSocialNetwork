@@ -11,4 +11,4 @@
     $module->display_contact($user); 
     $module->display_friends($user);
     $module->display_posts($user);
-    ?>
+?>

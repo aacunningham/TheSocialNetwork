@@ -27,7 +27,7 @@
         <!-- Content -->
         <tr>
             <td><b>Name:</b></td>
-            <td><input required name="name" type="text" value="<?php if (!empty($_POST['name'])) echo $_POST['name']; ?>"></td>
+            <td><input required name="name" type="text" value="<?php printPost('name'); ?>"></td>
         </tr>
         
         <!-- Submit -->

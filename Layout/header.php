@@ -10,6 +10,7 @@
     require_once "../folder/folder.php";
     require_once "../category/category.php";
     require_once "../profile/module.php";
+    require_once "../school/school.php";
 
     $user = new user ();
     $post = new post ();
@@ -17,8 +18,9 @@
     $folder = new folder ();
     $category = new category ();
     $module = new module ();
+    $school = new school ();
 
-    if (!$user->loggedIn() and $_SERVER['PHP_SELF'] != $subdir."/user/login.php" and $_SERVER['PHP_SELF'] != $subdir."/user/new.php") { ?>
+    if (!$user->loggedIn() and $_SERVER['PHP_SELF'] != $subdir."user/login.php" and $_SERVER['PHP_SELF'] != $subdir."user/new.php") { ?>
         <script type="text/javascript">
             redirect ("../user/login.php");
         </script>

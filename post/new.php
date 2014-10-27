@@ -29,7 +29,7 @@
         <!-- Content -->
         <tr>
             <td><b>Content:</b></td>
-            <td><textarea required name="content"><?php if (!empty($_POST['content'])) echo $_POST['content']; ?></textarea></td>
+            <td><textarea required name="content"><?php printPost('content'); ?></textarea></td>
         </tr>
         
         <!-- Submit -->

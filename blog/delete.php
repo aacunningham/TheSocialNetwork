@@ -2,7 +2,7 @@
     require_once "../Layout/header.php";
     
     if (!empty($_POST['submit'])) { //a blog has been chosen to be deleted
-        $blog->id = $_POST['id'];
+        $blog->bid = $_POST['id'];
         $blog->delete();
     }
     $list = $blog->listBLogs(); //list this user's blogs

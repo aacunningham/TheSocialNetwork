@@ -2,11 +2,11 @@
     require_once "../Layout/header.php";
     
     if (!empty($_POST['choose'])) { //if category chosen for editing
-        $category->id = $_POST['id'];
+        $category->cid = $_POST['id'];
         $category->get (); //get category info
     } elseif (!empty($_POST['submit'])) { //if edited category submitted
         //Form Validation
-        $category->id = $_POST['cid'];
+        $category->cid = $_POST['cid'];
         $category->name = test_input($_POST['name']);
         $category->edit ();
     }
@@ -38,7 +38,7 @@
             <!-- Content -->
             <tr>
                 <td><b>Name:</b></td>
-                <td><input required name="name" value="<?php if (!empty($category->name)) echo $category->name; elseif (!empty($_POST['name'])) echo $_POST['name']; ?>"></td>
+                <td><input required name="name" value="<?php echoInput('category', 'name'); ?>"></td>
             </tr>
             
             <!-- Submit -->

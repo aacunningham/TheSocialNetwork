@@ -2,7 +2,7 @@
     require_once "../Layout/header.php";
     
     if (!empty($_POST['submit'])) { //if folder selected for deletion
-        $folder->id = $_POST['id'];
+        $folder->fid = $_POST['id'];
         $folder->delete();
     }
     $list = $folder->listFolders(); //list this user's folders

@@ -8,6 +8,7 @@
     class user {
         //properties 
         public $email, $password, $fname, $lname, $picture, $interests, $hobbies, $bio, $rel, $privacy;
+        public $school, $work;
         private $identifier = "uid";
         private $table = "users";
         private $friends = "friends";

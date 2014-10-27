@@ -49,13 +49,13 @@
         <!-- Background -->
         <tr>
             <td><b>Background:</b></td>
-            <td><input type='color' required name="background"><?php if (!empty($_POST['background'])) echo $_POST['background']; ?></td>
+            <td><input type='color' required name="background"><?php printPost('background'); ?></td>
         </tr>
         
         <!-- Font Color -->
         <tr>
             <td><b>Font Color:</b></td>
-            <td><input type='color' required name="fontColor"><?php if (!empty($_POST['fontColor'])) echo $_POST['fontColor']; ?></td>
+            <td><input type='color' required name="fontColor"><?php printPost('fontColor'); ?></td>
         </tr>
         
         <!-- Submit -->

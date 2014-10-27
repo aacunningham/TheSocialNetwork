@@ -2,15 +2,15 @@
     require_once "../Layout/header.php";
     
     if (!empty($_POST['choose'])) { //if folder chosen for editing
-        $folder->id = $_POST['id'];
+        $folder->fid = $_POST['id'];
         $folder->get (); //get folder info
     } elseif (!empty($_POST['submit'])) { //if edited folder submitted
         //Form Validation
-        $folder->id = $_POST['fid'];
+        $folder->fid = $_POST['fid'];
         $folder->name = test_input($_POST['name']);
         $folder->edit ();
     }
-    $list = $folder->listAll (); //list all of this user's folders
+    $list = $folder->listFolders (); //list all of this user's folders
 ?>
 
 <!-- Title -->
@@ -37,7 +37,7 @@
             <!-- Content -->
             <tr>
                 <td><b>Name:</b></td>
-                <td><input required name="name" value="<?php if (!empty($folder->name)) echo $folder->name; elseif (!empty($_POST['name'])) echo $_POST['name']; ?>"></td>
+                <td><input required type="text" name="name" value="<?php echoInput ('folder', 'name'); ?>"></td>
             </tr>
             
             <!-- Submit -->

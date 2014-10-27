@@ -14,6 +14,8 @@
 <br>
 <a href="../post/interface.php" target="_self">Go to Posts</a>
 <br>
+<a href="../school/interface.php" target="_self">Go to Schools</a>
+<br>
 <a href="../user/interface.php" target="_self">Go to User</a>
 <br>
 <a href="../folder/interface.php" target="_self">Go to Folders</a>
