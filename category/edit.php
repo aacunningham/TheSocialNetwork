@@ -28,12 +28,12 @@
     <h3><?php echo $category->message; ?></h3>
 <?php endif; ?>
 
-<?php if (!empty($category->id)) : ?>
+<?php if (!empty($category->cid)) : ?>
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>
             <!-- Hidden - User ID -->
-            <input type="hidden" name="cid" value="<?php echo $category->id; ?>">
+            <input type="hidden" name="cid" value="<?php echo $category->cid; ?>">
             
             <!-- Content -->
             <tr>

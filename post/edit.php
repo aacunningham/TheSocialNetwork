@@ -28,12 +28,12 @@
     <h3><?php echo $post->message; ?></h3>
 <?php endif; ?>
 
-<?php if (!empty($post->id)) : ?>
+<?php if (!empty($post->pid)) : ?>
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>
             <!-- Hidden - Post ID -->
-            <input type="hidden" name="pid" value="<?php echo $post->id; ?>">
+            <input type="hidden" name="pid" value="<?php echo $post->pid; ?>">
             
             <!-- Content -->
             <tr>

@@ -11,6 +11,7 @@
     require_once "../category/category.php";
     require_once "../profile/module.php";
     require_once "../school/school.php";
+    require_once "../work/work.php";
 
     $user = new user ();
     $post = new post ();
@@ -19,6 +20,7 @@
     $category = new category ();
     $module = new module ();
     $school = new school ();
+    $work = new work ();
 
     if (!$user->loggedIn() and $_SERVER['PHP_SELF'] != $subdir."user/login.php" and $_SERVER['PHP_SELF'] != $subdir."user/new.php") { ?>
         <script type="text/javascript">

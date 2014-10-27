@@ -32,13 +32,13 @@
     <h3><?php echo $blog->message; ?></h3>
 <?php endif; ?>
 
-<?php if (!empty($blog->id)) : ?>
+<?php if (!empty($blog->bid)) : ?>
         
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>
             <!-- Hidden - User ID -->
-            <input type="hidden" name="bid" value="<?php echo $blog->id; ?>">
+            <input type="hidden" name="bid" value="<?php echo $blog->bid; ?>">
             
             <!-- Title -->
             <tr>

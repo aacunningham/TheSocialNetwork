@@ -27,12 +27,12 @@
     <h3><?php echo $folder->message; ?></h3>
 <?php endif; ?>
 
-<?php if (!empty($folder->id)) : ?>
+<?php if (!empty($folder->fid)) : ?>
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>
             <!-- Hidden - User ID -->
-            <input type="hidden" name="fid" value="<?php echo $folder->id; ?>">
+            <input type="hidden" name="fid" value="<?php echo $folder->fid; ?>">
             
             <!-- Content -->
             <tr>

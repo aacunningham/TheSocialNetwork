@@ -11,6 +11,11 @@
             echo 'selected';
     }
     
+    function echoType ($type) {
+        if ((!empty($school->type) and $school->type == $input) or !empty($_POST['type']) and $_POST['type'] == $type) 
+            echo 'selected'; 
+    }
+    
     $states = array ("AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", 
     "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", 
     "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY");
@@ -54,12 +59,12 @@
     <h3><?php echo $school->message; ?></h3>
 <?php endif; ?>
 
-<?php if (!empty($school->id)) : ?>
+<?php if (!empty($school->sid)) : ?>
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>
             <!-- Hidden - User ID -->
-            <input type="hidden" name="fid" value="<?php echo $school->id; ?>">
+            <input type="hidden" name="sid" value="<?php echo $school->sid; ?>">
             
             <!-- Content -->
             <tr>
@@ -68,7 +73,11 @@
             </tr>
             <tr>
                 <td><b>Type:</b></td>
-                <td><input required type="text" name="type" value="<?php echoInput("school", "type"); ?>"></td>
+                <td><select required name="type">
+                    <option value="University/College" <?php echoType("University/College"); ?>>University/College</option>
+                    <option value="High School" <?php echoType("High School"); ?>>High School</option>
+                    <option value="Elementary School" <?php echoType("Elementary School"); ?>>Elementary School</option>
+                </select></td>
             </tr>
             <tr>
                 <td><b>Address:</b></td>
