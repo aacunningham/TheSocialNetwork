@@ -22,7 +22,7 @@
     $school = new school ();
     $work = new work ();
 
-    if (!$user->loggedIn() and $_SERVER['PHP_SELF'] != $subdir."user/login.php" and $_SERVER['PHP_SELF'] != $subdir."user/new.php") { ?>
+    if (!$user->loggedIn() and $_SERVER['PHP_SELF'] != "/user/login.php" and $_SERVER['PHP_SELF'] != "/user/new.php") { ?>
         <script type="text/javascript">
             redirect ("../user/login.php");
         </script>
