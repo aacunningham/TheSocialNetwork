@@ -133,17 +133,6 @@
                     </tr>
                     <tr>
                         <td>Bio:</td>
-<<<<<<< HEAD
-                        <td><?=$user->bio?></td>
-                    </tr>
-                    <tr>
-                        <td>Interests:</td>
-                        <td><?=$user->interests?></td>
-                    </tr>
-                    <tr>
-                        <td>Hobbies:</td>
-                        <td><?=$user->hobbies?></td>
-=======
                         <td><?php echo $user->bio; ?></td>
                     </tr>
                     <tr>
@@ -157,7 +146,6 @@
                     <tr>
                         <td>Hobbies:</td>
                         <td><?php echo $user->hobbies; ?></td>
->>>>>>> 8ad5b76736503d9a0d6aa1853c959949ac6be388
                     </tr>
                 </table>
             </div>
