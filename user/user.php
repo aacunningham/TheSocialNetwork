@@ -28,7 +28,7 @@
         public function get ($identifier=null, $id=null, $set=true) { //fetch user's info from SQL using id(s) at identifier(s) (can be arrays)
             if (empty($identifier)) $identifier = $this->identifier; //if none provided, use uid as default
             if (empty($id)) $id = $this->uid; //if none provided, use uid as default
-            
+
             $dao = new SQL (); //data access object
             $results = $dao->select ($this->table, $identifier, $id); //send query to SQL
             
@@ -43,7 +43,6 @@
                     }
                 }
             }
-            
             return $results;
         }
         

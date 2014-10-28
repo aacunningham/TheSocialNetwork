@@ -170,19 +170,20 @@
         
         //Replace this with a gallery view
         public function display_friends ($user) {
+            $friend = new user();
             $this->get(array("uid", "name"), array($user->uid, "friends")); ?>
-            <div class="module" id="friends" style="background:#<?php echo $this->background; ?>;color:#<?php echo $this->fontColor; ?>;"?>
+            <div class="module" id="friends" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <h1 class="title">Friends</h1>
                 <table>
                     <?php foreach ($user->getFriends() as $id) : 
-                        $user->get("uid", $id);
+                        $friend->get("uid", $id);
                     ?>
                     <tr>
                         <a href="profile.php?<?php echo $id; ?>" target="_self">
-                        <td><img src="<?php echo $user->picture; ?>"></td>
+                        <td><img src="<?php echo $friend->picture; ?>"></td>
                     </tr>
                     <tr>
-                        <td><?php echo $user->fname." ".$user->lname; ?></td>
+                        <td><?php echo $friend->fname." ".$friend->lname; ?></td>
                     </tr>
                     </a>
                     <tr></tr>
@@ -194,7 +195,7 @@
         public function display_posts ($user) {
             global $post;
             $this->get(array("uid", "name"), array($user->uid, "posts")); ?>
-            <div class="module" id="posts" style="background:#<?php echo $this->background; ?>;color:#<?php echo $this->fontColor; ?>;"?>
+            <div class="module" id="posts" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <h1 class="title">Posts</h1>
                 <table>
                     <?php foreach ($post->display() as $p) : ?>
@@ -212,7 +213,7 @@
         public function display_schools ($user) {
             global $school; 
             $this->get(array("uid", "name"), array($user->uid, "schools")); ?>
-            <div class="module" id="schools" style="background:#<?php echo $this->background; ?>;color:#<?php echo $this->fontColor; ?>;"?>
+            <div class="module" id="schools" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <h1 class="title">Schools</h1>
             <table>
                 <?php foreach ($school->display($user->uid) as $s) : ?>
@@ -262,6 +263,62 @@
                 </tr>
                 <?php endforeach; ?>
             </table>
+            </div>
+        <?php }
+
+        public function display_work ($user) {
+            global $work;
+            $this->get(array("uid", "name"), array($user->uid, "work")); ?>
+            <div class="module" id="work" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
+                <h1 class="title">Work History</h1>
+                <table>
+                    <?php foreach ($work->display($user->uid) as $w) : ?>
+                    <tr>
+                        <td><b>Company:</b></td>
+                        <td><?php echo $w['company']; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Position:</b></td>
+                        <td><?php echo $w['position']; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Address:</b></td>
+                        <td><?php echo $w['address']; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>City:</b></td>
+                        <td><?php echo $w['city']; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>State:</b></td>
+                        <td><?php echo $w['state']; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Zip Code:</b></td>
+                        <td><?php echo $w['zipCode']; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Phone:</b></td>
+                        <td><?php echo $w['phone']; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Boss:</b></td>
+                        <td><?php echo $w['boss']; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Duties:</b></td>
+                        <td><?php echo $w['duties']; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>Start Date:</b></td>
+                        <td><?php echo $w['startDate']; ?></td>
+                    </tr>
+                    <tr>
+                        <td><b>End Date:</b></td>
+                        <td><?php if ($w["endDate"] == "0000-00-00") echo "Current"; else echo $w['endDate']; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
         <?php }
         
         

@@ -74,7 +74,6 @@
         
         public function listSchools ($uid=NULL) { //list all schools for this user
             $uid = empty($uid) ? $_SESSION['uid'] : $uid;
-            echo $uid;
             return $this->get ('uid', $uid, false);
         }
         

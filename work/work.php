@@ -72,8 +72,9 @@
             return $dao->selectAll($this->table); //select all columns and rows in the table
         }
         
-        public function listWorks () { //list all schools for this user
-            return $this->get ('uid', $_SESSION['uid'], false);
+        public function listWorks ($uid) { //list all schools for this user
+            $uid = empty($uid) ? $_SESSION['uid'] : $uid;
+            return $this->get ('uid', $uid, false);
         }
         
         public function sortWorks ($works) { //sorts schools by company for display
@@ -87,8 +88,8 @@
             return $works;
         }
         
-        public function display () { //returns list of this user's schools sorted by company for display
-            return $this->sortWorks($this->listWorks());
+        public function display ($uid) { //returns list of this user's schools sorted by company for display
+            return $this->sortWorks($this->listWorks($uid));
         }
         
         
