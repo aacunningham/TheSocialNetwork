@@ -18,7 +18,7 @@
     $category = new category ();
     $module = new module ();
 
-    if (!$user->loggedIn() and $_SERVER['PHP_SELF'] != "/TheSocialNetwork/user/login.php" and $_SERVER['PHP_SELF'] != "/TheSocialNetwork/user/new.php") { ?>
+    if (!$user->loggedIn() and $_SERVER['PHP_SELF'] != "/user/login.php" and $_SERVER['PHP_SELF'] != "/user/new.php") { ?>
         <script type="text/javascript">
             redirect ("../user/login.php");
         </script>

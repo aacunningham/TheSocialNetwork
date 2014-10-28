@@ -98,6 +98,19 @@
             $_SESSION['uid'] = NULL; //nullify their session info
             $this->message = "User logged out!";
         }
+		
+		public function forgot_password() { //start the password reset process
+			$dao = new SQL();
+			$result = $dao->select ($this->table, "email", $this->email); //get their password by their email
+			
+			if( empty($result)){
+				$this->message = "User not found";
+				return FALSE;
+			} else {
+				$this->message = "user found";
+				return TRUE;
+			}
+		}
         
         public function loggedIn () { //check if a valid user is logged in
             return !empty($_SESSION['uid']);

@@ -3,6 +3,26 @@
     <a href="interface.php" target="_self">Home</a>
 <?php endif; ?>
 
+<!-- Errors -->
+<?php if (!empty($user->message)) : ?>
+    <h3><?php echo $user->message; ?></h3>
+<?php endif; ?>
+
+<?php
+
+    require_once "../Layout/header.php";
+    
+    if (!empty($_POST['submit'])) {
+       $user->email = test_input($_POST['email']);
+       $check_res = $user->forgot_password(); 	//User submits email for account check
+       if( $check_res ) {
+       		echo "found";
+       } else {
+       	echo "not found";
+       }
+	}
+?>
+
 <!-- Heading -->
 <h1>Forgot my password</h1>
 <h3>Please don't forget your password again, it's a lot of work for me...</h3>
@@ -17,7 +37,10 @@
             
         <!-- Submit -->
         <tr>
-            <td><input type="submit" name="submit" value="Login"></td>
+            <td><input type="submit" name="submit" value="Send New Password"></td>
         </tr>
     </table>
 </form>
+
+<?php
+//<a href="login.php" target="_self">Login.</a>
