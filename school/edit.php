@@ -69,7 +69,7 @@
             <!-- Content -->
             <tr>
                 <td><b>Name:</b></td>
-                <td><input required type="text" name="name" value="<?php echoInput("school", "name"); ?>"></td>
+                <td><input required type="text" name="name" value="<?php echoInput($school, "name"); ?>"></td>
             </tr>
             <tr>
                 <td><b>Type:</b></td>
@@ -81,11 +81,11 @@
             </tr>
             <tr>
                 <td><b>Address:</b></td>
-                <td><input required type="text" name="address" value="<?php echoInput("school", "address"); ?>"></td>
+                <td><input required type="text" name="address" value="<?php echoInput($school, "address"); ?>"></td>
             </tr>
             <tr>
                 <td><b>City:</b></td>
-                <td><input required type="text" name="city" value="<?php echoInput("school", "city"); ?>"></td>
+                <td><input required type="text" name="city" value="<?php echoInput($school, "city"); ?>"></td>
             </tr>
             <tr>
                 <td><b>State:</b></td>
@@ -97,15 +97,15 @@
             </tr>
             <tr>
                 <td><b>Zip Code:</b></td>
-                <td><input required type="number" name="zipCode" value="<?php echoInput("school", "zipCode"); ?>"></td>
+                <td><input required type="number" name="zipCode" value="<?php echoInput($school, "zipCode"); ?>"></td>
             </tr>
             <tr>
                 <td><b>Major:</b></td>
-                <td><input type="text" name="major" value="<?php echoInput("school", "major"); ?>"></td>
+                <td><input type="text" name="major" value="<?php echoInput($school, "major"); ?>"></td>
             </tr>
             <tr>
                 <td><b>Minor:</b></td>
-                <td><input type="text" name="minor" value="<?php echoInput("school", "minor"); ?>"></td>
+                <td><input type="text" name="minor" value="<?php echoInput($school, "minor"); ?>"></td>
             </tr>
             <tr>
                 <td><b>Degree:</b></td>
@@ -117,11 +117,11 @@
             </tr>
             <tr>
                 <td><b>Start Date:</b></td>
-                <td><input required type="date" name="startDate" value="<?php echoInput("school", "startDate"); ?>"></td>
+                <td><input required type="date" name="startDate" value="<?php echoInput($school, "startDate"); ?>"></td>
             </tr>
             <tr>
                 <td><b>End Date:</b></td>
-                <td><input required type="date" name="endDate" value="<?php echoInput("school", "endDate"); ?>"></td>
+                <td><input required type="date" name="endDate" value="<?php echoInput($school, "endDate"); ?>"></td>
             </tr>
             
             <!-- Submit -->

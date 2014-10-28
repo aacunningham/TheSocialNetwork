@@ -46,7 +46,7 @@
         <!-- Content -->
         <tr>
             <td><b>Company:</b></td>
-            <td><input required type="text" name="name" value="<?php printPost('company'); ?>"></td>
+            <td><input required type="text" name="company" value="<?php printPost('company'); ?>"></td>
         </tr>
         <tr>
             <td><b>Position:</b></td>
@@ -90,7 +90,7 @@
         </tr>
         <tr>
             <td><b>End Date:</b></td>
-            <td><input required type="date" name="endDate" value="<?php printPost('endDate'); ?>"></td>
+            <td><input type="date" name="endDate" value="<?php printPost('endDate'); ?>"></td>
         </tr>
         
         <!-- Submit -->

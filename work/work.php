@@ -6,12 +6,12 @@
         //Properties 
         public $company, $position, $address, $city, $state, $zipCode, $startDate, $endDate, $phone, $boss, $duties;
         public $wid, $uid;
-        private $table = "work";
+        private $table = "workplaces";
         private $identifier = "wid";
         public $message;
         
         //Methods
-        public function get ($identifier=null, $id=null) { //fetch Work info from SQL using id(s) at identifier(s) (can be arrays)
+        public function get ($identifier=null, $id=null ,$set=true) { //fetch Work info from SQL using id(s) at identifier(s) (can be arrays)
             if (empty($identifier)) $identifier = $this->identifier; //default to wid
             if (empty($id)) $id = $this->wid; //default to wid
             
@@ -22,9 +22,11 @@
                 return NULL; //so we don't print errors
             }
             
-            foreach ($results[0] as $key => $value) { //if results
-                if (property_exists($this, $key)) { //if it's a property of the object (must be same names)
-                    $this->$key = $value; //set object's properties
+            if ($set) {
+                foreach ($results[0] as $key => $value) { //if results
+                    if (property_exists($this, $key)) { //if it's a property of the object (must be same names)
+                        $this->$key = $value; //set object's properties
+                    }
                 }
             }
             
@@ -71,7 +73,7 @@
         }
         
         public function listWorks () { //list all schools for this user
-            return $this->get ('uid', $_SESSION['uid']);
+            return $this->get ('uid', $_SESSION['uid'], false);
         }
         
         public function sortWorks ($works) { //sorts schools by company for display

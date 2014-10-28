@@ -37,7 +37,7 @@
             <!-- Content -->
             <tr>
                 <td><b>Name:</b></td>
-                <td><input required type="text" name="name" value="<?php echoInput ('folder', 'name'); ?>"></td>
+                <td><input required type="text" name="name" value="<?php echoInput ($folder, 'name'); ?>"></td>
             </tr>
             
             <!-- Submit -->

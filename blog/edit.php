@@ -43,13 +43,13 @@
             <!-- Title -->
             <tr>
                 <td><b>Title:</b></td>
-                <td><input type="text" name="title" required value="<?php echoInput('blog', 'title'); ?>"</td>
+                <td><input type="text" name="title" required value="<?php echoInput($blog, 'title'); ?>"</td>
             </tr>
             
             <!-- Content -->
             <tr>
                 <td><b>Content:</b></td>
-                <td><textarea required name="content"><?php echoInput('blog', 'content'); ?></textarea></td>
+                <td><textarea required name="content"><?php echoInput($blog, 'content'); ?></textarea></td>
             </tr>
             
             <!-- Category -->

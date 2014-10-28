@@ -38,7 +38,7 @@
             <!-- Content -->
             <tr>
                 <td><b>Name:</b></td>
-                <td><input required name="name" value="<?php echoInput('category', 'name'); ?>"></td>
+                <td><input required name="name" value="<?php echoInput($category, 'name'); ?>"></td>
             </tr>
             
             <!-- Submit -->
@@ -51,9 +51,9 @@
     <!-- Choose Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
         <table>
-            <!-- Blog -->
+            <!-- Category -->
             <tr>
-                <td><b>Blog:</b></td>
+                <td><b>Category:</b></td>
                 <td><select required name="id">
                     <?php foreach ($categoryList as $c) : ?>
                         <option value="<?php echo $c["cid"]; ?>"><?php echo $c["name"]; ?></option>

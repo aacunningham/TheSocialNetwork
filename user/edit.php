@@ -47,19 +47,19 @@
         <!-- First Name -->
         <tr>
             <td><b>First Name:</b></td>
-            <td><input required type="text" name="fname" value="<?php echoInput ('user', 'fname'); ?>"></td>
+            <td><input required type="text" name="fname" value="<?php echoInput ($user, 'fname'); ?>"></td>
         </tr>
         
         <!-- Last Name -->
         <tr>
             <td><b>Last Name:</b></td>
-            <td><input required type="text" name="lname" value="<?php echoInput ('user', 'lname'); ?>"></td>
+            <td><input required type="text" name="lname" value="<?php echoInput ($user, 'lname'); ?>"></td>
         </tr>
         
         <!-- Email -->
         <tr>
             <td><b>Email:<b></td>
-            <td><input required type="email" name="email" value="<?php echoInput ('user', 'email'); ?>"></td>
+            <td><input required type="email" name="email" value="<?php echoInput ($user, 'email'); ?>"></td>
         </tr>
         
         <!-- Picture -->
@@ -71,19 +71,19 @@
         <!-- Interests -->
         <tr>
             <td><b>Interests:<b></td>
-            <td><textarea name="interests"><?php echoInput ('user', 'interests'); ?></textarea></td>
+            <td><textarea name="interests"><?php echoInput ($user, 'interests'); ?></textarea></td>
         </tr>
         
         <!-- Hobbies -->
         <tr>
             <td><b>Hobbies:<b></td>
-            <td><textarea name="hobbies"><?php echoInput ('user', 'hobbies'); ?></textarea></td>
+            <td><textarea name="hobbies"><?php echoInput ($user, 'hobbies'); ?></textarea></td>
         </tr>
         
         <!-- Bio -->
         <tr>
             <td><b>Bio:<b></td>
-            <td><textarea name="bio"><?php echoInput ('user', 'bio'); ?></textarea></td>
+            <td><textarea name="bio"><?php echoInput ($user, 'bio'); ?></textarea></td>
         </tr>
         
         <!-- Relationship Status -->

@@ -63,7 +63,7 @@
         </tr>
         <tr>
             <td><b>End Date:</b></td>
-            <td><?php echo $w['endDate']; ?></td>
+            <td><?php if ($w["endDate"] == "0000-00-00") echo "Current"; else echo $w['endDate']; ?></td>
         </tr>
         <?php endforeach; ?>
     </table>

@@ -56,19 +56,19 @@
             <!-- Content -->
             <tr>
                 <td><b>Company:</b></td>
-                <td><input required type="text" name="company" value="<?php echoInput("work", "company"); ?>"></td>
+                <td><input required type="text" name="company" value="<?php echoInput($work, "company"); ?>"></td>
             </tr>
             <tr>
                 <td><b>Position:</b></td>
-                <td><input required type="text" name="position" value="<?php echoInput("work", "position"); ?>"></td>
+                <td><input required type="text" name="position" value="<?php echoInput($work, "position"); ?>"></td>
             </tr>
             <tr>
                 <td><b>Address:</b></td>
-                <td><input required type="text" name="address" value="<?php echoInput("work", "address"); ?>"></td>
+                <td><input required type="text" name="address" value="<?php echoInput($work, "address"); ?>"></td>
             </tr>
             <tr>
                 <td><b>City:</b></td>
-                <td><input required type="text" name="city" value="<?php echoInput("work", "city"); ?>"></td>
+                <td><input required type="text" name="city" value="<?php echoInput($work, "city"); ?>"></td>
             </tr>
             <tr>
                 <td><b>State:</b></td>
@@ -80,27 +80,27 @@
             </tr>
             <tr>
                 <td><b>Zip Code:</b></td>
-                <td><input required type="number" name="zipCode" value="<?php echoInput("work", "zipCode"); ?>"></td>
+                <td><input required type="number" name="zipCode" value="<?php echoInput($work, "zipCode"); ?>"></td>
             </tr>
             <tr>
                 <td><b>Phone:</b></td>
-                <td><input type="text" name="phone" value="<?php echoInput("work", "phone"); ?>"></td>
+                <td><input type="text" name="phone" value="<?php echoInput($work, "phone"); ?>"></td>
             </tr>
             <tr>
                 <td><b>Boss:</b></td>
-                <td><input type="text" name="boss" value="<?php echoInput("work", "boss"); ?>"></td>
+                <td><input type="text" name="boss" value="<?php echoInput($work, "boss"); ?>"></td>
             </tr>
             <tr>
                 <td><b>Duties: </b></td>
-                <td><textarea required name="duties"><?php echoInput("work", "duties"); ?></textarea></td>
+                <td><textarea required name="duties"><?php echoInput($work, "duties"); ?></textarea></td>
             </tr>
             <tr>
                 <td><b>Start Date:</b></td>
-                <td><input required type="date" name="startDate" value="<?php echoInput("work", "startDate"); ?>"></td>
+                <td><input required type="date" name="startDate" value="<?php echoInput($work, "startDate"); ?>"></td>
             </tr>
             <tr>
                 <td><b>End Date:</b></td>
-                <td><input required type="date" name="endDate" value="<?php echoInput("work", "endDate"); ?>"></td>
+                <td><input type="date" name="endDate" value="<?php echoInput($work, "endDate"); ?>"></td>
             </tr>
             
             <!-- Submit -->
@@ -117,8 +117,8 @@
             <tr>
                 <td><b>Work:</b></td>
                 <td><select required name="id">
-                    <?php foreach ($list as $s) : ?>
-                        <option value="<?php echo $s["sid"]; ?>"><?php echo $s["name"]; ?></option>
+                    <?php foreach ($list as $w) : ?>
+                        <option value="<?php echo $w["wid"]; ?>"><?php echo $w["company"]; ?></option>
                     <?php endforeach; ?>
                 </select></td>
             </tr>

@@ -10,7 +10,7 @@
         public $bid; //blog ID
         
         //Methods
-        public function get ($identifier=null, $id=null) { //fetch blog info from SQL using id(s) at identifier(s) (can be arrays for specific results)
+        public function get ($identifier=null, $id=null, $set=true) { //fetch blog info from SQL using id(s) at identifier(s) (can be arrays for specific results)
             if (empty($identifier)) $identifier = $this->identifier; //none provided, use bid as default
             if (empty($id)) $id = $this->bid; //none provided, use bid as default
            
@@ -20,10 +20,12 @@
             if (empty($results)) { //if empty
                 return NULL; //so we don't print errors
             }
-           
-            foreach ($results[0] as $key => $value) { //if results
-                if (property_exists($this, $key)) { //if it's a property of the object (must be same names)
-                    $this->$key = $value; //set object's properties
+            
+            if ($set) {
+                foreach ($results[0] as $key => $value) { //if results
+                    if (property_exists($this, $key)) { //if it's a property of the object (must be same names)
+                        $this->$key = $value; //set object's properties
+                    }
                 }
             }
            
@@ -73,7 +75,7 @@
             if (!empty($fid)) {
                 return $this->get (array ('uid', 'fid'), array ($_SESSION['uid'], $fid));
             } else {
-                return $this->get ('uid', $_SESSION['uid']);
+                return $this->get ('uid', $_SESSION['uid'], false);
             }
             
         }

@@ -10,7 +10,7 @@
         public $pid, $uid;
         
         //Methods
-        public function get ($identifier=null, $id=null) { //get post info from SQL by id(s) at identifier(s) (can be arrays)
+        public function get ($identifier=null, $id=null, $set=true) { //get post info from SQL by id(s) at identifier(s) (can be arrays)
             if (empty($identifier)) $identifier = $this->identifier; //default to pid
             if (empty($id)) $id = $this->pid; //default to pid
             
@@ -21,11 +21,13 @@
                 return NULL; //so we don't print errors
             }
            
-            foreach ($results[0] as $key => $value) { //if results
-                if (property_exists($this, $key)) { //if it's a property of the object (must be same names)
-                    $this->$key = $value; //set object's properties
-                }
-            }
+           if ($set) {
+               foreach ($results[0] as $key => $value) { //if results
+                   if (property_exists($this, $key)) { //if it's a property of the object (must be same names)
+                       $this->$key = $value; //set object's properties
+                   }
+               }
+           }
             
             return $results;
         }
@@ -72,7 +74,7 @@
         
         public function listPosts ($uid=NULL) { //list all posts for this user
             if (empty($uid)) $uid = $_SESSION['uid'];
-            return $this->get ('uid', $uid); //get this user's posts
+            return $this->get ('uid', $uid, false); //get this user's posts
         }
         
         public function sortPosts ($posts) { //sort posts by date and time of creation for display
