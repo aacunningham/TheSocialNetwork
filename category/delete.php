@@ -2,7 +2,7 @@
     require_once "../Layout/header.php";
     
     if (!empty($_POST['submit'])) { //if category chosen for deletion
-        $category->id = $_POST['id'];
+        $category->cid = $_POST['id'];
         $category->delete();
     }
     $list = $category->listAll(); //list all sitewide categories

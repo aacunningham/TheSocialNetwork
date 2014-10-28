@@ -2,11 +2,11 @@
     require_once "../Layout/header.php";
     
     if (!empty($_POST['choose'])) { //they've chosen a blog to edit
-        $blog->id = $_POST['id'];
+        $blog->bid = $_POST['id'];
         $blog->get (); //get blog info
     } elseif (!empty($_POST['submit'])) { //they've submitted an edit
         //Form Validation
-        $blog->id = $_POST['bid'];
+        $blog->bid = $_POST['bid'];
         $blog->title = test_input($_POST['title']);
         $blog->content = test_input($_POST['content']);
         $blog->category = test_input($_POST['category']);
@@ -32,24 +32,24 @@
     <h3><?php echo $blog->message; ?></h3>
 <?php endif; ?>
 
-<?php if (!empty($blog->id)) : ?>
+<?php if (!empty($blog->bid)) : ?>
         
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>
             <!-- Hidden - User ID -->
-            <input type="hidden" name="bid" value="<?php echo $blog->id; ?>">
+            <input type="hidden" name="bid" value="<?php echo $blog->bid; ?>">
             
             <!-- Title -->
             <tr>
                 <td><b>Title:</b></td>
-                <td><input type="text" name="title" required value="<?php if (!empty($blog->title)) echo $blog->title; elseif (!empty($_POST['title'])) echo $_POST['title']; ?>"</td>
+                <td><input type="text" name="title" required value="<?php echoInput($blog, 'title'); ?>"</td>
             </tr>
             
             <!-- Content -->
             <tr>
                 <td><b>Content:</b></td>
-                <td><textarea required name="content"><?php if (!empty($blog->content)) echo $blog->content; elseif (!empty($_POST['content'])) echo $_POST['content']; ?></textarea></td>
+                <td><textarea required name="content"><?php echoInput($blog, 'content'); ?></textarea></td>
             </tr>
             
             <!-- Category -->

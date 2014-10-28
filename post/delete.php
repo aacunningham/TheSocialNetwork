@@ -2,7 +2,7 @@
     require_once "../Layout/header.php";
     
     if (!empty($_POST['submit'])) { //if post selected for deletion
-        $post->id = $_POST['id'];
+        $post->pid = $_POST['id'];
         $post->delete();
     }
     $list = $post->listPosts(); //list this user's posts

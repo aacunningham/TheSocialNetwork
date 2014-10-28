@@ -7,5 +7,8 @@
     $user->id = $_SESSION['uid']; //replace later with method to get user id
     $user->get (); //get user info
     
-    $module->display($user, "about_me"); 
-    $module->display($user, "contact"); ?>
+    $module->display_about_me($user); 
+    $module->display_contact($user); 
+    $module->display_friends($user);
+    $module->display_posts($user);
+?>

@@ -6,6 +6,21 @@
         $data = htmlspecialchars($data); //turn potentially harmful characters into safe ones
         return $data; //return
     }
+    
+    function echoInput ($object, $property) {
+        if (!empty($object->$property)) echo $object->$property; 
+        elseif (!empty($_POST[$property])) echo $_POST[$property];
+    }
+    
+    function printPost ($index) {
+        if (!empty($_POST[$index]))
+            echo $_POST[$index];
+    }
+    
+    function printNE ($data) {
+        if (!empty($data))
+            echo $data;
+    }
 
     function getLastKey ($array) { //gets the last key of an array
         end($array);

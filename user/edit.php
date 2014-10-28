@@ -47,19 +47,19 @@
         <!-- First Name -->
         <tr>
             <td><b>First Name:</b></td>
-            <td><input required type="text" name="fname" value="<?php if (!empty($user->fname)) echo $user->fname; elseif (!empty($_POST['fname'])) echo $_POST['fname']; ?>"></td>
+            <td><input required type="text" name="fname" value="<?php echoInput ($user, 'fname'); ?>"></td>
         </tr>
         
         <!-- Last Name -->
         <tr>
             <td><b>Last Name:</b></td>
-            <td><input required type="text" name="lname" value="<?php if (!empty($user->lname)) echo $user->lname; elseif (!empty($_POST['lname'])) echo $_POST['lname']; ?>"></td>
+            <td><input required type="text" name="lname" value="<?php echoInput ($user, 'lname'); ?>"></td>
         </tr>
         
         <!-- Email -->
         <tr>
             <td><b>Email:<b></td>
-            <td><input required type="email" name="email" value="<?php if (!empty($user->email)) echo $user->email; elseif (!empty($_POST['email'])) echo $_POST['email']; ?>"></td>
+            <td><input required type="email" name="email" value="<?php echoInput ($user, 'email'); ?>"></td>
         </tr>
         
         <!-- Picture -->
@@ -71,19 +71,19 @@
         <!-- Interests -->
         <tr>
             <td><b>Interests:<b></td>
-            <td><textarea name="interests"><?php if (!empty($user->interests)) echo $user->interests; elseif (!empty($_POST['interests'])) echo $_POST['interests']; ?></textarea></td>
+            <td><textarea name="interests"><?php echoInput ($user, 'interests'); ?></textarea></td>
         </tr>
         
         <!-- Hobbies -->
         <tr>
             <td><b>Hobbies:<b></td>
-            <td><textarea name="hobbies"><?php if (!empty($user->hobbies)) echo $user->hobbies; elseif (!empty($_POST['hobbies'])) echo $_POST['hobbies']; ?></textarea></td>
+            <td><textarea name="hobbies"><?php echoInput ($user, 'hobbies'); ?></textarea></td>
         </tr>
         
         <!-- Bio -->
         <tr>
             <td><b>Bio:<b></td>
-            <td><textarea name="bio"><?php if (!empty($user->bio)) echo $user->bio; elseif (!empty($_POST['bio'])) echo $_POST['bio']; ?></textarea></td>
+            <td><textarea name="bio"><?php echoInput ($user, 'bio'); ?></textarea></td>
         </tr>
         
         <!-- Relationship Status -->
@@ -97,8 +97,8 @@
         <tr>
             <td><b>Privacy Setting:</b></td>
             <td><select name='privacy'>
-                <option value="<?php echo $user->publicToUsers; ?>" <?php if (!empty($user->privacy) and $user->privacy == $user->publicToUsers) echo "selected"; ?>>Public, signed in users</option>
                 <option value="<?php echo $user->public; ?>" <?php if (!empty($user->privacy) and $user->privacy == $user->public) echo "selected"; ?>>Public, not signed in</option>
+                <option value="<?php echo $user->publicToUsers; ?>" <?php if (!empty($user->privacy) and $user->privacy == $user->publicToUsers) echo "selected"; ?>>Public, signed in users</option>
                 <option value="<?php echo $user->friendsOnly; ?>" <?php if (!empty($user->privacy) and $user->privacy == $user->friendsOnly) echo "selected"; ?>>Friends Only</option>
             </select></td>
         </tr>

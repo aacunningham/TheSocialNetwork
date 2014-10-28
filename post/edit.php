@@ -3,11 +3,11 @@
     require_once "../Layout/header.php";
     
     if (!empty($_POST['choose'])) { //if post selected for editing
-        $post->id = $_POST['id'];
+        $post->pid = $_POST['id'];
         $post->get (); //get post info
     } elseif (!empty($_POST['submit'])) { //if edited post submitted
         //Form Validation
-        $post->id = $_POST['pid'];
+        $post->pid = $_POST['pid'];
         $post->content = test_input($_POST['content']);
         $post->edit ();
     }
@@ -28,17 +28,17 @@
     <h3><?php echo $post->message; ?></h3>
 <?php endif; ?>
 
-<?php if (!empty($post->id)) : ?>
+<?php if (!empty($post->pid)) : ?>
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>
             <!-- Hidden - Post ID -->
-            <input type="hidden" name="pid" value="<?php echo $post->id; ?>">
+            <input type="hidden" name="pid" value="<?php echo $post->pid; ?>">
             
             <!-- Content -->
             <tr>
                 <td><b>Content:</b></td>
-                <td><textarea required name="content"><?php if (!empty($user->content)) echo $user->content; elseif (!empty($_POST['content'])) echo $_POST['content']; ?></textarea></td>
+                <td><textarea required name="content"><?php echoInput($post, 'content'); ?></textarea></td>
             </tr>
             
             <!-- Submit -->

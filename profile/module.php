@@ -2,7 +2,10 @@
 
     require_once "../assets/functions.php";
     require_once "../user/user.php";
+    require_once "../post/post.php";
     date_default_timezone_set("America/Los_Angeles");
+
+    $post = new post ();
 
     class module {
         //Properties
@@ -21,6 +24,10 @@
             if (empty($id)) $id = $this->mid;
             $dao = new SQL ();
             $results = $dao->select ($this->table, $identifier, $id);
+            if (empty($results)) {
+                echo "An error occurred in get in the module class - empty results.";
+                return false;
+            }
             foreach ($results[0] as $key => $value) {
                 if (property_exists($this, $key)) { //if it's a property of the object (must be same names)
                     $this->$key = $value; //set object's properties
@@ -60,9 +67,8 @@
 
         public function print_page ($user) {
             $dao = new SQL ();
-            $left_side = $dao->select ("modules", ["uid", "side"], [$user->uid, 0], "sequence");
-            $right_side = $dao->select ("modules", ["uid", "side"], [$user->uid, 1], "sequence");
-            echo "<a href=\"../user/interface.php\" target=\"_self\">Home</a>";
+            $left_side = $dao->select ("modules", array("uid", "side"), array($user->uid, 0), "sequence");
+            $right_side = $dao->select ("modules", array("uid", "side"), array($user->uid, 1), "sequence");
             echo "<div style=\"width:30%; float:left\">";
             foreach ($left_side as $module) {
                 $this->print_module ($user, $module);
@@ -82,6 +88,9 @@
                 break;
             case "contact":
                 $this->display_contact ($user);
+                break;
+            case "friends":
+                $this->dislpay_friends ($user);
                 break;
             }
         }
@@ -124,6 +133,7 @@
                     </tr>
                     <tr>
                         <td>Bio:</td>
+<<<<<<< HEAD
                         <td><?=$user->bio?></td>
                     </tr>
                     <tr>
@@ -133,6 +143,21 @@
                     <tr>
                         <td>Hobbies:</td>
                         <td><?=$user->hobbies?></td>
+=======
+                        <td><?php echo $user->bio; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Relationship Status:</td>
+                        <td><?php echo $user->rel; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Interests:</td>
+                        <td><?php echo $user->interests; ?></td>
+                    </tr>
+                    <tr>
+                        <td>Hobbies:</td>
+                        <td><?php echo $user->hobbies; ?></td>
+>>>>>>> 8ad5b76736503d9a0d6aa1853c959949ac6be388
                     </tr>
                 </table>
             </div>
@@ -149,7 +174,47 @@
                     </tr>
                 </table>
             </div>
-            
+        <?php }
+        
+        //Replace this with a gallery view
+        public function display_friends ($user) {
+            $this->get(array("uid", "name"), array($user->uid, "friends")); ?>
+            <div class="module" id="friends" style="background:#<?php echo $this->background; ?>;color:#<?php echo $this->fontColor; ?>;"?>
+                <h1 class="title">Friends</h1>
+                <table>
+                    <?php foreach ($user->getFriends() as $id) : 
+                        $user->get("uid", $id);
+                    ?>
+                    <tr>
+                        <a href="profile.php?<?php echo $id; ?>" target="_self">
+                        <td><img src="<?php echo $user->picture; ?>"></td>
+                    </tr>
+                    <tr>
+                        <td><?php echo $user->fname." ".$user->lname; ?></td>
+                    </tr>
+                    </a>
+                    <tr></tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
+        <?php }
+        
+        public function display_posts ($user) {
+            global $post;
+            $this->get(array("uid", "name"), array($user->uid, "posts")); ?>
+            <div class="module" id="posts" style="background:#<?php echo $this->background; ?>;color:#<?php echo $this->fontColor; ?>;"?>
+                <h1 class="title">Posts</h1>
+                <table>
+                    <?php foreach ($post->display() as $p) : ?>
+                    <tr>
+                        <td><?php echo $p['dateTime']; ?></td>
+                        <td><?php echo $p['content']; ?></td>
+                    </tr>
+                    </a>
+                    <tr></tr>
+                    <?php endforeach; ?>
+                </table>
+            </div>
         <?php }
         
         

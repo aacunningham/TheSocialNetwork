@@ -1,9 +1,0 @@
-application: aesthetic-rush-696 
-version: 1
-runtime: php
-api_version: 1
-threadsafe: yes
-
-handlers:
-- url: .*
-  script: index.html

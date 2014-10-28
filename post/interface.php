@@ -14,6 +14,10 @@
 <br>
 <a href="../blog/interface.php" target="_self">Go to Blogs</a>
 <br>
+<a href="../school/interface.php" target="_self">Go to Schools</a>
+<br>
+<a href="../work/interface.php" target="_self">Go to Work History</a>
+<br>
 <a href="../user/interface.php" target="_self">Go to User</a>
 <br>
 <a href="../folder/interface.php" target="_self">Go to Folders</a>
