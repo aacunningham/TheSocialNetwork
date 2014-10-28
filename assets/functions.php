@@ -61,39 +61,8 @@
 
 
 ?>
-
-
-<script type="text/javascript">
-    function redirect (url) { //redirects the window to the specified URL
-        window.location = url;
-    }
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <script type="text/javascript">
+        function redirect (url) { //redirects the window to the specified URL
+            window.location = url;
+        }
+    </script>
