@@ -17,9 +17,6 @@
 <?php if (!empty($schools)) : ?>
     <!-- Display Schools -->
     <table>
-        <tr>
-            <th>Name</th>
-        </tr>
         <?php foreach ($schools as $s) : ?>
         <tr>
             <td><b>Name:</b></td>

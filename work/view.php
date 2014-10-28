@@ -17,12 +17,9 @@
 <?php if (!empty($works)) : ?>
     <!-- Display Work History -->
     <table>
-        <tr>
-            <th>Company</th>
-        </tr>
         <?php foreach ($works as $w) : ?>
         <tr>
-            <td><b>Name:</b></td>
+            <td><b>Company:</b></td>
             <td><?php echo $w['company']; ?></td>
         </tr>
         <tr>

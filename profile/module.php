@@ -3,9 +3,13 @@
     require_once "../assets/functions.php";
     require_once "../user/user.php";
     require_once "../post/post.php";
+    require_once "../work/work.php";
+    require_once "../school/school.php";
     date_default_timezone_set("America/Los_Angeles");
 
     $post = new post ();
+    $school = new school ();
+    $work = new work();
 
     class module {
         //Properties
@@ -203,6 +207,61 @@
                     <?php endforeach; ?>
                 </table>
             </div>
+        <?php }
+        
+        public function display_schools ($user) {
+            global $school; 
+            $this->get(array("uid", "name"), array($user->uid, "schools")); ?>
+            <div class="module" id="schools" style="background:#<?php echo $this->background; ?>;color:#<?php echo $this->fontColor; ?>;"?>
+                <h1 class="title">Schools</h1>
+            <table>
+                <?php foreach ($school->display($user->uid) as $s) : ?>
+                <tr>
+                    <td><b>Name:</b></td>
+                    <td><?php echo $s['name']; ?></td>
+                </tr>
+                <tr>
+                    <td><b>Type:</b></td>
+                    <td><?php echo $s['type']; ?></td>
+                </tr>
+                <tr>
+                    <td><b>Address:</b></td>
+                    <td><?php echo $s['address']; ?></td>
+                </tr>
+                <tr>
+                    <td><b>City:</b></td>
+                    <td><?php echo $s['city']; ?></td>
+                </tr>
+                <tr>
+                    <td><b>State:</b></td>
+                    <td><?php echo $s['state']; ?></td>
+                </tr>
+                <tr>
+                    <td><b>Zip Code:</b></td>
+                    <td><?php echo $s['zipCode']; ?></td>
+                </tr>
+                <tr>
+                    <td><b>Major:</b></td>
+                    <td><?php echo $s['major']; ?></td>
+                </tr>
+                <tr>
+                    <td><b>Minor:</b></td>
+                    <td><?php echo $s['minor']; ?></td>
+                </tr>
+                <tr>
+                    <td><b>Start Date:</b></td>
+                    <td><?php echo $s['startDate']; ?></td>
+                </tr>
+                <tr>
+                    <td><b>End Date:</b></td>
+                    <td><?php echo $s['endDate']; ?></td>
+                </tr>
+                <tr>
+                    <td><b>Degree:</b></td>
+                    <td><?php echo $s['degree']; ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </table>
         <?php }
         
         
