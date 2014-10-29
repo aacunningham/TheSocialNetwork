@@ -1,8 +1,15 @@
 <?php
     require_once "module.php";
-    require_once "../Layout/header.php"; 
+    require_once "../Layout/header.php"; ?>
     
+<title>Testing Modules</title>
+<h1>Testing Modules</h1>
     
+<!-- Back Navigtion -->
+<a href="interface.php" target="_self">Home</a>
+<br>
+
+<?php
     //Get User Information
     $user->uid = 2; //replace later with method to get user id
     $user->get (); //get user info

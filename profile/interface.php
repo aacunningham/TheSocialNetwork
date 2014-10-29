@@ -12,6 +12,8 @@
     <br>
     <a href="edit.php" target="_self">Edit Module</a>
     <br>
+    <a href="testing.php" target="_self">View Testing Page</a>
+    <br>
     <a href="../blog/interface.php" target="_self">Go to Blogs</a>
     <br>
     <a href="../user/interface.php" target="_self">Go to User</a>
