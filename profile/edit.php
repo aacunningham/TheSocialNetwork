@@ -14,7 +14,7 @@
         $module->fontColor = test_input($_POST['fontColor']);
         $module->edit ();
     }
-    $list = $module->listAll();
+    $list = $module->listModules();
 ?>
 
 <!-- Title -->

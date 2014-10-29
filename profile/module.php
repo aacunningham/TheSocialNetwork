@@ -23,20 +23,26 @@
             $this->uid = !empty($_SESSION['uid']) ? $_SESSION['uid'] : '';
         }
         
-        public function get ($identifier=null, $id=null) {
+        public function get ($identifier=null, $id=null, $set=true) {
             if (empty($identifier)) $identifier = $this->identifier;
             if (empty($id)) $id = $this->mid;
+            
             $dao = new SQL ();
             $results = $dao->select ($this->table, $identifier, $id);
+            
             if (empty($results)) {
-                echo "An error occurred in get in the module class - empty results.";
-                return false;
+                echo "An error occurred - that module does not exist in the database.";
+                return NULL;
             }
-            foreach ($results[0] as $key => $value) {
-                if (property_exists($this, $key)) { //if it's a property of the object (must be same names)
-                    $this->$key = $value; //set object's properties
+            
+            if ($set) {
+                foreach ($results[0] as $key => $value) {
+                    if (property_exists($this, $key)) { //if it's a property of the object (must be same names)
+                        $this->$key = $value; //set object's properties
+                    }
                 }
             }
+            return $results;
         }
 
         public function create () {
@@ -102,6 +108,11 @@
         public function listAll () {
             $dao = new SQL ();
             return $dao->selectAll($this->table);
+        }
+        
+        public function listModules ($uid=NULL) {
+            $uid = empty($uid) ? $_SESSION['uid'] : $uid;
+            return $this->get ('uid', $uid, false);
         }
         
         public function getName () {
