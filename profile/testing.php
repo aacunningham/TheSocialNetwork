@@ -4,7 +4,7 @@
     
     
     //Get User Information
-    $user->uid = $_SESSION['uid']; //replace later with method to get user id
+    $user->uid = 2; //replace later with method to get user id
     $user->get (); //get user info
 
     $module->display_about_me($user); 

@@ -28,6 +28,8 @@
     <br>
     <a href="../blog/interface.php" target="_self">Go to Blogs</a>
     <br>
+    <a href="../profile/interface.php" target="_self">Go to Profile Modules</a>
+    <br>
     <a href="../folder/interface.php" target="_self">Go to Folders</a>
     <br>
     <a href="../category/interface.php" target="_self">Go to Categories</a>

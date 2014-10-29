@@ -71,7 +71,7 @@
 
         public function print_left ($user) {
             $dao = new SQL ();
-            $left_side = $dao->select ("modules", ["uid", "side"], [$user->uid, 0], "sequence");
+            $left_side = $dao->select ("modules", array("uid", "side"), array($user->uid, 0), "sequence");
             foreach ($left_side as $module) {
                 $this->print_module ($user, $module);
             }
@@ -79,7 +79,7 @@
 
         public function print_right ($user) {
             $dao = new SQL ();
-            $right_side = $dao->select ("modules", ["uid", "side"], [$user->uid, 1], "sequence");
+            $right_side = $dao->select ("modules", array("uid", "side"), array($user->uid, 1), "sequence");
             foreach ($right_side as $module) {
                 $this->print_module ($user, $module);
             }
@@ -94,7 +94,7 @@
                 $this->display_contact ($user);
                 break;
             case "friends":
-                $this->dislpay_friends ($user);
+                $this->display_friends ($user);
                 break;
             }
         }
@@ -198,7 +198,7 @@
             <div class="module" id="posts" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <h1 class="title">Posts</h1>
                 <table>
-                    <?php foreach ($post->display() as $p) : ?>
+                    <?php foreach ($post->display($user->uid) as $p) : ?>
                     <tr>
                         <td><?php echo $p['dateTime']; ?></td>
                         <td><?php echo $p['content']; ?></td>
