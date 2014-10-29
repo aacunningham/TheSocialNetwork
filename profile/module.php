@@ -69,24 +69,24 @@
             }
         }
 
-        public function print_page ($user) {
+        public function print_left ($user) {
             $dao = new SQL ();
-            $left_side = $dao->select ("modules", array("uid", "side"), array($user->uid, 0), "sequence");
-            $right_side = $dao->select ("modules", array("uid", "side"), array($user->uid, 1), "sequence");
-            echo "<div style=\"width:30%; float:left\">";
+            $left_side = $dao->select ("modules", ["uid", "side"], [$user->uid, 0], "sequence");
             foreach ($left_side as $module) {
                 $this->print_module ($user, $module);
             }
-            echo "</div>";
-            echo "<div style=\"width:30%; float:right\">";
+        }
+
+        public function print_right ($user) {
+            $dao = new SQL ();
+            $right_side = $dao->select ("modules", ["uid", "side"], [$user->uid, 1], "sequence");
             foreach ($right_side as $module) {
                 $this->print_module ($user, $module);
             }
-            echo "</div>";
         }
 
         public function print_module ($user, $module) {
-            switch ($module[1]) {
+            switch ($module[2]) {
             case "about me":
                 $this->display_about_me ($user);
                 break;
@@ -129,35 +129,35 @@
         public function display_about_me ($user) { 
             $this->get(array("uid", "name"), array($user->uid, "about me")); ?>
         <div class="module" id="about_me" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
-                <h1 class="title">About Me</h1>
-                <table style="width:100%">
-                    <tr>
-                        <td>Name:</td>
-                        <td><?php echo $user->fname.' '.$user->lname; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Bio:</td>
-                        <td><?php echo $user->bio; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Relationship Status:</td>
-                        <td><?php echo $user->rel; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Interests:</td>
-                        <td><?php echo $user->interests; ?></td>
-                    </tr>
-                    <tr>
-                        <td>Hobbies:</td>
-                        <td><?php echo $user->hobbies; ?></td>
-                    </tr>
-                </table>
-            </div>
+            <h1 class="title">About Me</h1>
+            <table style="width:100%">
+                <tr>
+                    <td>Name:</td>
+                    <td><?php echo $user->fname.' '.$user->lname; ?></td>
+                </tr>
+                <tr>
+                    <td>Bio:</td>
+                    <td><?php echo $user->bio; ?></td>
+                </tr>
+                <tr>
+                    <td>Relationship Status:</td>
+                    <td><?php echo $user->rel; ?></td>
+                </tr>
+                <tr>
+                    <td>Interests:</td>
+                    <td><?php echo $user->interests; ?></td>
+                </tr>
+                <tr>
+                    <td>Hobbies:</td>
+                    <td><?php echo $user->hobbies; ?></td>
+                </tr>
+            </table>
+        </div>
         <?php }
         
         public function display_contact ($user) {
             $this->get(array("uid", "name"), array($user->uid, "contact")); ?>
-        <div class="module" id="contact" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
+        <div class="module" id="contact" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
                 <h1 class="title">Contact</h1>
                 <table>
                     <tr>

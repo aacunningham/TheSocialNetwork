@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../Layout/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../Layout/style.css">
 <?php
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
@@ -26,9 +32,40 @@
         <script type="text/javascript">
             redirect ("../user/login.php");
         </script>
-    <?php } ?>
+    <?php }
 
-<!DOCTYPE html>
-<head>
-    <link rel="stylesheet" type="text/css" href="../Layout/style.css">
-</head>
+    function nav_bar () { ?>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../user/interface.php" target="_self">The Social Network</a>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <form action="../user/friends.php" method="POST" class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input name="search" class="form-control" type="text" placeholder="Search Users"></input>
+                        </div>
+                        <button class="btn btn-default" name="submit" type="submit" value="submit">Search</button>
+                    </form>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="../profile/profile.php">View Profile</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">User <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="../user/edit.php">Preferences</a></li>
+                            <li><a href="../user/logout.php">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <?php } ?> 

@@ -26,7 +26,7 @@
 
 <!-- Title -->
 <title>Edit User</title>
-
+</head>
 <!-- Back Navigtion -->
 <a href="interface.php" target="_self">Home</a>
 
@@ -40,10 +40,9 @@
 
 <!-- Edit User Form -->
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
+    <!-- Hidden - User ID -->
+    <input type="hidden" name="uid" value="<?php echo $user->id; ?>">
     <table>
-        <!-- Hidden - User ID -->
-        <input type="hidden" name="uid" value="<?php echo $user->id; ?>">
-        
         <!-- First Name -->
         <tr>
             <td><b>First Name:</b></td>
