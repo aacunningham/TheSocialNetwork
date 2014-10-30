@@ -64,7 +64,7 @@
                             <li><a href="../post/interface.php">Posts</a></li>
                             <li><a href="../blog/interface.php">Blogs</a></li>
                             <li><a href="../folder/interface.php">Folders</a></li>
-                            <li><a href="../catagory/interface.php">Catagories</a></li>
+                            <li><a href="../category/interface.php">Categories</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

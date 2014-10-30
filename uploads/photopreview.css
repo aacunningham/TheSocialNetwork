@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div.img {
+
+}
+
+div.img img {
+
+
+
+}
+
+div.img a:hover img {
+
+;
+}
+div.desc {
+
+
+}
+</style>
+</head>
+<body>
+
+<div class="img">
+<a target="_blank" href=" test.htm"><img src="test.jpg" alt="test" width="100"
+height="90"></a>
