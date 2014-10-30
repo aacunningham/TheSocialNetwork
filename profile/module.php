@@ -133,25 +133,25 @@
             $this->get(array("uid", "name"), array($user->uid, "about me")); ?>
         <div class="module" id="about_me" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
             <h1 class="title">About Me</h1>
-            <table style="width:100%">
-                <tr>
-                    <td>Name:</td>
+            <table class="about_me">
+                <tr class="name">
+                    <td class="bolden">Name:</td>
                     <td><?php echo $user->fname.' '.$user->lname; ?></td>
                 </tr>
-                <tr>
-                    <td>Bio:</td>
+                <tr class="bio">
+                    <td class="bolden">Bio:</td>
                     <td><?php echo $user->bio; ?></td>
                 </tr>
-                <tr>
-                    <td>Relationship Status:</td>
+                <tr class="rel">
+                    <td class="bolden">Relationship Status:</td>
                     <td><?php echo $user->rel; ?></td>
                 </tr>
-                <tr>
-                    <td>Interests:</td>
+                <tr class="interests">
+                    <td class="bolden">Interests:</td>
                     <td><?php echo $user->interests; ?></td>
                 </tr>
-                <tr>
-                    <td>Hobbies:</td>
+                <tr class="hobbies">
+                    <td class="bolden">Hobbies:</td>
                     <td><?php echo $user->hobbies; ?></td>
                 </tr>
             </table>
@@ -164,7 +164,7 @@
                 <h1 class="title">Contact</h1>
                 <table>
                     <tr>
-                        <td>Email:</td>
+                        <td class="bolden">Email:</td>
                         <td><?php echo $user->email; ?></td>
                     </tr>
                 </table>
@@ -200,15 +200,17 @@
             $this->get(array("uid", "name"), array($user->uid, "posts")); ?>
             <div class="module" id="posts" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <h1 class="title">Posts</h1>
-                <table>
+                <table class='posts table table-striped'>
+                    <tbody>
                     <?php foreach ($post->display($user->uid) as $p) : ?>
-                    <tr>
-                        <td><?php echo $p['dateTime']; ?></td>
+                    <tr class='postContent'>
                         <td><?php echo $p['content']; ?></td>
                     </tr>
-                    </a>
-                    <tr></tr>
+                    <tr class='postDate'>
+                        <td><?php echo formatDate($p['dateTime']); ?></td>
+                    </tr>
                     <?php endforeach; ?>
+                    </tbody>
                 </table>
             </div>
         <?php }
@@ -221,47 +223,47 @@
             <table>
                 <?php foreach ($school->display($user->uid) as $s) : ?>
                 <tr>
-                    <td><b>Name:</b></td>
+                    <td class="bolden">Name:</td>
                     <td><?php echo $s['name']; ?></td>
                 </tr>
                 <tr>
-                    <td><b>Type:</b></td>
+                    <td class="bolden">Type:</td>
                     <td><?php echo $s['type']; ?></td>
                 </tr>
                 <tr>
-                    <td><b>Address:</b></td>
+                    <td class="bolden">Address:</td>
                     <td><?php echo $s['address']; ?></td>
                 </tr>
                 <tr>
-                    <td><b>City:</b></td>
+                    <td class="bolden">City:</td>
                     <td><?php echo $s['city']; ?></td>
                 </tr>
                 <tr>
-                    <td><b>State:</b></td>
+                    <td class="bolden">State:</td>
                     <td><?php echo $s['state']; ?></td>
                 </tr>
                 <tr>
-                    <td><b>Zip Code:</b></td>
+                    <td class="bolden">Zip Code:</td>
                     <td><?php echo $s['zipCode']; ?></td>
                 </tr>
                 <tr>
-                    <td><b>Major:</b></td>
+                    <td class="bolden">Major:</td>
                     <td><?php echo $s['major']; ?></td>
                 </tr>
                 <tr>
-                    <td><b>Minor:</b></td>
+                    <td class="bolden">Minor:</td>
                     <td><?php echo $s['minor']; ?></td>
                 </tr>
                 <tr>
-                    <td><b>Start Date:</b></td>
+                    <td class="bolden">Start Date:</td>
                     <td><?php echo $s['startDate']; ?></td>
                 </tr>
                 <tr>
-                    <td><b>End Date:</b></td>
+                    <td class="bolden">End Date:</td>
                     <td><?php echo $s['endDate']; ?></td>
                 </tr>
                 <tr>
-                    <td><b>Degree:</b></td>
+                    <td class="bolden">Degree:</td>
                     <td><?php echo $s['degree']; ?></td>
                 </tr>
                 <?php endforeach; ?>
@@ -277,47 +279,47 @@
                 <table>
                     <?php foreach ($work->display($user->uid) as $w) : ?>
                     <tr>
-                        <td><b>Company:</b></td>
+                        <td class="bolden">Company:</td>
                         <td><?php echo $w['company']; ?></td>
                     </tr>
                     <tr>
-                        <td><b>Position:</b></td>
+                        <td class="bolden">Position:</td>
                         <td><?php echo $w['position']; ?></td>
                     </tr>
                     <tr>
-                        <td><b>Address:</b></td>
+                        <td class="bolden">Address:</td>
                         <td><?php echo $w['address']; ?></td>
                     </tr>
                     <tr>
-                        <td><b>City:</b></td>
+                        <td class="bolden">City:</td>
                         <td><?php echo $w['city']; ?></td>
                     </tr>
                     <tr>
-                        <td><b>State:</b></td>
+                        <td class="bolden">State:</td>
                         <td><?php echo $w['state']; ?></td>
                     </tr>
                     <tr>
-                        <td><b>Zip Code:</b></td>
+                        <td class="bolden">Zip Code:</td>
                         <td><?php echo $w['zipCode']; ?></td>
                     </tr>
                     <tr>
-                        <td><b>Phone:</b></td>
+                        <td class="bolden">Phone:</td>
                         <td><?php echo $w['phone']; ?></td>
                     </tr>
                     <tr>
-                        <td><b>Boss:</b></td>
+                        <td class="bolden">Boss:</td>
                         <td><?php echo $w['boss']; ?></td>
                     </tr>
                     <tr>
-                        <td><b>Duties:</b></td>
+                        <td class="bolden">Duties:</td>
                         <td><?php echo $w['duties']; ?></td>
                     </tr>
                     <tr>
-                        <td><b>Start Date:</b></td>
+                        <td class="bolden">Start Date:</td>
                         <td><?php echo $w['startDate']; ?></td>
                     </tr>
                     <tr>
-                        <td><b>End Date:</b></td>
+                        <td class="bolden">End Date:</td>
                         <td><?php if ($w["endDate"] == "0000-00-00") echo "Current"; else echo $w['endDate']; ?></td>
                     </tr>
                     <?php endforeach; ?>

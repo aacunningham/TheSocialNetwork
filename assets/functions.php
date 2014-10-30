@@ -1,5 +1,22 @@
 <?php
 
+    function formatDate ($date) { //year-month-day hour:min:sec to day month (year if not current year) hour:min
+        $year = substr($date, 0, strpos($date, "-"));
+        $date = substr($date, strpos($date, "-")+1);
+        $month = substr($date, 0, strpos($date, "-"));
+        $date = substr($date, strpos($date, "-")+1);
+        $day = substr($date, 0, 2);
+        $date = substr($date, 3);
+        $hour = substr($date, 0, 2);
+        $date = substr($date, 3);
+        $min = substr($date, 0, 2);
+        $dateObj = DateTime::createFromFormat('!m', $month);
+        $month = $dateObj->format('F');
+        echo $day." ".$month." ".(24-$hour).":".$min;
+        if ($hour >= 12) echo " PM";
+        else echo " AM";
+    }
+
     function test_input($data) { //validate input (standard)
         $data = trim($data); //trim spaces off
         $data = stripslashes($data); //strip slashes off

@@ -2,11 +2,6 @@ h1, h2, h3, h4 {
 	text-align: center;
 }
 
-table {
-	width: 50%;
-	margin: auto;
-}
-
 /* Profile module */
 div.module {
     border: 1px solid #000000;
@@ -32,4 +27,33 @@ div.module .title {
 img {
     max-height: 200px;
     max-width: 200px;
+}
+
+/* General Tables */
+
+table {
+    width: 50%;
+    margin: auto;
+}
+
+table td {
+    padding: 5px;
+}
+
+td.bolden {
+    font-weight: bold;
+}
+
+/* Post Module */
+table.posts tr {
+    text-align: center;
+}
+
+tr.postContent {
+    font-size: 1.2em;
+}
+
+tr.postDate {
+    font-style: italic;
+    font-size: 1em;
 }
