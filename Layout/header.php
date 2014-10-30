@@ -56,11 +56,21 @@
                     </form>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../profile/profile.php">View Profile</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">Go to... <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="../profile/profile.php">Your Profile</a></li>
+                            <li><a href="../profile/interface.php">Modules</a></li>
+                            <li><a href="../post/interface.php">Posts</a></li>
+                            <li><a href="../blog/interface.php">Blogs</a></li>
+                            <li><a href="../folder/interface.php">Folders</a></li>
+                            <li><a href="../catagory/interface.php">Catagories</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="#" data-toggle="dropdown">User <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="../user/edit.php">Preferences</a></li>
+                            <li><a href="../user/edit.php">Edit Profile</a></li>
                             <li><a href="../user/logout.php">Logout</a></li>
                         </ul>
                     </li>
