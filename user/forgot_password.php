@@ -5,12 +5,11 @@
 
 <!-- Errors -->
 <?php if (!empty($user->message)) : ?>
-    <h3><?php echo $user->message; ?></h3>
+    <h3><?php echo $user->messa;ge; ?></h3>
 <?php endif; ?>
 
 <?php
-
-    require_once "../Layout/header.php";
+    require_once "../layout/header.php";
     
     if (!empty($_POST['submit'])) {
        $user->email = test_input($_POST['email']);
@@ -22,6 +21,9 @@
        }
 	}
 ?>
+
+<!-- Back Navigtion -->
+<a href="interface.php" target="_self">Home</a>
 
 <!-- Heading -->
 <h1>Forgot my password</h1>
