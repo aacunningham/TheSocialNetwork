@@ -102,6 +102,15 @@
             case "friends":
                 $this->display_friends ($user);
                 break;
+            case "posts":
+                $this->display_posts ($user);
+                break;
+            case "schools":
+                $this->display_schools ($user);
+                break;
+            case "work":
+                $this->display_work ($user);
+                break;
             }
         }
 
@@ -118,23 +127,6 @@
         public function getName () {
             $this->get (array("uid"), array($this->uid));
             return $this->name;
-        }
-        
-        //attempt at polymorphism
-        public function display ($object, $location) {
-            $class = get_class ($object);
-            $type = $this->getName ($location);
-            switch ($class) {
-                case "user":
-                    $this->display_user ($object, $type);
-                    break;
-                case "photo":
-                    $this->display_blog ($object, $type);
-                    break;
-                case "post":
-                    $this->display_post ($object, $type);
-                    break;
-            }
         }
         
         public function display_about_me ($user) { 
@@ -330,6 +322,7 @@
                     </tr>
                     <?php endforeach; ?>
                 </table>
+            </div>
         <?php }
         
         

@@ -9,7 +9,7 @@
         $user->fname = test_input($_POST['fname']);
         $user->lname = test_input($_POST['lname']);
         if (!empty($_FILES['picture']['tmp_name'])) {
-            $user->picture = saveFile ('picture', "assets/$user->email");
+            $user->picture = saveFile ('picture', "../assets/$user->email");
         }
         $user->interests = test_input($_POST['interests']);
         $user->hobbies = test_input($_POST['hobbies']);
