@@ -6,7 +6,7 @@
 <!-- Errors -->
 <!-- waaaaaahhh -->
 <?php if (!empty($user->message)) : ?>
-    <h3><?php echo $user->messa;ge; ?></h3>
+    <h3><?php echo $user->message; ?></h3>
 <?php endif; ?>
 
 <?php
