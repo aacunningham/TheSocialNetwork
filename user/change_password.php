@@ -4,7 +4,7 @@
 <?php endif; ?>
 
 <?php
-    require_once "../layout/header.php";
+    require_once "../Layout/header.php";
 	
     if (!empty($_POST['submit'])) { //change password submitted
         if (test_input($_POST['password1']) == test_input($_POST['password2'])) {
