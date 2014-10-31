@@ -68,6 +68,21 @@
                 $this->message = "Oops - an error occurred.";
             }
         }
+		
+		public function update_password()	{ //update the user password in SQL
+			$columns = array("password");
+			$values = array($this->password);
+			
+			$dao = new SQL();
+			$success = $dao->update( $this->table, $columns, $values, $this->identifier, $this->uid);
+			
+            if ($success) {
+                $this->message = "Password changed!";
+            } else {
+                $this->message = "Oops - an error occurred.";
+            }
+			return $success;
+		}
         
         public function delete () { //deletes a row in the SQL
             $dao = new SQL (); //data access object
@@ -112,12 +127,7 @@
 				return TRUE;
 			}
 		}
-		
-		/*public function get_challenge_question() { //get their password recovery question
-			$dao = new SQL();
-			$result = $dao->select_inner("users","security_questions", "UID", "UID");
-			return $result;
-		}*/
+
 		public function get_challenge_question() {
 			$dao = new SQL();
             $result = $dao->select ("security_questions", "uid", $this->uid); //go to the security table and get their challenge question
