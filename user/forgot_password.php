@@ -15,9 +15,12 @@
        $user->email = test_input($_POST['email']);
        $check_res = $user->forgot_password(); 	//User submits email for account check
        if( $check_res ) {
-       		echo "found";
-       } else {
-       	echo "not found";
+       		header('Location: password_challenge.php');
+       		//echo "Found User";
+			/*$result = $user->get_challenge_question();
+			echo $result[0]['uid'];
+			echo $result[0]['challenge'];
+			echo $result[0]['answer'];*/
        }
 	}
 ?>
@@ -39,7 +42,7 @@
             
         <!-- Submit -->
         <tr>
-            <td><input type="submit" name="submit" value="Send New Password"></td>
+            <td><input type="submit" name="submit" value="Reset Password"></td>
         </tr>
     </table>
 </form>

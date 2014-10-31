@@ -67,7 +67,14 @@ class SQL {
 	}
         return $this->get($query); //send query, return results
     }
-    
+	
+	public function select_inner( $left_table, $right_table, $left_identifier, $right_identifier ) { //select with inner join - return all column values from left and right tables where $left_ident == $right_ident
+    	//incomplete function
+    	$left_identifier = $left_table.".".$left_identifier;
+		$right_identifier = $right_table.".".$right_identifier;
+    	$query = "SELECT * FROM ".$left_table." INNER JOIN ".$right_table." ON ".$left_identifier."=".$right_identifier;
+		return $this->get($query);
+	}
     public function selectAll ($table) { //select all rows and columns from a given table
         $query = "SELECT * FROM ".$table; //select everything
         return $this->get($query); //return results of query

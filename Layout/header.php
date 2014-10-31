@@ -18,7 +18,11 @@
     $category = new category ();
     $module = new module ();
 
-    if (!$user->loggedIn() and $_SERVER['PHP_SELF'] != "/user/login.php" and $_SERVER['PHP_SELF'] != "/user/new.php" and $_SERVER['PHP_SELF'] != "/user/forgot_password.php") { ?>
+    if (!$user->loggedIn() and $_SERVER['PHP_SELF'] != "/user/login.php" 
+    	and $_SERVER['PHP_SELF'] != "/user/new.php" 
+    	and $_SERVER['PHP_SELF'] != "/user/forgot_password.php"
+		and $_SERVER['PHP_SELF'] != "/user/password_challenge.php"
+		and $_SERVER['PHP_SELF'] != "/user/change_password.php") { ?>
         <script type="text/javascript">
             redirect ("../user/login.php");
         </script>

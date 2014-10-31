@@ -107,9 +107,27 @@
 				$this->message = "User not found";
 				return FALSE;
 			} else {
-				$this->message = "user found";
+				$this->message = "User found";
+				$_SESSION['uid'] = $result[0]["uid"]; //save their uid in session for use everywhere
 				return TRUE;
 			}
+		}
+		
+		/*public function get_challenge_question() { //get their password recovery question
+			$dao = new SQL();
+			$result = $dao->select_inner("users","security_questions", "UID", "UID");
+			return $result;
+		}*/
+		public function get_challenge_question() {
+			$dao = new SQL();
+            $result = $dao->select ("security_questions", "uid", $this->uid); //go to the security table and get their challenge question
+            if (empty($result)) {
+                $this->message = "Oops - an error occurred.";
+                return;
+            } else {
+                return $result;
+                $this->message = "Found Question"; 
+            }		
 		}
         
         public function loggedIn () { //check if a valid user is logged in
