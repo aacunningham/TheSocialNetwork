@@ -9,7 +9,7 @@
 <?php endif; ?>
 
 <?php
-    require_once "../layout/header.php";
+    require_once "../Layout/header.php";
     
     if (!empty($_POST['submit'])) {
        $user->email = test_input($_POST['email']);

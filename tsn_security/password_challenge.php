@@ -4,7 +4,7 @@
 <?php endif; ?>
 
 <?php
-    require_once "../layout/header.php";
+    require_once "../Layout/header.php";
 	if(!isset($_SESSION['attempts'])) {
 		$_SESSION['attempts'] = 0;
 	}
