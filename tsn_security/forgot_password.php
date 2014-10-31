@@ -3,6 +3,11 @@
     <a href="interface.php" target="_self">Home</a>
 <?php endif; ?>
 
+<!-- Errors -->
+<?php if (!empty($user->message)) : ?>
+    <h3><?php echo $user->message; ?></h3>
+<?php endif; ?>
+
 <?php
     require_once "../layout/header.php";
     
@@ -41,8 +46,3 @@
         </tr>
     </table>
 </form>
-
-<!-- Errors -->
-<?php if (!empty($user->message)) : ?>
-    <h3><?php echo $user->message; ?></h3>
-<?php endif; ?>
