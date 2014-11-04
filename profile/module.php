@@ -93,6 +93,9 @@
 
         public function print_module ($user, $module) {
             switch ($module[2]) {
+            case "profile picture":
+                $this->display_profile_picture ($user);
+                break;
             case "about me":
                 $this->display_about_me ($user);
                 break;
@@ -131,36 +134,44 @@
         
         public function display_about_me ($user) { 
             $this->get(array("uid", "name"), array($user->uid, "about me")); ?>
-        <div class="module" id="about_me" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
-            <h1 class="title">About Me</h1>
-            <table class="about_me">
-                <tr class="name">
-                    <td class="bolden">Name:</td>
-                    <td><?php echo $user->fname.' '.$user->lname; ?></td>
-                </tr>
-                <tr class="bio">
-                    <td class="bolden">Bio:</td>
-                    <td><?php echo $user->bio; ?></td>
-                </tr>
-                <tr class="rel">
-                    <td class="bolden">Relationship Status:</td>
-                    <td><?php echo $user->rel; ?></td>
-                </tr>
-                <tr class="interests">
-                    <td class="bolden">Interests:</td>
-                    <td><?php echo $user->interests; ?></td>
-                </tr>
-                <tr class="hobbies">
-                    <td class="bolden">Hobbies:</td>
-                    <td><?php echo $user->hobbies; ?></td>
-                </tr>
-            </table>
-        </div>
+            <div class="module" id="about_me" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
+                <?php if ($user->uid == $user->getUser()) : ?>
+                    <a class="edit_content" href="../user/edit.php">Edit</a>
+                    <a class="edit_module" href="../profile/edit.php?m=about_me">Personalize</a>
+                <?php endif; ?>
+                <h1 class="title">About Me</h1>
+                <table class="about_me">
+                    <tr class="name">
+                        <td class="bolden">Name:</td>
+                        <td><?php echo $user->fname.' '.$user->lname; ?></td>
+                    </tr>
+                    <tr class="bio">
+                        <td class="bolden">Bio:</td>
+                        <td><?php echo $user->bio; ?></td>
+                    </tr>
+                    <tr class="rel">
+                        <td class="bolden">Relationship Status:</td>
+                        <td><?php echo $user->rel; ?></td>
+                    </tr>
+                    <tr class="interests">
+                        <td class="bolden">Interests:</td>
+                        <td><?php echo $user->interests; ?></td>
+                    </tr>
+                    <tr class="hobbies">
+                        <td class="bolden">Hobbies:</td>
+                        <td><?php echo $user->hobbies; ?></td>
+                    </tr>
+                </table>
+            </div>
         <?php }
         
         public function display_contact ($user) {
             $this->get(array("uid", "name"), array($user->uid, "contact")); ?>
-        <div class="module" id="contact" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
+            <div class="module" id="contact" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
+                <?php if ($user->uid == $user->getUser()) : ?>
+                    <a class="edit_content" href="../user/edit.php">Edit</a>
+                    <a class="edit_module" href="../profile/edit.php?m=contact">Personalize</a>
+                <?php endif; ?>
                 <h1 class="title">Contact</h1>
                 <table>
                     <tr>
@@ -176,22 +187,23 @@
             $friend = new user();
             $this->get(array("uid", "name"), array($user->uid, "friends")); ?>
             <div class="module" id="friends" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
+                <?php if ($user->uid == $user->getUser()) : ?>
+                    <a class="edit_module" href="../profile/edit.php?m=friends">Personalize</a>
+                <?php endif; ?>
                 <h1 class="title">Friends</h1>
-                <table>
                     <?php foreach ($user->getFriends() as $id) : 
                         $friend->get("uid", $id);
                     ?>
+                    <table class='friend'>
                     <tr>
-                        <a href="profile.php?<?php echo $id; ?>" target="_self">
-                        <td><img src="<?php echo $friend->picture; ?>"></td>
+                        <td><a href="profile.php?uid=<?php echo $id; ?>" target="_self"><img src="<?php echo $friend->picture; ?>"></a></td>
                     </tr>
                     <tr>
-                        <td><?php echo $friend->fname." ".$friend->lname; ?></td>
+                        <td><a href="profile.php?uid=<?php echo $id; ?>" target="_self"><?php echo $friend->fname." ".$friend->lname; ?></a><br>
+                        <a id="unfriend" href="../user/unFriend.php?f=<?php echo $id; ?>" target="_self" onclick="return confirm('Are you sure you want to unfriend this person?');">unFriend</a></td>
                     </tr>
-                    </a>
-                    <tr></tr>
+                    </table>
                     <?php endforeach; ?>
-                </table>
             </div>
         <?php }
         
@@ -199,12 +211,18 @@
             global $post;
             $this->get(array("uid", "name"), array($user->uid, "posts")); ?>
             <div class="module" id="posts" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
+                <?php if ($user->uid == $user->getUser()) : ?>
+                    <a class="edit_module" href="../profile/edit.php?m=posts">Personalize</a>
+                <?php endif; ?>
                 <h1 class="title">Posts</h1>
                 <table class='posts table table-striped'>
                     <tbody>
                     <?php foreach ($post->display($user->uid) as $p) : ?>
                     <tr class='postContent'>
                         <td><?php echo $p['content']; ?></td>
+                        <?php if ($user->uid == $user->getUser()) : ?>
+                            <td id="edit_post"><a class="edit_content" href="../post/edit.php?p=<?php echo $p["pid"]; ?>">Edit</a></td>
+                        <?php endif; ?>
                     </tr>
                     <tr class='postDate'>
                         <td><?php echo formatDate($p['dateTime']); ?></td>
@@ -219,55 +237,61 @@
             global $school; 
             $this->get(array("uid", "name"), array($user->uid, "schools")); ?>
             <div class="module" id="schools" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
+                <?php if ($user->uid == $user->getUser()) : ?>
+                    <a class="edit_module" href="../profile/edit.php?m=schools">Personalize</a>
+                <?php endif; ?>
                 <h1 class="title">Schools</h1>
-            <table>
-                <?php foreach ($school->display($user->uid) as $s) : ?>
-                <tr>
-                    <td class="bolden">Name:</td>
-                    <td><?php echo $s['name']; ?></td>
-                </tr>
-                <tr>
-                    <td class="bolden">Type:</td>
-                    <td><?php echo $s['type']; ?></td>
-                </tr>
-                <tr>
-                    <td class="bolden">Address:</td>
-                    <td><?php echo $s['address']; ?></td>
-                </tr>
-                <tr>
-                    <td class="bolden">City:</td>
-                    <td><?php echo $s['city']; ?></td>
-                </tr>
-                <tr>
-                    <td class="bolden">State:</td>
-                    <td><?php echo $s['state']; ?></td>
-                </tr>
-                <tr>
-                    <td class="bolden">Zip Code:</td>
-                    <td><?php echo $s['zipCode']; ?></td>
-                </tr>
-                <tr>
-                    <td class="bolden">Major:</td>
-                    <td><?php echo $s['major']; ?></td>
-                </tr>
-                <tr>
-                    <td class="bolden">Minor:</td>
-                    <td><?php echo $s['minor']; ?></td>
-                </tr>
-                <tr>
-                    <td class="bolden">Start Date:</td>
-                    <td><?php echo $s['startDate']; ?></td>
-                </tr>
-                <tr>
-                    <td class="bolden">End Date:</td>
-                    <td><?php echo $s['endDate']; ?></td>
-                </tr>
-                <tr>
-                    <td class="bolden">Degree:</td>
-                    <td><?php echo $s['degree']; ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </table>
+                <table>
+                    <?php foreach ($school->display($user->uid) as $s) : ?>
+                    <tr>
+                        <td class="bolden">Name:</td>
+                        <td><?php echo $s['name']; ?></td>
+                        <?php if ($user->uid == $user->getUser()) : ?>
+                            <td><a class="edit_content" href="../school/edit.php?s=<?php echo $s['sid']; ?>">Edit</a></td>
+                        <?php endif; ?>
+                    </tr>
+                    <tr>
+                        <td class="bolden">Type:</td>
+                        <td><?php echo $s['type']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="bolden">Address:</td>
+                        <td><?php echo $s['address']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="bolden">City:</td>
+                        <td><?php echo $s['city']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="bolden">State:</td>
+                        <td><?php echo $s['state']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="bolden">Zip Code:</td>
+                        <td><?php echo $s['zipCode']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="bolden">Major:</td>
+                        <td><?php echo $s['major']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="bolden">Minor:</td>
+                        <td><?php echo $s['minor']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="bolden">Start Date:</td>
+                        <td><?php echo $s['startDate']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="bolden">End Date:</td>
+                        <td><?php echo $s['endDate']; ?></td>
+                    </tr>
+                    <tr>
+                        <td class="bolden">Degree:</td>
+                        <td><?php echo $s['degree']; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
             </div>
         <?php }
 
@@ -275,12 +299,18 @@
             global $work;
             $this->get(array("uid", "name"), array($user->uid, "work")); ?>
             <div class="module" id="work" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
+                <?php if ($user->uid == $user->getUser()) : ?>
+                    <a class="edit_module" href="../profile/edit.php?m=work">Personalize</a>
+                <?php endif; ?>
                 <h1 class="title">Work History</h1>
                 <table>
                     <?php foreach ($work->display($user->uid) as $w) : ?>
                     <tr>
                         <td class="bolden">Company:</td>
                         <td><?php echo $w['company']; ?></td>
+                        <?php if ($user->uid == $user->getUser()) : ?>
+                            <td><a class="edit_content" href="../work/edit.php?w=<?php echo $w['wid']; ?>">Edit</a></td>
+                        <?php endif; ?>
                     </tr>
                     <tr>
                         <td class="bolden">Position:</td>
@@ -327,6 +357,21 @@
             </div>
         <?php }
         
+        public function display_profile_picture ($user) {
+            $this->get(array("uid", "name"), array($user->uid, "profile picture")); ?>
+            <div class="module" id="about_me" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
+                <?php if ($user->uid == $user->getUser()) : ?>
+                    <a class="edit_content" href="../user/edit.php">Edit</a>
+                    <a class="edit_module" href="../profile/edit.php?m=about_me">Personalize</a>
+                <?php endif; ?>
+                <h1 class="title"><?php echo $user->fname." ".$user->lname; ?></h1>
+                <table class="profile_picture">
+                    <tr>
+                        <td><img src="<?php echo $user->picture; ?>"></td>
+                    </tr>
+                </table>
+            </div>
+        <?php }
         
     }
 ?>

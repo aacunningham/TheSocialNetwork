@@ -72,7 +72,7 @@
             return $dao->selectAll($this->table); //select all columns and rows in the table
         }
         
-        public function listWorks ($uid) { //list all schools for this user
+        public function listWorks ($uid=NULL) { //list all schools for this user
             $uid = empty($uid) ? $_SESSION['uid'] : $uid;
             return $this->get ('uid', $uid, false);
         }

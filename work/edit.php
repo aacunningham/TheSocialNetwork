@@ -10,7 +10,10 @@
     "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", 
     "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY");
     
-    if (!empty($_POST['choose'])) { //if work chosen for editing
+    if (!empty($_GET['w'])) {
+        $work->wid = $_GET['w'];
+        $work->get (); //get work info
+    } elseif (!empty($_POST['choose'])) { //if work chosen for editing
         $work->wid = $_POST['id'];
         $work->get (); //get work info
     } elseif (!empty($_POST['submit'])) { //if edited work submitted

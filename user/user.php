@@ -24,6 +24,10 @@
                 $this->get ();
             }
         }
+        
+        public function getUser () {
+            return $_SESSION['uid'];
+        }
                 
         public function get ($identifier=null, $id=null, $set=true) { //fetch user's info from SQL using id(s) at identifier(s) (can be arrays)
             if (empty($identifier)) $identifier = $this->identifier; //if none provided, use uid as default

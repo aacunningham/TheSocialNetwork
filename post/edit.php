@@ -2,7 +2,10 @@
 
     require_once "../Layout/header.php";
     
-    if (!empty($_POST['choose'])) { //if post selected for editing
+    if (!empty($_GET['p'])) {
+        $post->pid = $_GET['p'];
+        $post->get ();
+    } elseif (!empty($_POST['choose'])) { //if post selected for editing
         $post->pid = $_POST['id'];
         $post->get (); //get post info
     } elseif (!empty($_POST['submit'])) { //if edited post submitted

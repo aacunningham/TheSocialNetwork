@@ -6,6 +6,8 @@
     if (!empty($_POST['choose'])) {
         $module->mid = $_POST['id'];
         $module->get (); //get module info
+    } elseif (!empty($_GET['m'])) {
+        $module->get (array("name", "uid"), array(str_replace("_", " ", $_GET['m']), $user->uid), true);
     } elseif (!empty($_POST['submit'])) {
         //Form Validation
         $module->mid = test_input($_POST['mid']);
@@ -24,7 +26,7 @@
 <a href="interface.php" target="_self">Home</a>
 
 <!-- Heading -->
-<h1>Edit Module</h1>
+<h1>Edit <?php if (!empty($module->name)) echo ucwords($module->name); ?> Module</h1>
 
 <?php if (!empty($module->message)) : ?>
     <h3><?php echo $module->message; ?></h3>

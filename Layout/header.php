@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../Layout/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../Layout/style.css">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
 <?php
     if (session_status() == PHP_SESSION_NONE) {
         session_start();

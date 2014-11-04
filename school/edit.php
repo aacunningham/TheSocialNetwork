@@ -23,7 +23,10 @@
     $degrees = array ("N/A", "GED", "High School Diploma", "A.A.", "A.S.", "A.A.S.", "A.E.", "A.A.A.", "A.P.S.", "B.S.", "B.A.", 
     "B.F.A.", "B.B.A.", "B.Arch.", "M.A.", "M.S.", "M.Res.", "M.Phil.", "LL.M.", "M.B.A.", "PhD", "M.D.", "Ed.D.", "J.D.", "D.O.");
     
-    if (!empty($_POST['choose'])) { //if school chosen for editing
+    if (!empty($_GET['s'])) {
+        $school->sid = $_GET['s'];
+        $school->get (); //get school info
+    } elseif (!empty($_POST['choose'])) { //if school chosen for editing
         $school->sid = $_POST['id'];
         $school->get (); //get school info
     } elseif (!empty($_POST['submit'])) { //if edited school submitted
