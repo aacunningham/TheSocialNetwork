@@ -10,7 +10,7 @@ $directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_
 $uploadHandler = 'http://' . $_SERVER['HTTP_HOST'] . $directory_self . 'upload.process.php';
 
 // what would be the ideal set a max file size for the html upload form
-$max_file_size = 10000; // size in bytes
+$max_file_size = 3000000; // size in bytes
 
 // now its time to echo the html page
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
