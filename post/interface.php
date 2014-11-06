@@ -12,11 +12,11 @@
     <br>
     <a href="edit.php" target="_self">Edit Post</a>
     <br>
-    <a href="delete.php" target="_self">Delete Post</a>
+    <!--<a href="delete.php" target="_self">Delete Post</a>-->
     <br>
     <a href="view.php" target="_self">View Posts</a>
     <br>
-    <a href="../blog/interface.php" target="_self">Go to Blogs</a>
+    <!--<a href="../blog/interface.php" target="_self">Go to Blogs</a>
     <br>
     <a href="../school/interface.php" target="_self">Go to Schools</a>
     <br>
@@ -30,7 +30,7 @@
     <br>
     <a href="../profile/profile.php" target="_self">Go to Profile</a>
     <br>
-    <a href="../profile/interface.php" target="_self">Go to Profile Modules</a>
+    <a href="../profile/interface.php" target="_self">Go to Profile Modules</a>-->
     <script src="../Layout/js/jquery-1.11.1.min.js"></script>
     <script src="../Layout/js/bootstrap.min.js"></script>
 </body>

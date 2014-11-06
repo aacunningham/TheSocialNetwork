@@ -12,8 +12,8 @@
         $blog->bid = $_POST['bid'];
         $blog->title = test_input($_POST['title']);
         $blog->content = test_input($_POST['content']);
-        $blog->category = test_input($_POST['category']);
-        $blog->folder = test_input($_POST['folder']);
+        $blog->cid = test_input($_POST['category']);
+        $blog->fid = test_input($_POST['folder']);
         $blog->edit ();
     }
     $categoryList = $category->listAll (); //list all categories (sitewide)
@@ -27,7 +27,7 @@
 <?php if (!empty($_GET['b'])) : ?>
     <a class='back' href="edit.php?f=<?php echo $_GET['f']; ?>" target="_self">Blogs</a>
 <?php elseif (!empty($_GET['f'])) : ?>
-    <a class='back' href="interface.php" target="_self">Home</a>
+    <a class='back' href="interface.php" target="_self">Folders</a>
 <?php endif; ?>
 
 <!-- Heading -->
@@ -39,6 +39,7 @@
 <?php endif; ?>
 
 <?php if (!empty($blog->bid)) : ?>
+    <a class="delete" href="delete.php?f=<?php echo $_GET['f']; ?>&b=<?php echo $blog->bid; ?>" target="_self" onclick="return confirm ('Are you sure you want to delete this blog?');">Delete Blog</a>
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>

@@ -1,7 +1,11 @@
 <?php
     require_once "../Layout/header.php";
     
-    if (!empty($_POST['submit'])) { //if category chosen for deletion
+    if (!empty($_GET['c'])) {
+        $category->cid = $_GET['c'];
+        $category->delete();
+        header ("Location: interface.php");
+    } elseif (!empty($_POST['submit'])) { //if category chosen for deletion
         $category->cid = $_POST['id'];
         $category->delete();
     }

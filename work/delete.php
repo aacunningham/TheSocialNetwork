@@ -1,7 +1,11 @@
 <?php
     require_once "../Layout/header.php";
 
-    if (!empty($_POST['submit'])) { //if work selected for deletion
+    if (!empty($_GET['w'])) {
+        $work->wid = $_GET['w'];
+        $work->delete();
+        header ("Location: interface.php");
+    } elseif (!empty($_POST['submit'])) { //if work selected for deletion
         $work->wid = $_POST['id'];
         $work->delete();
     }

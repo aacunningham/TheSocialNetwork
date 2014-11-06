@@ -1,7 +1,11 @@
 <?php
     require_once "../Layout/header.php";
     
-    if (!empty($_POST['submit'])) { //if folder selected for deletion
+    if (!empty($_GET['f'])) {
+        $folder->fid = $_GET['f'];
+        $folder->delete();
+        header ("Location: interface.php");
+    } elseif (!empty($_POST['submit'])) { //if folder selected for deletion
         $folder->fid = $_POST['id'];
         $folder->delete();
     }

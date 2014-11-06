@@ -4,9 +4,10 @@
     if (!empty($_POST['submit'])) { //new blog submitted
         $blog->title = test_input($_POST['title']);
         $blog->content = test_input($_POST['content']);
-        $blog->category = test_input ($_POST['category']);
-        $blog->folder = test_input ($_POST['folder']);
+        $blog->cid = test_input ($_POST['category']);
+        $blog->fid = test_input ($_POST['folder']);
         $blog->create ();
+        header ("Location: ../blog/edit.php?f=".$_POST['folder']);
     }
     
     $categoryList = $category->listAll (); //list all sitewide categories
@@ -22,7 +23,7 @@
 <?php else : 
         $folder->fid = $_GET['f'];
         $folder->get();
-    ?>
+?>
     <a class='back' href="edit.php?f=<?php echo $_GET['f']; ?>" target="_self"><?php echo $folder->name; ?></a>
 <?php endif; ?>
 <!-- Heading -->

@@ -55,6 +55,7 @@
 <?php endif; ?>
 
 <?php if (!empty($work->wid)) : ?>
+    <a class="delete" href="delete.php?w=<?php echo $work->wid; ?>" target="_self" onclick="return confirm ('Are you sure you want to delete this workplace?');">Delete Workplace</a>
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>

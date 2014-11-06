@@ -131,3 +131,16 @@ a.back {
     float: left;
     padding: 10px;
 }
+
+/* Delete Links */
+a.delete {
+    color: red;
+    font-size: 1em;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Global */
+div#content {
+}

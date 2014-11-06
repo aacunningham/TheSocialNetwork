@@ -68,6 +68,7 @@
 <?php endif; ?>
 
 <?php if (!empty($school->sid)) : ?>
+    <a class="delete" href="delete.php?s=<?php echo $school->sid; ?>" target="_self" onclick="return confirm ('Are you sure you want to delete this school?');">Delete School</a>
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>

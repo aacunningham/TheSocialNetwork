@@ -29,6 +29,7 @@
 <?php endif; ?>
 
 <?php if (!empty($category->cid)) : ?>
+    <a class="delete" href="delete.php?c=<?php echo $category->cid; ?>" target="_self" onclick="return confirm ('Are you sure you want to delete this category?');">Delete Category</a>
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>

@@ -1,7 +1,11 @@
 <?php
     require_once "../Layout/header.php";
 
-    if (!empty($_POST['submit'])) { //if school selected for deletion
+    if (!empty($_GET['s'])) {
+        $school->sid = $_GET['s'];
+        $school->delete();
+        header ("Location: interface.php");
+    } elseif (!empty($_POST['submit'])) { //if school selected for deletion
         $school->sid = $_POST['id'];
         $school->delete();
     }

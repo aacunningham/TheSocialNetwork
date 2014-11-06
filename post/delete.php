@@ -1,7 +1,11 @@
 <?php
     require_once "../Layout/header.php";
     
-    if (!empty($_POST['submit'])) { //if post selected for deletion
+    if (!empty($_GET['p'])) {
+        $post->pid = $_GET['p'];
+        $post->delete();
+        header ("Location: ../profile/profile.php");
+    } elseif (!empty($_POST['submit'])) { //if post selected for deletion
         $post->pid = $_POST['id'];
         $post->delete();
     }

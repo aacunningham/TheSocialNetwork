@@ -37,6 +37,7 @@
 <?php endif; ?>
 
 <?php if (!empty($post->pid)) : ?>
+    <a class="delete" href="delete.php?p=<?php echo $_GET['p']; ?>" target="_self" onclick="return confirm ('Are you sure you want to delete this post?');">Delete Post</a>
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>

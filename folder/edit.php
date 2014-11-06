@@ -28,6 +28,7 @@
 <?php endif; ?>
 
 <?php if (!empty($folder->fid)) : ?>
+    <a class="delete" href="delete.php?f=<?php echo $folder->fid; ?>" target="_self" onclick="return confirm ('Are you sure you want to delete this folder?');">Delete Folder</a>
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>

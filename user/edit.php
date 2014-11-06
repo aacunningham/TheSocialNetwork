@@ -4,7 +4,7 @@
     
     if (!empty($_POST['submit'])) { //if edited user submitted
         //Form Validation
-        $user->id = $_POST['uid'];
+        $user->uid = $_POST['uid'];
         $user->email = test_input($_POST['email']);
         $user->fname = test_input($_POST['fname']);
         $user->lname = test_input($_POST['lname']);
@@ -24,7 +24,7 @@
           header ("Location: ../profile/profile.php");
     } else {
         //Get User Information
-        $user->id = $_SESSION['uid'];
+        $user->uid = $_SESSION['uid'];
         $user->get (); //get user info
     }
 ?>
@@ -46,7 +46,7 @@
 <!-- Edit User Form -->
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
     <!-- Hidden - User ID -->
-    <input type="hidden" name="uid" value="<?php echo $user->id; ?>">
+    <input type="hidden" name="uid" value="<?php echo $user->uid; ?>">
     <!-- Redirect to Profile? -->
     <input type="hidden" name="redirect" value="<?php echo isset($_GET['u']); ?>">
     <table>

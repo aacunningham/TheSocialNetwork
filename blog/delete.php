@@ -1,7 +1,11 @@
 <?php
     require_once "../Layout/header.php";
     
-    if (!empty($_POST['submit'])) { //a blog has been chosen to be deleted
+    if (!empty($_GET['b'])) {
+        $blog->bid = $_GET['b'];
+        $blog->delete();
+        header ("Location: edit.php?f=".$_GET['f']);
+    } elseif (!empty($_POST['submit'])) { //a blog has been chosen to be deleted
         $blog->bid = $_POST['id'];
         $blog->delete();
     }

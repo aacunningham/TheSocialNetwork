@@ -18,7 +18,7 @@
        </div>
     <?php endforeach;
 
-?>
+?><!--
 <br>
 <br>
 <br>
@@ -44,7 +44,7 @@
     <br>
     <a href="../profile/profile.php" target="_self">Go to Profile</a>
     <br>
-    <a href="../profile/interface.php" target="_self">Go to Profile Modules</a>
+    <a href="../profile/interface.php" target="_self">Go to Profile Modules</a> -->
     <script src="../Layout/js/jquery-1.11.1.min.js"></script>
     <script src="../Layout/js/bootstrap.min.js"></script>
 </body>
