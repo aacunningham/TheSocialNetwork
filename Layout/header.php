@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="../Layout/style.css">
     <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
+    <script src="../Layout/js/jquery-1.11.1.min.js"></script>
+    <script src="../Layout/js/bootstrap.min.js"></script>
 <?php
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
