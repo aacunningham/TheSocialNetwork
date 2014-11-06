@@ -8,11 +8,24 @@
 <?php nav_bar(); ?>
     <h1>Folders</h1>
     
-    <a href="new.php" target="_self">Create New</a>
+<!-- Create New -->
+<div class="icon_container">
+    <a href="new.php" target="_self"><img class="new icon" src="../assets/icons/create_new_doc.png"></a>
+    <span class="caption">Create New Folder</span>
+</div>
+<?php $folders = $folder->listFolders();
+    foreach ($folders as $folder) : ?>
+       <div class="icon_container"> 
+           <a href="edit.php?f=<?php echo $folder['fid']; ?>" target="_self"><img class="folder icon" src="../assets/icons/folder.png"></a>
+           <span class='caption'><?php echo $folder["name"]; ?></span>
+       </div>
+    <?php endforeach; ?>
+    
+    <!--<a href="new.php" target="_self">Create New</a>
     <br>
     <a href="edit.php" target="_self">Edit Folder</a>
     <br>
-    <!--<a href="delete.php" target="_self">Delete Folder</a>-->
+    <a href="delete.php" target="_self">Delete Folder</a>
     <br>
     <a href="view.php" target="_self">View Folders</a>
     <br>

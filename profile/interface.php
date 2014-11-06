@@ -14,7 +14,7 @@
     <br>
     <a href="testing.php" target="_self">View Testing Page</a>
     <br>
-    <a href="../blog/interface.php" target="_self">Go to Blogs</a>
+    <!--<a href="../blog/interface.php" target="_self">Go to Blogs</a>
     <br>
     <a href="../user/interface.php" target="_self">Go to User</a>
     <br>
@@ -24,7 +24,7 @@
     <br>
     <a href="../category/interface.php" target="_self">Go to Categories</a>
     <br>
-    <a href="../profile/profile.php" target="_self">Go to Profile</a>
+    <a href="../profile/profile.php" target="_self">Go to Profile</a>-->
     <script src="../Layout/js/jquery-1.11.1.min.js"></script>
     <script src="../Layout/js/bootstrap.min.js"></script>
 </body>

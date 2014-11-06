@@ -1,9 +1,9 @@
 <?php
     require_once "../Layout/header.php";
     
-    if (!empty($_POST['choose'])) { //if folder chosen for editing
-        $folder->fid = $_POST['id'];
-        $folder->get (); //get folder info
+    if (!empty($_GET['f'])) {
+        $folder->fid = $_GET['f'];
+        $folder->get (); //get blog info
     } elseif (!empty($_POST['submit'])) { //if edited folder submitted
         //Form Validation
         $folder->fid = $_POST['fid'];
@@ -44,26 +44,6 @@
             <!-- Submit -->
             <tr>
                 <td><input type="submit" name="submit"></td>
-            </tr>
-        </table>
-    </form>
-<?php else: ?>
-    <!-- Choose Form -->
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
-        <table>
-            <!-- Folder -->
-            <tr>
-                <td><b>Folder:</b></td>
-                <td><select required name="id">
-                    <?php foreach ($list as $f) : ?>
-                        <option value="<?php echo $f["fid"]; ?>"><?php echo $f["name"]; ?></option>
-                    <?php endforeach; ?>
-                </select></td>
-            </tr>
-            
-            <!-- Submit -->
-            <tr>
-                <td><input type="submit" name="choose" value="Edit"></td>
             </tr>
         </table>
     </form>
