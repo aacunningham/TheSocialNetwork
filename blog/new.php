@@ -17,8 +17,14 @@
 <title>New Blog</title>
 
 <!-- Back Navigtion -->
-<a href="interface.php" target="_self">Home</a>
-
+<?php if (empty($_GET['f'])) : ?>
+    <a class='back' href="interface.php" target="_self">Home</a>
+<?php else : 
+        $folder->fid = $_GET['f'];
+        $folder->get();
+    ?>
+    <a class='back' href="edit.php?f=<?php echo $_GET['f']; ?>" target="_self"><?php echo $folder->name; ?></a>
+<?php endif; ?>
 <!-- Heading -->
 <h1>New Blog</h1>
 
@@ -56,7 +62,7 @@
             <td><b>Folder:</b></td>
             <td><select required name="folder">
                 <?php foreach ($folderList as $f) : ?>
-                    <option value="<?php echo $f["fid"]; ?>"><?php echo $f["name"]; ?></option>
+                    <option value="<?php echo $f["fid"]; ?>" <?php if (!empty($_GET['f']) and $_GET['f'] == $f["fid"]) echo 'selected'; ?>><?php echo $f["name"]; ?></option>
                 <?php endforeach; ?>
             </select></td>
         </tr>

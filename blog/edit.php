@@ -25,9 +25,9 @@
 
 <!-- Back Navigtion -->
 <?php if (!empty($_GET['b'])) : ?>
-    <a href="edit.php?f=<?php echo $_GET['f']; ?>" target="_self">Blogs</a>
+    <a class='back' href="edit.php?f=<?php echo $_GET['f']; ?>" target="_self">Blogs</a>
 <?php elseif (!empty($_GET['f'])) : ?>
-    <a href="interface.php" target="_self">Home</a>
+    <a class='back' href="interface.php" target="_self">Home</a>
 <?php endif; ?>
 
 <!-- Heading -->
@@ -39,7 +39,6 @@
 <?php endif; ?>
 
 <?php if (!empty($blog->bid)) : ?>
-        
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>
@@ -88,8 +87,20 @@
     $blogs = $blog->listBlogs($folder->fid);
     if (empty($blogs)) : ?>
         <h2>You have no blogs in this folder yet!</h2>
-  <?php else: 
-    foreach ($blogs as $b) : ?>
+        
+        <!-- Create New -->
+        <div class="icon_container">
+            <a href="new.php?f=<?php echo $_GET['f']; ?>" target="_self"><img class="new icon" src="../assets/icons/create_new_doc.png"></a>
+            <span class="caption">Create New Blog</span>
+        </div>
+  <?php else: ?>
+              
+        <!-- Create New -->
+        <div class="icon_container">
+            <a href="new.php?f=<?php echo $_GET['f']; ?>" target="_self"><img class="new icon" src="../assets/icons/create_new_doc.png"></a>
+            <span class="caption">Create New</span>
+        </div>
+    <?php foreach ($blogs as $b) : ?>
         <div class="icon_container">
             <a href="edit.php?f=<?php echo $_GET['f']; ?>&b=<?php echo $b['bid']; ?>" target="_self"><img class="document icon" src="../assets/icons/document.png"></a>
             <span class='caption'><?php echo $b["title"]; ?></span>

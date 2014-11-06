@@ -124,3 +124,10 @@ div.icon_container {
     font-weight: bold;
     font-size: 1.1em;
 }
+
+/* Back Navigation */
+a.back {
+    font-size: 1.3em;
+    float: left;
+    padding: 10px;
+}
