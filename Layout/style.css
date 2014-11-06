@@ -105,3 +105,22 @@ a#unfriend {
 div.module table.about_me {
     width: 90%;
 }
+
+
+/* Icons */
+img.icon {
+    max-height: 100px;
+}
+
+div.icon_container {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    width: 120px;
+}
+
+.caption {
+    display: block;
+    font-weight: bold;
+    font-size: 1.1em;
+}

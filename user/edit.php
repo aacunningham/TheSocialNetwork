@@ -17,6 +17,11 @@
         $user->rel = test_input($_POST['rel']);
         $user->privacy = test_input($_POST['privacy']);
         $user->edit ();
+        if ($_POST['redirect']) {
+            header ("Location: ../profile/profile.php");
+        }
+    } elseif (!empty($_POST['cancel'])) {
+          header ("Location: ../profile/profile.php");
     } else {
         //Get User Information
         $user->id = $_SESSION['uid'];
@@ -42,6 +47,8 @@
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
     <!-- Hidden - User ID -->
     <input type="hidden" name="uid" value="<?php echo $user->id; ?>">
+    <!-- Redirect to Profile? -->
+    <input type="hidden" name="redirect" value="<?php echo isset($_GET['u']); ?>">
     <table>
         <!-- First Name -->
         <tr>
@@ -105,6 +112,9 @@
         <!-- Submit -->
         <tr>
             <td><input type="submit" name="submit"></td>
+            <?php if (isset($_GET['u'])) : ?>
+                <td><button type="submit" name="cancel" value="Cancel">Cancel</button></td>
+            <?php endif; ?>
         </tr>
     </table>
 </form>

@@ -10,5 +10,5 @@
 ?>
 
 <script type="text/javascript">
-    redirect ("/profile/profile.php");
+    redirect ("<?php echo $subdir; ?>/profile/profile.php");
 </script>

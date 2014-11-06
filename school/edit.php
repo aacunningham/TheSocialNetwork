@@ -44,6 +44,11 @@
         $school->minor = test_input($_POST['minor']);
         $school->degree = test_input($_POST['degree']);
         $school->edit ();
+        if ($_POST['redirect']) {
+            header ("Location: ../profile/profile.php");
+        }
+    } elseif (!empty($_POST['cancel'])) {
+          header ("Location: ../profile/profile.php");
     }
     $list = $school->listSchools (); //list all of this user's folders
 ?>
@@ -68,6 +73,8 @@
         <table>
             <!-- Hidden - User ID -->
             <input type="hidden" name="sid" value="<?php echo $school->sid; ?>">
+            <!-- Redirect to Profile? -->
+            <input type="hidden" name="redirect" value="<?php echo isset($_GET['s']); ?>">
             
             <!-- Content -->
             <tr>
@@ -130,6 +137,9 @@
             <!-- Submit -->
             <tr>
                 <td><input type="submit" name="submit"></td>
+                <?php if (isset($_GET['s'])) : ?>
+                    <td><button type="submit" name="cancel" value="Cancel">Cancel</button></td>
+                <?php endif; ?>
             </tr>
         </table>
     </form>

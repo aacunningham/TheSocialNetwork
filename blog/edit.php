@@ -1,9 +1,12 @@
 <?php
     require_once "../Layout/header.php";
     
-    if (!empty($_POST['choose'])) { //they've chosen a blog to edit
-        $blog->bid = $_POST['id'];
+    if (!empty($_GET['b'])) {
+        $blog->bid = $_GET['b'];
         $blog->get (); //get blog info
+    } elseif (!empty($_GET['f'])) { //they've chosen a blog to edit
+        $folder->fid = $_GET['f'];
+        $folder->get ();
     } elseif (!empty($_POST['submit'])) { //they've submitted an edit
         //Form Validation
         $blog->bid = $_POST['bid'];
@@ -15,14 +18,17 @@
     }
     $categoryList = $category->listAll (); //list all categories (sitewide)
     $folderList = $folder->listFolders (); //list this user's folders
-    $blogList = $blog->listBlogs(); //list this user's blogs
 ?>
 
 <!-- Title -->
 <title>Edit Blog</title>
 
 <!-- Back Navigtion -->
-<a href="interface.php" target="_self">Home</a>
+<?php if (!empty($_GET['b'])) : ?>
+    <a href="edit.php?f=<?php echo $_GET['f']; ?>" target="_self">Blogs</a>
+<?php elseif (!empty($_GET['f'])) : ?>
+    <a href="interface.php" target="_self">Home</a>
+<?php endif; ?>
 
 <!-- Heading -->
 <h1>Edit Blog</h1>
@@ -78,25 +84,16 @@
             </tr>
         </table>
     </form>
-<?php else: ?>
-        
-    <!-- Choose Form -->
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
-        <table>
-            <!-- Blog -->
-            <tr>
-                <td><b>Blog:</b></td>
-                <td><select required name="id">
-                    <?php foreach ($blogList as $b) : ?>
-                        <option value="<?php echo $b["bid"]; ?>"><?php echo $b["title"]; ?></option>
-                    <?php endforeach; ?>
-                </select></td>
-            </tr>
-            
-            <!-- Submit -->
-            <tr>
-                <td><input type="submit" name="choose" value="Edit"></td>
-            </tr>
-        </table>
-    </form>
-<?php endif; ?>
+<?php elseif (!empty($folder->fid)): 
+    $blogs = $blog->listBlogs($folder->fid);
+    if (empty($blogs)) : ?>
+        <h2>You have no blogs in this folder yet!</h2>
+  <?php else: 
+    foreach ($blogs as $b) : ?>
+        <div class="icon_container">
+            <a href="edit.php?f=<?php echo $_GET['f']; ?>&b=<?php echo $b['bid']; ?>" target="_self"><img class="document icon" src="../assets/icons/document.png"></a>
+            <span class='caption'><?php echo $b["title"]; ?></span>
+        </div>
+    <?php endforeach;
+    endif; 
+endif; ?>

@@ -13,6 +13,11 @@
         $post->pid = $_POST['pid'];
         $post->content = test_input($_POST['content']);
         $post->edit ();
+        if ($_POST['redirect']) {
+            header ("Location: ../profile/profile.php");
+        }
+    } elseif (!empty($_POST['cancel'])) {
+          header ("Location: ../profile/profile.php");
     }
     $list = $post->listPosts(); //list this user's posts
 ?>
@@ -37,6 +42,8 @@
         <table>
             <!-- Hidden - Post ID -->
             <input type="hidden" name="pid" value="<?php echo $post->pid; ?>">
+            <!-- Redirect to Profile? -->
+            <input type="hidden" name="redirect" value="<?php echo isset($_GET['p']); ?>">
             
             <!-- Content -->
             <tr>
@@ -47,6 +54,9 @@
             <!-- Submit -->
             <tr>
                 <td><input type="submit" name="submit"></td>
+                <?php if (isset($_GET['p'])) : ?>
+                    <td><button type="submit" name="cancel" value="Cancel">Cancel</button></td>
+                <?php endif; ?>
             </tr>
         </table>
     </form>

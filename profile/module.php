@@ -136,7 +136,7 @@
             $this->get(array("uid", "name"), array($user->uid, "about me")); ?>
             <div class="module" id="about_me" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
                 <?php if ($user->uid == $user->getUser()) : ?>
-                    <a class="edit_content" href="../user/edit.php">Edit</a>
+                    <a class="edit_content" href="../user/edit.php?u">Edit</a>
                     <a class="edit_module" href="../profile/edit.php?m=about_me">Personalize</a>
                 <?php endif; ?>
                 <h1 class="title">About Me</h1>
@@ -169,7 +169,7 @@
             $this->get(array("uid", "name"), array($user->uid, "contact")); ?>
             <div class="module" id="contact" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
                 <?php if ($user->uid == $user->getUser()) : ?>
-                    <a class="edit_content" href="../user/edit.php">Edit</a>
+                    <a class="edit_content" href="../user/edit.php?u">Edit</a>
                     <a class="edit_module" href="../profile/edit.php?m=contact">Personalize</a>
                 <?php endif; ?>
                 <h1 class="title">Contact</h1>
@@ -362,7 +362,7 @@
             <div class="module" id="about_me" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
                 <?php if ($user->uid == $user->getUser()) : ?>
                     <a class="edit_content" href="../user/edit.php">Edit</a>
-                    <a class="edit_module" href="../profile/edit.php?m=about_me">Personalize</a>
+                    <a class="edit_module" href="../profile/edit.php?m=profile_picture">Personalize</a>
                 <?php endif; ?>
                 <h1 class="title"><?php echo $user->fname." ".$user->lname; ?></h1>
                 <table class="profile_picture">

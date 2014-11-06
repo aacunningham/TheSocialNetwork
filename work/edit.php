@@ -31,6 +31,11 @@
         $work->boss = test_input($_POST['boss']);
         $work->duties = test_input($_POST['duties']);
         $work->edit ();
+        if ($_POST['redirect']) {
+            header ("Location: ../profile/profile.php");
+        }
+    } elseif (!empty($_POST['cancel'])) {
+          header ("Location: ../profile/profile.php");
     }
     $list = $work->listWorks (); //list all of this user's folders
 ?>
@@ -55,6 +60,8 @@
         <table>
             <!-- Hidden - User ID -->
             <input type="hidden" name="fid" value="<?php echo $work->wid; ?>">
+            <!-- Redirect to Profile? -->
+            <input type="hidden" name="redirect" value="<?php echo isset($_GET['w']); ?>">
             
             <!-- Content -->
             <tr>
@@ -109,6 +116,9 @@
             <!-- Submit -->
             <tr>
                 <td><input type="submit" name="submit"></td>
+                <?php if (isset($_GET['w'])) : ?>
+                    <td><button type="submit" name="cancel" value="Cancel">Cancel</button></td>
+                <?php endif; ?>
             </tr>
         </table>
     </form>
