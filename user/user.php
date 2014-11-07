@@ -60,12 +60,21 @@
             $this->message = "User created!";
         } 
 
+        //Create default modules on user creation
         public function create_default ($userid) {
             $columns = array ("uid", "name", "side", "sequence", "background", "fontColor");
             $values = array ($userid, "about me", 0, 0, "#FF00FF", "#000000");
             $dao = new SQL ();
             $dao->insert ("modules", $columns, $values);
             $values = array ($userid, "contact", 1, 0, "#FF00FF", "#000000");
+            $dao->insert ("modules", $columns, $values);
+            $values = array ($userid, "schools", 1, 0, "#FF00FF", "#000000");
+            $dao->insert ("modules", $columns, $values);
+            $values = array ($userid, "work", 1, 0, "#FF00FF", "#000000");
+            $dao->insert ("modules", $columns, $values);
+            $values = array ($userid, "friends", 1, 0, "#FF00FF", "#000000");
+            $dao->insert ("modules", $columns, $values);
+            $values = array ($userid, "posts", 1, 0, "#FF00FF", "#000000");
             $dao->insert ("modules", $columns, $values);
         }
 

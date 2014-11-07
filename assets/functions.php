@@ -12,9 +12,19 @@
         $min = substr($date, 0, 2);
         $dateObj = DateTime::createFromFormat('!m', $month);
         $month = $dateObj->format('F');
-        echo $day." ".$month." ".(24-$hour).":".$min;
+        $h = $hour > 12 ? $hour-12 : $hour;
+        echo $day." ".$month." ".$h.":".$min;
         if ($hour >= 12) echo " PM";
         else echo " AM";
+    }
+    
+    function formatDate2 ($date) { //year-month-day to month - day - year
+        $year = substr($date, 0, strpos($date, "-"));
+        $date = substr($date, strpos($date, "-")+1);
+        $month = substr($date, 0, strpos($date, "-"));
+        $date = substr($date, strpos($date, "-")+1);
+        $day = substr($date, 0, 2);
+        echo $month." - ".$day." - ".$year;
     }
 
     function test_input($data) { //validate input (standard)
@@ -84,8 +94,14 @@
         }
         
         function deleteFn (url) {
-            if(confirm('Are you sure you want to delete?')) {
-                window.location.href=url;
+            if (url.indexOf("unFriend") > -1) {
+                if (confirm('Are you sure you want to unfriend this person?')) {
+                    window.location.href=url;
+                }
+            } else {
+                if(confirm('Are you sure you want to delete?')) {
+                    window.location.href=url;
+                }
             }
         }
     </script>

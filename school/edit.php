@@ -26,10 +26,12 @@
     if (!empty($_GET['s'])) {
         $school->sid = $_GET['s'];
         $school->get (); //get school info
-    } elseif (!empty($_POST['choose'])) { //if school chosen for editing
-        $school->sid = $_POST['id'];
-        $school->get (); //get school info
-    } elseif (!empty($_POST['submit'])) { //if edited school submitted
+        if (isset($_GET['del'])) {
+            $school->delete();
+            header ("Location: interface.php");
+        }
+    }
+    if (!empty($_POST['submit'])) { //if edited school submitted
         //Form Validation
         $school->sid = $_POST['sid'];
         $school->name = test_input($_POST['name']);
@@ -56,8 +58,15 @@
 <!-- Title -->
 <title>Edit School</title>
 
+<body style="padding-top:70px">
+<?php nav_bar(); ?>
+
 <!-- Back Navigtion -->
-<button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Schools</button>
+<?php if (isset($_GET['u'])) : ?>
+    <button type="button" class="left btn btn-primary" onclick="window.location.href='../profile/profile.php'">My Profile</button>
+<?php else : ?>
+    <button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Schools</button>
+<?php endif; ?>
 
 <!-- Heading -->
 <h1>Edit School</h1>
@@ -68,94 +77,77 @@
 <?php endif; ?>
 
 <?php if (!empty($school->sid)) : ?>
-    <button type="button" class="btn btn-danger" onclick="deleteFn('delete.php?s=<?php echo $school->sid; ?>')">Delete</button>
+    <button type="button" class="btn btn-danger" onclick="deleteFn('?s=<?php echo $school->sid; ?>&del')">Delete</button>
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-        <table>
-            <!-- Hidden - User ID -->
-            <input type="hidden" name="sid" value="<?php echo $school->sid; ?>">
-            <!-- Redirect to Profile? -->
-            <input type="hidden" name="redirect" value="<?php echo isset($_GET['s']); ?>">
-            
-            <!-- Content -->
-            <tr>
-                <td><b>Name:</b></td>
-                <td><input required type="text" name="name" value="<?php echoInput($school, "name"); ?>"></td>
-            </tr>
-            <tr>
-                <td><b>Type:</b></td>
-                <td><select required name="type">
-                    <option value="University/College" <?php echoType("University/College"); ?>>University/College</option>
-                    <option value="High School" <?php echoType("High School"); ?>>High School</option>
-                    <option value="Elementary School" <?php echoType("Elementary School"); ?>>Elementary School</option>
+        <div class='form'>
+            <table>
+                <!-- Hidden - User ID -->
+                <input type="hidden" name="sid" value="<?php echo $school->sid; ?>">
+                <!-- Redirect to Profile? -->
+                <input type="hidden" name="redirect" value="<?php echo isset($_GET['s']); ?>">
+                
+                <!-- Content -->
+                <tr>
+                    <td><b>Name:</b></td>
+                    <td><input required type="text" name="name" value="<?php echoInput($school, "name"); ?>"></td>
+                </tr>
+                <tr>
+                    <td><b>Type:</b></td>
+                    <td><select required name="type">
+                        <option value="University/College" <?php echoType("University/College"); ?>>University/College</option>
+                        <option value="High School" <?php echoType("High School"); ?>>High School</option>
+                        <option value="Elementary School" <?php echoType("Elementary School"); ?>>Elementary School</option>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><b>Address:</b></td>
+                    <td><input required type="text" name="address" value="<?php echoInput($school, "address"); ?>"></td>
+                </tr>
+                <tr>
+                    <td><b>City:</b></td>
+                    <td><input required type="text" name="city" value="<?php echoInput($school, "city"); ?>"></td>
+                </tr>
+                <tr>
+                    <td><b>State:</b></td>
+                    <td><select name="state" required>
+                        <?php foreach ($states as $s) :?>
+                            <option value="<?php echo $s; ?>" <?php echoState($s); ?>><?php echo $s; ?></option>
+                        <?php endforeach; ?>
+                    </select></td>
+                </tr>
+                <tr>
+                    <td><b>Zip Code:</b></td>
+                    <td><input required type="number" name="zipCode" value="<?php echoInput($school, "zipCode"); ?>"></td>
+                </tr>
+                <tr>
+                    <td><b>Major:</b></td>
+                    <td><input type="text" name="major" value="<?php echoInput($school, "major"); ?>"></td>
+                </tr>
+                <tr>
+                    <td><b>Minor:</b></td>
+                    <td><input type="text" name="minor" value="<?php echoInput($school, "minor"); ?>"></td>
+                </tr>
+                <tr>
+                    <td><b>Degree:</b></td>
+                    <td><select required name="degree">
+                        <?php foreach ($degrees as $d) : ?>
+                            <option value="<?php echo $d; ?>" <?php echoDegree($d); ?>><?php echo $d; ?></option>
+                        <?php endforeach; ?>
                 </select></td>
-            </tr>
-            <tr>
-                <td><b>Address:</b></td>
-                <td><input required type="text" name="address" value="<?php echoInput($school, "address"); ?>"></td>
-            </tr>
-            <tr>
-                <td><b>City:</b></td>
-                <td><input required type="text" name="city" value="<?php echoInput($school, "city"); ?>"></td>
-            </tr>
-            <tr>
-                <td><b>State:</b></td>
-                <td><select name="state" required>
-                    <?php foreach ($states as $s) :?>
-                        <option value="<?php echo $s; ?>" <?php echoState($s); ?>><?php echo $s; ?></option>
-                    <?php endforeach; ?>
-                </select></td>
-            </tr>
-            <tr>
-                <td><b>Zip Code:</b></td>
-                <td><input required type="number" name="zipCode" value="<?php echoInput($school, "zipCode"); ?>"></td>
-            </tr>
-            <tr>
-                <td><b>Major:</b></td>
-                <td><input type="text" name="major" value="<?php echoInput($school, "major"); ?>"></td>
-            </tr>
-            <tr>
-                <td><b>Minor:</b></td>
-                <td><input type="text" name="minor" value="<?php echoInput($school, "minor"); ?>"></td>
-            </tr>
-            <tr>
-                <td><b>Degree:</b></td>
-                <td><td><select required name="degree">
-                    <?php foreach ($degrees as $d) : ?>
-                        <option value="<?php echo $d; ?>" <?php echoDegree($d); ?>><?php echo $d; ?></option>
-                    <?php endforeach; ?>
-            </select></td>
-            </tr>
-            <tr>
-                <td><b>Start Date:</b></td>
-                <td><input required type="date" name="startDate" value="<?php echoInput($school, "startDate"); ?>"></td>
-            </tr>
-            <tr>
-                <td><b>End Date:</b></td>
-                <td><input required type="date" name="endDate" value="<?php echoInput($school, "endDate"); ?>"></td>
-            </tr>
-        </table>
-        
+                </tr>
+                <tr>
+                    <td><b>Start Date:</b></td>
+                    <td><input required type="date" name="startDate" value="<?php echoInput($school, "startDate"); ?>"></td>
+                </tr>
+                <tr>
+                    <td><b>End Date:</b></td>
+                    <td><input required type="date" name="endDate" value="<?php echoInput($school, "endDate"); ?>"></td>
+                </tr>
+            </table>
+        </div>
         <!-- Submit -->
         <button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button>
         <button class="btn btn-warning" type="submit" name="cancel" value="Cancel">Cancel</button>
-    </form>
-<?php else: ?>
-    <!-- Choose Form -->
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
-        <table>
-            <!-- School -->
-            <tr>
-                <td><b>School:</b></td>
-                <td><select required name="id">
-                    <?php foreach ($list as $s) : ?>
-                        <option value="<?php echo $s["sid"]; ?>"><?php echo $s["name"]; ?></option>
-                    <?php endforeach; ?>
-                </select></td>
-            </tr>
-        </table>
-    
-        <!-- Submit -->
-        <button class="btn btn-success" type="submit" name="choose" value="Edit">Submit</button>
     </form>
 <?php endif; ?>

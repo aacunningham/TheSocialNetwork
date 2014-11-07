@@ -32,7 +32,7 @@ img {
 }
 
 button {
-    margin: 10px !important; /* need to override bootstrap on this */
+   margin: 10px !important; /* need to override bootstrap on this */
 }
 
 .left {
@@ -46,9 +46,13 @@ button {
 /* General Tables */
 
 table, table#width50 {
-    text-align: left;
+    text-align: center;
     width: 50%;
     margin: auto;
+}
+
+div.form table {
+    text-align: left;
 }
 
 table#width80 {
@@ -73,6 +77,7 @@ div.module table {
     float: left;
     margin-left: 15px;
     font-family: 'Ubuntu', sans-serif;
+    text-align: left;
 }
 
 a.edit_content {
@@ -87,6 +92,7 @@ a.edit_module {
 
 /* Post Module */
 div.module table.posts {
+    table-layout: fixed;
     width: 100%;    
     float: none;
     margin-left: 0;
@@ -167,3 +173,18 @@ div.page {
     margin: auto;
 }
 
+/* For Home Page */
+div.rounded {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+div#feed {
+    background-color: #BADDFF;
+}
+
+div#browse {
+    background-color: #94FFB8;
+}

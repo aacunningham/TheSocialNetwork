@@ -83,7 +83,7 @@
             }
             
             usort ($posts, function ($a, $b) {
-                return $a['dateTime'] - $b['dateTime'];
+                return strcmp ($b['dateTime'], $a['dateTime']);
             });
             return $posts;
         }

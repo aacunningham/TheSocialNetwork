@@ -23,11 +23,15 @@
         $work->boss = test_input($_POST['boss']);
         $work->duties = test_input($_POST['duties']);
         $work->create ();
+        header ("Location: interface.php");
     }
 ?>
 
 <!-- Title -->
 <title>New Workplace</title>
+
+<body style="padding-top:70px">
+<?php nav_bar(); ?>
 
 <!-- Back Navigtion -->
 <button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Work</button>
@@ -41,6 +45,7 @@
 <?php endif; ?>
 
 <!-- New Folder Form -->
+<div class='form'>
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
     <table>
         <!-- Content -->
@@ -93,6 +98,7 @@
             <td><input type="date" name="endDate" value="<?php printPost('endDate'); ?>"></td>
         </tr>
     </table>
+    </div>
     <!-- Submit -->
     <button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button>
 </form>

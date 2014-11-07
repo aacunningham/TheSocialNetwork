@@ -88,7 +88,7 @@
             return $schools;
         }
         
-        public function display ($uid) { //returns list of this user's schools sorted by name for display
+        public function display ($uid=NULL) { //returns list of this user's schools sorted by name for display
             return $this->sortSchools($this->listSchools($uid));
         }
         

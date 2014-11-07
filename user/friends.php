@@ -16,11 +16,13 @@
     }
     
 ?>
-
     <title>Make Friends</title>
     
+    <body style="padding-top:70px">
+    <?php nav_bar(); ?>
+    
     <!-- Back Navigtion -->
-    <a href="interface.php" target="_self">Home</a>
+    <button type="button" class="left btn btn-primary" onclick="window.location.href='../profile/profile.php'">My Profile</button>
 
     <h1>Search for friends by email or name!</h1>
     
@@ -38,7 +40,7 @@
                 <td><input required type="text" name="search" value="<?php if (!empty($_POST['search'])) echo $_POST['search']; ?>">
                 
                 <!-- Submit -->
-                <input type="submit" name="submit" value="Search">
+                <button class="btn btn-success" type="submit" name="submit" value="submit">Search</button>
                 </td>
             </tr>
         </table>
@@ -58,7 +60,7 @@
             <td><?php echo $friend['email']; ?></td>
             <td><form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
                     <input type='hidden' name='email' value="<?php echo $friend['email']; ?>">
-                    <input type='submit' name='friend' value="Friend This User">
+                    <button class="btn btn-primary" type="submit" name="friend" value="submit">Friend</button>
                 </form></td>
         </tr>
         <?php endforeach; ?>

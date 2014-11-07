@@ -19,25 +19,29 @@
 <button type="button" class="btn btn-success" onclick="window.location.href='new.php'">Create New</button>
 <?php if (!empty($posts)) : ?>
     <!-- Display Posts -->
-    <table id="width80" class="table table-striped">
-        <tr>
-            <th>Date and Time</th>
-            <th>Content</th>
-        </tr>
-        <?php foreach ($posts as $p) : 
-                $counter++;
-                if ($counter <= $page*$limit) :
-                    if ($page == 1 or ($page > 1 and $counter > ($page-1)*$limit)) :
-            ?>
-        <tr>
-            <td><?php echo $p['dateTime']; ?></td>
-            <td><?php echo $p['content']; ?></td>
-            <td><button type="button" class="btn btn-primary" onclick="window.location.href='edit.php?p=<?php echo $p['pid']; ?>'">Edit</button></td>
-        </tr>
-        <?php endif; 
-            endif; 
-            endforeach; ?>
-    </table>
+    <div class="rounded">
+        <table id="width80" class="table table-striped table-hover">
+            <tr>
+                <th>Date and Time</th>
+                <th>Content</th>
+                <th>Edit</th>
+            </tr>
+            <?php foreach ($posts as $p) : 
+                    $counter++;
+                    if ($counter <= $page*$limit) :
+                        if ($page == 1 or ($page > 1 and $counter > ($page-1)*$limit)) :
+                ?>
+            <tr>
+                <td><?php echo $p['dateTime']; ?></td>
+                <td><?php echo $p['content']; ?></td>
+                <td><button type="button" class="btn btn-primary" onclick="window.location.href='edit.php?p=<?php echo $p['pid']; ?>'">Edit</button></td>
+            </tr>
+            <?php endif; 
+                endif; 
+                endforeach; ?>
+        </table>
+    </div>
+    
     <div class="page">
     <?php if ($page > 1) : ?>
         <button type="button" class="left btn btn-info" onclick="window.location.href='?p=<?php echo $page-1; ?>'">Previous</button>

@@ -13,10 +13,12 @@
     if (!empty($_GET['w'])) {
         $work->wid = $_GET['w'];
         $work->get (); //get work info
-    } elseif (!empty($_POST['choose'])) { //if work chosen for editing
-        $work->wid = $_POST['id'];
-        $work->get (); //get work info
-    } elseif (!empty($_POST['submit'])) { //if edited work submitted
+        if (isset($_GET['del'])) {
+            $work->delete();
+            header ("Location: interface.php");
+        }
+    }
+    if (!empty($_POST['submit'])) { //if edited work submitted
         //Form Validation
         $work->wid = $_POST['wid'];
         $work->company = test_input($_POST['company']);
@@ -43,8 +45,15 @@
 <!-- Title -->
 <title>Edit Work History</title>
 
+<body style="padding-top:70px">
+<?php nav_bar(); ?>
+
 <!-- Back Navigtion -->
-<button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Work</button>
+<?php if (isset($_GET['u'])) : ?>
+    <button type="button" class="left btn btn-primary" onclick="window.location.href='../profile/profile.php'">My Profile</button>
+<?php else : ?>
+    <button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Work</button>
+<?php endif; ?>
 
 <!-- Heading -->
 <h1>Edit Work History</h1>
@@ -55,9 +64,10 @@
 <?php endif; ?>
 
 <?php if (!empty($work->wid)) : ?>
-    <button type="button" class="btn btn-danger" onclick="deleteFn('delete.php?w=<?php echo $work->wid; ?>')">Delete</button>
+    <button type="button" class="btn btn-danger" onclick="deleteFn('?w=<?php echo $work->wid; ?>&del')">Delete</button>
     
     <!-- Edit Form -->
+    <div class='form'>
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>
             <!-- Hidden - User ID -->
@@ -115,27 +125,9 @@
                 <td><input type="date" name="endDate" value="<?php echoInput($work, "endDate"); ?>"></td>
             </tr>
         </table>
-        
+        </div>
         <!-- Submit -->
         <button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button>
         <button class="btn btn-warning" type="submit" name="cancel" value="Cancel">Cancel</button>
-    </form>
-<?php else: ?>
-    <!-- Choose Form -->
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
-        <table>
-            <!-- Work -->
-            <tr>
-                <td><b>Work:</b></td>
-                <td><select required name="id">
-                    <?php foreach ($list as $w) : ?>
-                        <option value="<?php echo $w["wid"]; ?>"><?php echo $w["company"]; ?></option>
-                    <?php endforeach; ?>
-                </select></td>
-            </tr>
-        </table>
-        
-        <!-- Submit -->
-        <button class="btn btn-success" type="submit" name="choose" value="Edit">Submit</button>
     </form>
 <?php endif; ?>

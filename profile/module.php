@@ -136,8 +136,8 @@
             $this->get(array("uid", "name"), array($user->uid, "about me")); ?>
             <div class="module" id="about_me" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
                 <?php if ($user->uid == $user->getUser()) : ?>
-                    <a class="edit_content" href="../user/edit.php?u">Edit</a>
-                    <a class="edit_module" href="../profile/edit.php?m=about_me">Personalize</a>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='../user/edit.php'">Edit</button>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=about_me'">Personalize</button>
                 <?php endif; ?>
                 <h1 class="title">About Me</h1>
                 <table class="about_me">
@@ -169,8 +169,8 @@
             $this->get(array("uid", "name"), array($user->uid, "contact")); ?>
             <div class="module" id="contact" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
                 <?php if ($user->uid == $user->getUser()) : ?>
-                    <a class="edit_content" href="../user/edit.php?u">Edit</a>
-                    <a class="edit_module" href="../profile/edit.php?m=contact">Personalize</a>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='../user/edit.php'">Edit</button>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=contact'">Personalize</button>
                 <?php endif; ?>
                 <h1 class="title">Contact</h1>
                 <table>
@@ -188,7 +188,7 @@
             $this->get(array("uid", "name"), array($user->uid, "friends")); ?>
             <div class="module" id="friends" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <?php if ($user->uid == $user->getUser()) : ?>
-                    <a class="edit_module" href="../profile/edit.php?m=friends">Personalize</a>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=friends'">Personalize</button>
                 <?php endif; ?>
                 <h1 class="title">Friends</h1>
                     <?php foreach ($user->getFriends() as $id) : 
@@ -200,7 +200,7 @@
                     </tr>
                     <tr>
                         <td><a href="profile.php?uid=<?php echo $id; ?>" target="_self"><?php echo $friend->fname." ".$friend->lname; ?></a><br>
-                        <a id="unfriend" href="../user/unFriend.php?f=<?php echo $id; ?>" target="_self" onclick="return confirm('Are you sure you want to unfriend this person?');">unFriend</a></td>
+                        <button type="button" class="btn btn-danger" onclick="deleteFn('../user/unFriend.php?f=<?php echo $id; ?>')">UnFriend</button></td>
                     </tr>
                     </table>
                     <?php endforeach; ?>
@@ -212,20 +212,21 @@
             $this->get(array("uid", "name"), array($user->uid, "posts")); ?>
             <div class="module" id="posts" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <?php if ($user->uid == $user->getUser()) : ?>
-                    <a class="edit_module" href="../profile/edit.php?m=posts">Personalize</a>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=posts'">Personalize</button>
                 <?php endif; ?>
                 <h1 class="title">Posts</h1>
-                <table class='posts table table-striped'>
+                <table class='posts table table-striped table-hover'>
                     <tbody>
                     <?php foreach ($post->display($user->uid) as $p) : ?>
                     <tr class='postContent'>
                         <td><?php echo $p['content']; ?></td>
                         <?php if ($user->uid == $user->getUser()) : ?>
-                            <td id="edit_post"><a class="edit_content" href="../post/edit.php?p=<?php echo $p["pid"]; ?>">Edit</a></td>
+                            <td id="edit_post"><button type="button" class="btn btn-primary" onclick="window.location.href='../post/edit.php?p=<?php echo $p["pid"]; ?>&u'">Edit</button></td>
                         <?php endif; ?>
                     </tr>
                     <tr class='postDate'>
                         <td><?php echo formatDate($p['dateTime']); ?></td>
+                        <td></td>
                     </tr>
                     <?php endforeach; ?>
                     </tbody>
@@ -238,17 +239,19 @@
             $this->get(array("uid", "name"), array($user->uid, "schools")); ?>
             <div class="module" id="schools" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <?php if ($user->uid == $user->getUser()) : ?>
-                    <a class="edit_module" href="../profile/edit.php?m=schools">Personalize</a>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=schools'">Personalize</button>
                 <?php endif; ?>
                 <h1 class="title">Schools</h1>
                 <table>
                     <?php foreach ($school->display($user->uid) as $s) : ?>
                     <tr>
+                        <?php if ($user->uid == $user->getUser()) : ?>
+                            <td><button type="button" class="btn btn-primary" onclick="window.location.href='../school/edit.php?s=<?php echo $s['sid']; ?>&u'">Edit</button></td>
+                        <?php endif; ?>
+                    </tr>
+                    <tr>
                         <td class="bolden">Name:</td>
                         <td><?php echo $s['name']; ?></td>
-                        <?php if ($user->uid == $user->getUser()) : ?>
-                            <td><a class="edit_content" href="../school/edit.php?s=<?php echo $s['sid']; ?>">Edit</a></td>
-                        <?php endif; ?>
                     </tr>
                     <tr>
                         <td class="bolden">Type:</td>
@@ -280,11 +283,11 @@
                     </tr>
                     <tr>
                         <td class="bolden">Start Date:</td>
-                        <td><?php echo $s['startDate']; ?></td>
+                        <td><?php echo formatDate2($s['startDate']); ?></td>
                     </tr>
                     <tr>
                         <td class="bolden">End Date:</td>
-                        <td><?php echo $s['endDate']; ?></td>
+                        <td><?php echo formatDate2($s['endDate']); ?></td>
                     </tr>
                     <tr>
                         <td class="bolden">Degree:</td>
@@ -300,17 +303,19 @@
             $this->get(array("uid", "name"), array($user->uid, "work")); ?>
             <div class="module" id="work" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <?php if ($user->uid == $user->getUser()) : ?>
-                    <a class="edit_module" href="../profile/edit.php?m=work">Personalize</a>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=work'">Personalize</button>
                 <?php endif; ?>
                 <h1 class="title">Work History</h1>
                 <table>
                     <?php foreach ($work->display($user->uid) as $w) : ?>
                     <tr>
+                        <?php if ($user->uid == $user->getUser()) : ?>
+                            <td><button type="button" class="btn btn-primary" onclick="window.location.href='../work/edit.php?w=<?php echo $w['wid']; ?>&u'">Edit</button></td>
+                        <?php endif; ?>
+                    </tr>
+                    <tr>
                         <td class="bolden">Company:</td>
                         <td><?php echo $w['company']; ?></td>
-                        <?php if ($user->uid == $user->getUser()) : ?>
-                            <td><a class="edit_content" href="../work/edit.php?w=<?php echo $w['wid']; ?>">Edit</a></td>
-                        <?php endif; ?>
                     </tr>
                     <tr>
                         <td class="bolden">Position:</td>
@@ -346,11 +351,11 @@
                     </tr>
                     <tr>
                         <td class="bolden">Start Date:</td>
-                        <td><?php echo $w['startDate']; ?></td>
+                        <td><?php echo formatDate2($w['startDate']); ?></td>
                     </tr>
                     <tr>
                         <td class="bolden">End Date:</td>
-                        <td><?php if ($w["endDate"] == "0000-00-00") echo "Current"; else echo $w['endDate']; ?></td>
+                        <td><?php if ($w["endDate"] == "0000-00-00") echo "Current"; else echo formatDate2($w['endDate']); ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </table>
@@ -361,8 +366,8 @@
             $this->get(array("uid", "name"), array($user->uid, "profile picture")); ?>
             <div class="module" id="about_me" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
                 <?php if ($user->uid == $user->getUser()) : ?>
-                    <a class="edit_content" href="../user/edit.php">Edit</a>
-                    <a class="edit_module" href="../profile/edit.php?m=profile_picture">Personalize</a>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='../user/edit.php'">Edit</button>
+                    <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=profile_picture'">Personalize</button>
                 <?php endif; ?>
                 <h1 class="title"><?php echo $user->fname." ".$user->lname; ?></h1>
                 <table class="profile_picture">

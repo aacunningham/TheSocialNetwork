@@ -36,11 +36,15 @@
         $school->minor = test_input($_POST['minor']);
         $school->degree = test_input($_POST['degree']);
         $school->create ();
+        header ("Location: interface.php");
     }
 ?>
 
 <!-- Title -->
 <title>New School</title>
+
+<body style="padding-top:70px">
+<?php nav_bar(); ?>
 
 <!-- Back Navigtion -->
 <button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Schools</button>
@@ -55,65 +59,67 @@
 
 <!-- New Folder Form -->
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-    <table>
-        <!-- Content -->
-        <tr>
-            <td><b>Name:</b></td>
-            <td><input required type="text" name="name" value="<?php printPost('name'); ?>"></td>
-        </tr>
-        <tr>
-            <td><b>Type:</b></td>
-            <td><select required name="type">
-                <option value="University/College" <?php echoType("University/College"); ?>>University/College</option>
-                <option value="High School" <?php echoType("High School"); ?>>High School</option>
-                <option value="Elementary School" <?php echoType("Elementary School"); ?>>Elementary School</option>
-            </select></td>
-        </tr>
-        <tr>
-            <td><b>Address:</b></td>
-            <td><input required type="text" name="address" value="<?php printPost('address'); ?>"></td>
-        </tr>
-        <tr>
-            <td><b>City:</b></td>
-            <td><input required type="text" name="city" value="<?php printPost('city'); ?>"></td>
-        </tr>
-        <tr>
-            <td><b>State:</b></td>
-            <td><select name="state" required>
-                <?php foreach ($states as $s) :?>
-                    <option value="<?php echo $s; ?>" <?php echoState($s); ?>><?php echo $s; ?></option>
-                <?php endforeach; ?>
-            </select></td>
-        </tr>
-        <tr>
-            <td><b>Zip Code:</b></td>
-            <td><input required type="number" name="zipCode" value="<?php printPost('zipCode'); ?>"></td>
-        </tr>
-        <tr>
-            <td><b>Major:</b></td>
-            <td><input type="text" name="major" value="<?php printPost('major'); ?>"></td>
-        </tr>
-        <tr>
-            <td><b>Minor:</b></td>
-            <td><input type="text" name="minor" value="<?php printPost('minor'); ?>"></td>
-        </tr>
-        <tr>
-            <td><b>Degree:</b></td>
-            <td><select required name="degree">
-                <?php foreach ($degrees as $d) : ?>
-                    <option value="<?php echo $d; ?>" <?php echoDegree($d); ?>><?php echo $d; ?></option>
-                <?php endforeach; ?>
-            </select></td>
-        </tr>
-        <tr>
-            <td><b>Start Date:</b></td>
-            <td><input required type="date" name="startDate" value="<?php printPost('startDate'); ?>"></td>
-        </tr>
-        <tr>
-            <td><b>End Date:</b></td>
-            <td><input required type="date" name="endDate" value="<?php printPost('endDate'); ?>"></td>
-        </tr>
-    </table>
+    <div class='form'>
+        <table>
+            <!-- Content -->
+            <tr>
+                <td><b>Name:</b></td>
+                <td><input required type="text" name="name" value="<?php printPost('name'); ?>"></td>
+            </tr>
+            <tr>
+                <td><b>Type:</b></td>
+                <td><select required name="type">
+                    <option value="University/College" <?php echoType("University/College"); ?>>University/College</option>
+                    <option value="High School" <?php echoType("High School"); ?>>High School</option>
+                    <option value="Elementary School" <?php echoType("Elementary School"); ?>>Elementary School</option>
+                </select></td>
+            </tr>
+            <tr>
+                <td><b>Address:</b></td>
+                <td><input required type="text" name="address" value="<?php printPost('address'); ?>"></td>
+            </tr>
+            <tr>
+                <td><b>City:</b></td>
+                <td><input required type="text" name="city" value="<?php printPost('city'); ?>"></td>
+            </tr>
+            <tr>
+                <td><b>State:</b></td>
+                <td><select name="state" required>
+                    <?php foreach ($states as $s) :?>
+                        <option value="<?php echo $s; ?>" <?php echoState($s); ?>><?php echo $s; ?></option>
+                    <?php endforeach; ?>
+                </select></td>
+            </tr>
+            <tr>
+                <td><b>Zip Code:</b></td>
+                <td><input required type="number" name="zipCode" value="<?php printPost('zipCode'); ?>"></td>
+            </tr>
+            <tr>
+                <td><b>Major:</b></td>
+                <td><input type="text" name="major" value="<?php printPost('major'); ?>"></td>
+            </tr>
+            <tr>
+                <td><b>Minor:</b></td>
+                <td><input type="text" name="minor" value="<?php printPost('minor'); ?>"></td>
+            </tr>
+            <tr>
+                <td><b>Degree:</b></td>
+                <td><select required name="degree">
+                    <?php foreach ($degrees as $d) : ?>
+                        <option value="<?php echo $d; ?>" <?php echoDegree($d); ?>><?php echo $d; ?></option>
+                    <?php endforeach; ?>
+                </select></td>
+            </tr>
+            <tr>
+                <td><b>Start Date:</b></td>
+                <td><input required type="date" name="startDate" value="<?php printPost('startDate'); ?>"></td>
+            </tr>
+            <tr>
+                <td><b>End Date:</b></td>
+                <td><input required type="date" name="endDate" value="<?php printPost('endDate'); ?>"></td>
+            </tr>
+        </table>
+    </div>
     
     <!-- Submit -->
     <button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button>

@@ -4,11 +4,15 @@
     if (!empty($_POST['submit'])) { //if new category submitted
         $category->name = test_input ($_POST['name']);
         $category->create ();
+        header ("Location: interface.php");
     }
 ?>
 
 <!-- Title -->
 <title>New Category</title>
+
+<body style="padding-top:70px">
+<?php nav_bar(); ?>
 
 <!-- Back Navigtion -->
 <button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Categories</button>
@@ -22,6 +26,7 @@
 <?php endif; ?>
 
 <!-- Category Form -->
+<div class='form'>
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
     <table>
         <!-- Content -->
@@ -33,3 +38,4 @@
     <!-- Submit -->
     <button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button>
 </form>
+</div>

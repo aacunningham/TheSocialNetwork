@@ -68,11 +68,13 @@
                         <a class="dropdown-toggle" href="#" data-toggle="dropdown">Go to... <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="../profile/profile.php">Your Profile</a></li>
-                            <li><a href="../profile/interface.php">Modules</a></li>
+                            <li><a href="../profile/home.php">Home</a></li>
                             <li><a href="../post/interface.php">Posts</a></li>
                             <li><a href="../blog/interface.php">Blogs</a></li>
                             <li><a href="../folder/interface.php">Folders</a></li>
                             <li><a href="../category/interface.php">Categories</a></li>
+                            <li><a href="../school/interface.php">Schools</a></li>
+                            <li><a href="../work/interface.php">Work</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -87,3 +89,4 @@
         </div>
     </nav>
     <?php } ?> 
+    <div class="container">
