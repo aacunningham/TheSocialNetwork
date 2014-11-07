@@ -88,7 +88,7 @@
             return $posts;
         }
         
-        public function display ($uid) { //returns list of posts for this user for display
+        public function display ($uid=NULL) { //returns list of posts for this user for display
             return $this->sortPosts($this->listPosts($uid));
         }
         

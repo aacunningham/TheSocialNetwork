@@ -24,7 +24,7 @@
     <br>
     <a href="delete.php" target="_self" onclick="return confirm('Are you sure you want to delete your account?');">Delete User</a>
     <br>
-    <a href="../post/interface.php" target="_self">Go to Posts</a>
+    <!--<a href="../post/interface.php" target="_self">Go to Posts</a>
     <br>
     <a href="../blog/interface.php" target="_self">Go to Blogs</a>
     <br>
@@ -34,6 +34,6 @@
     <br>
     <a href="../category/interface.php" target="_self">Go to Categories</a>
     <br>
-    <a href="../profile/profile.php" target="_self">Go to Profile</a>
+    <a href="../profile/profile.php" target="_self">Go to Profile</a>-->
 </body>
 </html>

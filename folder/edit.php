@@ -17,7 +17,7 @@
 <title>Edit Folder</title>
 
 <!-- Back Navigtion -->
-<a href="interface.php" target="_self">Home</a>
+<button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Folders</button>
 
 <!-- Heading -->
 <h1>Edit Folder</h1>
@@ -28,7 +28,8 @@
 <?php endif; ?>
 
 <?php if (!empty($folder->fid)) : ?>
-    <a class="delete" href="delete.php?f=<?php echo $folder->fid; ?>" target="_self" onclick="return confirm ('Are you sure you want to delete this folder?');">Delete Folder</a>
+    <button type="button" class="btn btn-danger" onclick="deleteFn('delete.php?f=<?php echo $folder->fid; ?>')">Delete</button>
+    
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>
@@ -40,11 +41,9 @@
                 <td><b>Name:</b></td>
                 <td><input required type="text" name="name" value="<?php echoInput ($folder, 'name'); ?>"></td>
             </tr>
-            
-            <!-- Submit -->
-            <tr>
-                <td><input type="submit" name="submit"></td>
-            </tr>
         </table>
+            
+        <!-- Submit -->
+        <button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button>
     </form>
 <?php endif; ?>

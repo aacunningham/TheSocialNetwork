@@ -29,7 +29,7 @@
 <title>New User</title>
 
 <!-- Back Navigtion -->
-<a href="interface.php" target="_self">Home</a>
+<button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">User</button>
 
 <!-- Heading -->
 <h1>New User</h1>
@@ -112,10 +112,8 @@
                 <option value="<?php echo $user->friendsOnly; ?>">Friends Only</option>
             </select></td>
         </tr>
-        
-        <!-- Submit -->
-        <tr>
-            <td><input type="submit" name="submit"></td>
-        </tr>
     </table>
+    
+    <!-- Submit -->
+    <button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button>
 </form>

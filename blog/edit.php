@@ -7,7 +7,9 @@
     } elseif (!empty($_GET['f'])) { //they've chosen a blog to edit
         $folder->fid = $_GET['f'];
         $folder->get ();
-    } elseif (!empty($_POST['submit'])) { //they've submitted an edit
+    }
+    
+    if (!empty($_POST['submit'])) { //they've submitted an edit
         //Form Validation
         $blog->bid = $_POST['bid'];
         $blog->title = test_input($_POST['title']);
@@ -24,10 +26,13 @@
 <title>Edit Blog</title>
 
 <!-- Back Navigtion -->
-<?php if (!empty($_GET['b'])) : ?>
-    <a class='back' href="edit.php?f=<?php echo $_GET['f']; ?>" target="_self">Blogs</a>
+<?php if (!empty($_GET['b'])) : 
+    $folder->fid = $_GET['f'];
+    $folder->get();
+?>
+    <button type="button" class="left btn btn-primary" onclick="window.location.href='edit.php?f=<?php echo $_GET['f']; ?>'"><?php echo $folder->name; ?></button>
 <?php elseif (!empty($_GET['f'])) : ?>
-    <a class='back' href="interface.php" target="_self">Folders</a>
+    <button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Folders</button>
 <?php endif; ?>
 
 <!-- Heading -->
@@ -39,9 +44,9 @@
 <?php endif; ?>
 
 <?php if (!empty($blog->bid)) : ?>
-    <a class="delete" href="delete.php?f=<?php echo $_GET['f']; ?>&b=<?php echo $blog->bid; ?>" target="_self" onclick="return confirm ('Are you sure you want to delete this blog?');">Delete Blog</a>
+    <button type="button" class="btn btn-danger" onclick="deleteFn('delete.php?f=<?php echo $_GET['f']; ?>&b=<?php echo $blog->bid; ?>')">Delete</button>
     <!-- Edit Form -->
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
+    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); echo "?f=".$_GET['f']; ?>" method="POST">
         <table>
             <!-- Hidden - User ID -->
             <input type="hidden" name="bid" value="<?php echo $blog->bid; ?>">
@@ -63,7 +68,7 @@
                 <td><b>Category:</b></td>
                 <td><select required name="category">
                     <?php foreach ($categoryList as $cat) : ?>
-                        <option value="<?php echo $cat["cid"]; ?>"><?php echo $cat["name"]; ?></option>
+                        <option value="<?php echo $cat["cid"]; ?>" <?php if (!empty($blog->cid) and $blog->cid == $cat['cid']) echo "selected"; ?>><?php echo $cat["name"]; ?></option>
                     <?php endforeach; ?>
                 </select></td>
             </tr>
@@ -73,14 +78,14 @@
                 <td><b>Folder:</b></td>
                 <td><select required name="folder">
                     <?php foreach ($folderList as $folder) : ?>
-                        <option value="<?php echo $folder["fid"]; ?>"><?php echo $folder["name"]; ?></option>
+                        <option value="<?php echo $folder["fid"]; ?>" <?php if (!empty($blog->fid) and $blog->fid == $folder['fid']) echo "selected"; ?>><?php echo $folder["name"]; ?></option>
                     <?php endforeach; ?>
                 </select></td>
             </tr>
             
             <!-- Submit -->
             <tr>
-                <td><input type="submit" name="submit"></td>
+                <td><button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button></td>
             </tr>
         </table>
     </form>

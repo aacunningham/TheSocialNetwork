@@ -26,7 +26,7 @@
 <title>Edit Post</title>
 
 <!-- Back Navigtion -->
-<a href="interface.php" target="_self">Home</a>
+<button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Posts</button>
 
 <!-- Heading -->
 <h1>Edit Post</h1>
@@ -37,7 +37,8 @@
 <?php endif; ?>
 
 <?php if (!empty($post->pid)) : ?>
-    <a class="delete" href="delete.php?p=<?php echo $_GET['p']; ?>" target="_self" onclick="return confirm ('Are you sure you want to delete this post?');">Delete Post</a>
+    <button type="button" class="btn btn-danger" onclick="deleteFn('delete.php?p=<?php echo $_GET['p']; ?>')">Delete</button>
+    
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>
@@ -51,15 +52,11 @@
                 <td><b>Content:</b></td>
                 <td><textarea required name="content"><?php echoInput($post, 'content'); ?></textarea></td>
             </tr>
-            
-            <!-- Submit -->
-            <tr>
-                <td><input type="submit" name="submit"></td>
-                <?php if (isset($_GET['p'])) : ?>
-                    <td><button type="submit" name="cancel" value="Cancel">Cancel</button></td>
-                <?php endif; ?>
-            </tr>
         </table>
+        
+        <!-- Submit -->
+        <button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button>
+        <button class="btn btn-warning" type="submit" name="cancel" value="Cancel">Cancel</button>
     </form>
 <?php else: ?>
     <!-- Choose Form -->
@@ -74,11 +71,9 @@
                     <?php endforeach; ?>
                 </select></td>
             </tr>
-            
-            <!-- Submit -->
-            <tr>
-                <td><input type="submit" name="choose" value="Edit"></td>
-            </tr>
         </table>
+        
+        <!-- Submit -->
+        <button class="btn btn-success" type="submit" name="choose" value="Edit">Submit</button>
     </form>
 <?php endif; ?>

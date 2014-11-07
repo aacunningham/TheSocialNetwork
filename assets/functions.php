@@ -82,4 +82,10 @@
         function redirect (url) { //redirects the window to the specified URL
             window.location = url;
         }
+        
+        function deleteFn (url) {
+            if(confirm('Are you sure you want to delete?')) {
+                window.location.href=url;
+            }
+        }
     </script>

@@ -31,15 +31,37 @@ img {
     max-width: 200px;
 }
 
+button {
+    margin: 10px !important; /* need to override bootstrap on this */
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
 /* General Tables */
 
-table {
+table, table#width50 {
+    text-align: left;
     width: 50%;
+    margin: auto;
+}
+
+table#width80 {
+    width: 80%;
     margin: auto;
 }
 
 table td {
     padding: 5px;
+}
+
+table th {
+    text-align: center;
 }
 
 td.bolden {
@@ -125,13 +147,6 @@ div.icon_container {
     font-size: 1.1em;
 }
 
-/* Back Navigation */
-a.back {
-    font-size: 1.3em;
-    float: left;
-    padding: 10px;
-}
-
 /* Delete Links */
 a.delete {
     color: red;
@@ -142,5 +157,13 @@ a.delete {
 }
 
 /* Global */
-div#content {
+div.container {
+    text-align: center;
 }
+
+/* Pagination links */
+div.page {
+    width: 50%;
+    margin: auto;
+}
+

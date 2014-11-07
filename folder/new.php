@@ -11,7 +11,7 @@
 <title>New Folder</title>
 
 <!-- Back Navigtion -->
-<a href="interface.php" target="_self">Home</a>
+<button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Folders</button>
 
 <!-- Heading -->
 <h1>New Folder</h1>
@@ -29,10 +29,7 @@
             <td><b>Name:</b></td>
             <td><input required name="name" type="text" value="<?php printPost('name'); ?>"></td>
         </tr>
-        
-        <!-- Submit -->
-        <tr>
-            <td><input type="submit" name="submit"></td>
-        </tr>
     </table>
+    <!-- Submit -->
+    <button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button>
 </form>

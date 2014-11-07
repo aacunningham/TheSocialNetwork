@@ -23,7 +23,7 @@
 <title>Edit Module</title>
 
 <!-- Back Navigtion -->
-<a href="interface.php" target="_self">Home</a>
+<button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Modules</button>
 
 <!-- Heading -->
 <h1>Edit <?php if (!empty($module->name)) echo ucwords($module->name); ?> Module</h1>
@@ -52,12 +52,10 @@
             <td><b>Font Color:</b></td>
             <td><input type='color' required name="fontColor" value="<?php echo !empty($module->fontColor) ? $module->fontColor : ''; ?>"><?php if (!empty($_POST['fontColor'])) echo $_POST['fontColor']; ?></td>
         </tr>
-        
-        <!-- Submit -->
-        <tr>
-            <td><input type="submit" name="submit"></td>
-        </tr>
     </table>
+    
+    <!-- Submit -->
+    <button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button>
 </form>
 <?php else: ?>
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
@@ -71,11 +69,9 @@
                 <?php endforeach; ?>
             </select></td>
         </tr>
-        
-        <!-- Submit -->
-        <tr>
-            <td><input type="submit" name="choose" value="Edit"></td>
-        </tr>
     </table>
+    
+    <!-- Submit -->
+    <button class="btn btn-success" type="submit" name="choose" value="Edit">Submit</button>
 </form>
 <?php endif; ?>

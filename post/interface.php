@@ -1,57 +1,53 @@
+<?php
+    require_once "../Layout/header.php";
+    $limit = 10;
+    $counter = 0;
+    $page = empty($_GET['p']) ? 1 : $_GET['p']; 
+    $posts = $post->display(); //list all posts for this user, sorted by most recent first
+    $count = count ($posts);
+?>
 
-<?php require_once "../Layout/header.php"; ?>
-    
+<!-- Title -->
 <title>Posts</title>
-</head>
 
-<body style="padding-top:50px">
 <?php nav_bar(); ?>
-    <h1>Posts</h1>
-    
-    <a href="new.php" target="_self">Create New</a>
-    <br>
-    <a href="edit.php" target="_self">Edit Post</a>
-    <br>
-    <!--<a href="delete.php" target="_self">Delete Post</a>-->
-    <br>
-    <a href="view.php" target="_self">View Posts</a>
-    <br>
-    <!--<a href="../blog/interface.php" target="_self">Go to Blogs</a>
-    <br>
-    <a href="../school/interface.php" target="_self">Go to Schools</a>
-    <br>
-    <a href="../work/interface.php" target="_self">Go to Work History</a>
-    <br>
-    <a href="../user/interface.php" target="_self">Go to User</a>
-    <br>
-    <a href="../folder/interface.php" target="_self">Go to Folders</a>
-    <br>
-    <a href="../category/interface.php" target="_self">Go to Categories</a>
-    <br>
-    <a href="../profile/profile.php" target="_self">Go to Profile</a>
-    <br>
-    <a href="../profile/interface.php" target="_self">Go to Profile Modules</a>-->
-    <script src="../Layout/js/jquery-1.11.1.min.js"></script>
-    <script src="../Layout/js/bootstrap.min.js"></script>
+
+<body style="padding-top:70px">
+<!-- Heading -->
+<h1>Posts</h1>
+
+<button type="button" class="btn btn-success" onclick="window.location.href='new.php'">Create New</button>
+<?php if (!empty($posts)) : ?>
+    <!-- Display Posts -->
+    <table id="width80" class="table table-striped">
+        <tr>
+            <th>Date and Time</th>
+            <th>Content</th>
+        </tr>
+        <?php foreach ($posts as $p) : 
+                $counter++;
+                if ($counter <= $page*$limit) :
+                    if ($page == 1 or ($page > 1 and $counter > ($page-1)*$limit)) :
+            ?>
+        <tr>
+            <td><?php echo $p['dateTime']; ?></td>
+            <td><?php echo $p['content']; ?></td>
+            <td><button type="button" class="btn btn-primary" onclick="window.location.href='edit.php?p=<?php echo $p['pid']; ?>'">Edit</button></td>
+        </tr>
+        <?php endif; 
+            endif; 
+            endforeach; ?>
+    </table>
+    <div class="page">
+    <?php if ($page > 1) : ?>
+        <button type="button" class="left btn btn-info" onclick="window.location.href='?p=<?php echo $page-1; ?>'">Previous</button>
+    <?php endif; 
+    if ($limit*$page < $count) : ?>
+        <button type="button" class="right btn btn-info" onclick="window.location.href='?p=<?php echo $page+1; ?>'">Next</button>
+    <?php endif; ?>
+    </div>
+<?php else : ?>
+    <!-- No Posts to Display -->
+    <h3>You have no posts yet!</h3>
+<?php endif; ?>
 </body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

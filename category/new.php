@@ -11,7 +11,7 @@
 <title>New Category</title>
 
 <!-- Back Navigtion -->
-<a href="interface.php" target="_self">Home</a>
+<button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Categories</button>
 
 <!-- Heading -->
 <h1>New Category</h1>
@@ -29,10 +29,7 @@
             <td><b>Name:</b></td>
             <td><input required name="name" type="text" value="<?php printPost('name'); ?>"></td>
         </tr>
-        
-        <!-- Submit -->
-        <tr>
-            <td><input type="submit" name="submit"></td>
-        </tr>
     </table>
+    <!-- Submit -->
+    <button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button>
 </form>

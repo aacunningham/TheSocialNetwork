@@ -57,7 +57,7 @@
 <title>Edit School</title>
 
 <!-- Back Navigtion -->
-<a href="interface.php" target="_self">Home</a>
+<button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Schools</button>
 
 <!-- Heading -->
 <h1>Edit School</h1>
@@ -68,7 +68,7 @@
 <?php endif; ?>
 
 <?php if (!empty($school->sid)) : ?>
-    <a class="delete" href="delete.php?s=<?php echo $school->sid; ?>" target="_self" onclick="return confirm ('Are you sure you want to delete this school?');">Delete School</a>
+    <button type="button" class="btn btn-danger" onclick="deleteFn('delete.php?s=<?php echo $school->sid; ?>')">Delete</button>
     <!-- Edit Form -->
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
         <table>
@@ -134,15 +134,11 @@
                 <td><b>End Date:</b></td>
                 <td><input required type="date" name="endDate" value="<?php echoInput($school, "endDate"); ?>"></td>
             </tr>
-            
-            <!-- Submit -->
-            <tr>
-                <td><input type="submit" name="submit"></td>
-                <?php if (isset($_GET['s'])) : ?>
-                    <td><button type="submit" name="cancel" value="Cancel">Cancel</button></td>
-                <?php endif; ?>
-            </tr>
         </table>
+        
+        <!-- Submit -->
+        <button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button>
+        <button class="btn btn-warning" type="submit" name="cancel" value="Cancel">Cancel</button>
     </form>
 <?php else: ?>
     <!-- Choose Form -->
@@ -157,11 +153,9 @@
                     <?php endforeach; ?>
                 </select></td>
             </tr>
-            
-            <!-- Submit -->
-            <tr>
-                <td><input type="submit" name="choose" value="Edit"></td>
-            </tr>
         </table>
+    
+        <!-- Submit -->
+        <button class="btn btn-success" type="submit" name="choose" value="Edit">Submit</button>
     </form>
 <?php endif; ?>

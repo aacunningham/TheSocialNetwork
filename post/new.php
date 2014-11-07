@@ -13,7 +13,7 @@
 <title>New Post</title>
 
 <!-- Back Navigtion -->
-<a href="interface.php" target="_self">Home</a>
+<button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Posts</button>
 
 <!-- Heading -->
 <h1>New Post</h1>
@@ -31,10 +31,8 @@
             <td><b>Content:</b></td>
             <td><textarea required name="content"><?php printPost('content'); ?></textarea></td>
         </tr>
-        
-        <!-- Submit -->
-        <tr>
-            <td><input type="submit" name="submit"></td>
-        </tr>
     </table>
+    
+    <!-- Submit -->
+    <button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button>
 </form>

@@ -43,7 +43,7 @@
 <title>New School</title>
 
 <!-- Back Navigtion -->
-<a href="interface.php" target="_self">Home</a>
+<button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Schools</button>
 
 <!-- Heading -->
 <h1>New School</h1>
@@ -113,10 +113,8 @@
             <td><b>End Date:</b></td>
             <td><input required type="date" name="endDate" value="<?php printPost('endDate'); ?>"></td>
         </tr>
-        
-        <!-- Submit -->
-        <tr>
-            <td><input type="submit" name="submit"></td>
-        </tr>
     </table>
+    
+    <!-- Submit -->
+    <button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button>
 </form>

@@ -88,7 +88,7 @@
             return $works;
         }
         
-        public function display ($uid) { //returns list of this user's schools sorted by company for display
+        public function display ($uid=NULL) { //returns list of this user's schools sorted by company for display
             return $this->sortWorks($this->listWorks($uid));
         }
         

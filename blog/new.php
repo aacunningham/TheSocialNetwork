@@ -19,12 +19,12 @@
 
 <!-- Back Navigtion -->
 <?php if (empty($_GET['f'])) : ?>
-    <a class='back' href="interface.php" target="_self">Home</a>
+    <button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Blogs</button>
 <?php else : 
         $folder->fid = $_GET['f'];
         $folder->get();
 ?>
-    <a class='back' href="edit.php?f=<?php echo $_GET['f']; ?>" target="_self"><?php echo $folder->name; ?></a>
+    <button type="button" class="left btn btn-primary" onclick="window.location.href='edit.php?f=<?php echo $_GET['f']; ?>'"><?php echo $folder->name; ?></button>
 <?php endif; ?>
 <!-- Heading -->
 <h1>New Blog</h1>
@@ -70,7 +70,7 @@
         
         <!-- Submit -->
         <tr>
-            <td><input type="submit" name="submit"></td>
+            <td><button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button></td>
         </tr>
     </table>
 </form>

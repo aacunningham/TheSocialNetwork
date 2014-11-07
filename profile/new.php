@@ -16,7 +16,7 @@
 <title>New Module</title>
 
 <!-- Back Navigtion -->
-<a href="interface.php" target="_self">Home</a>
+<button type="button" class="left btn btn-primary" onclick="window.location.href='interface.php'">Modules</button>
 
 <!-- Heading -->
 <h1>New Module</h1>
@@ -57,10 +57,7 @@
             <td><b>Font Color:</b></td>
             <td><input type='color' required name="fontColor"><?php printPost('fontColor'); ?></td>
         </tr>
-        
-        <!-- Submit -->
-        <tr>
-            <td><input type="submit" name="submit"></td>
-        </tr>
     </table>
+    <!-- Submit -->
+    <button class="btn btn-success" type="submit" name="submit" value="submit">Submit</button>
 </form>
