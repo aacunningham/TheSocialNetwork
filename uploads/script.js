@@ -27,3 +27,18 @@ $('body').on('change', '#file', function(){
             }));
          }
    });
+
+//Image preview code    
+    function imageIsLoaded(e) {
+        $('#previewimg' + abc).attr('src', e.target.result);
+    };
+
+    $('#upload').click(function(e) {
+        var name = $(":file").val();
+        if (!name)
+        {
+            alert("Select an image");
+            e.preventDefault();
+        }
+    });
+});
