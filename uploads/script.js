@@ -8,3 +8,22 @@ $(document).ready(function() {
                 $("<br/><br/>")
                 ));
     });
+
+$('body').on('change', '#file', function(){
+            if (this.files && this.files[0]) {
+                 abc += 1; //Increment by 1 (global variable)
+				
+				var z = abc - 1;
+                var x = $(this).parent().find('#previewimg' + z).remove();
+                $(this).before("<div id='abcd"+ abc +"' class='abcd'><img id='previewimg" + abc + "' src=''/></div>");
+               
+			    var reader = new FileReader();
+                reader.onload = imageIsLoaded;
+                reader.readAsDataURL(this.files[0]);
+               
+		    $(this).hide();
+            $("#abcd"+ abc).append($("<img/>", {id: 'img', src: 'x.png', alt: 'delete'}).click(function() {
+            $(this).parent().parent().remove();
+            }));
+         }
+   });
