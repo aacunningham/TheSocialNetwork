@@ -1,28 +1,32 @@
-#Upload {
-	width: 30em;
-	margin: 2em auto;
-	padding:0 3em 3em 3em;
-	border:2px solid #bbb;
-	color: ;
-	font: ;
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+form{
+    background-color:white;
 }
-
-#Upload h1{
-	font: ;
-	margin: 0;
-	padding:2em 0;
-	text-align: left;
+#maindiv{
+    width:960px; 
+    margin:10px auto; 
+    padding:10px;
+    font-family: 'Droid Sans', sans-serif;
 }
-
-#Upload label{
-	width: 5em;
-	
+#formdiv{
+    width:500px; 
+    float:left; 
+    text-align: center;
 }
-
-#Upload p {
-	
+form{
+    padding: 40px 20px;
+    box-shadow: 0px 0px 10px;
+    border-radius: 2px;
 }
-
-.blue{
-	color:blue;
+h2{
+    margin-left: 30px;
+}
+.upload{
+    background-color:#000FF;
+    border:1px solid #000FF;
+    color:#f0ffff;
+    border-radius:5px;
+    padding:10px;
+    text-shadow:1px 1px 0px green;
+    box-shadow: 2px 2px 15px rgba(0,0,0, .75);
 }
