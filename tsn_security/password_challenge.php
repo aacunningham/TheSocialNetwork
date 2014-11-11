@@ -1,6 +1,6 @@
 <?php if (!empty($_SESSION['uid'])) : ?>
     <!-- Back Navigtion -->
-    <a href="interface.php" target="_self">Home</a>
+    <a href="../post/interface.php" target="_self">Home</a>
 <?php endif; ?>
 
 <?php
@@ -27,7 +27,7 @@
 		}
 		if( $_SESSION['attempts'] >= 5) {			//after so many failures destroy the session
 			session_destroy();						//and return to the landing page
-			header('Location: /user/login.php');
+			header('Location: ../post/login.php');
 		}
 	}			
 ?>

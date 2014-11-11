@@ -15,7 +15,7 @@
         }
 		
 		if ($success ) {
-			header('Location: /user/interface.php');	//send to users page
+			header('Location: ../post/interface.php');	//send to users page
 		}
     }	
 ?>

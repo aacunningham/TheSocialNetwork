@@ -16,11 +16,13 @@
        $check_res = $user->forgot_password(); 	//User submits email for account check
        if( $check_res ) {
        		header('Location: password_challenge.php');
-       		//echo "Found User";
-			/*$result = $user->get_challenge_question();
+       		/*echo "Found User";
+			echo "User ID ", $_SESSION['uid'], ":", $user->uid, ":";
+			$result = $user->get_challenge_question();
 			echo $result[0]['uid'];
 			echo $result[0]['challenge'];
-			echo $result[0]['answer'];*/
+			echo $result[0]['answer'];
+			echo $user->message;*/
        }
 	}
 ?>
