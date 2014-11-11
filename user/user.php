@@ -16,6 +16,7 @@
         public $public = "Public, not signed in";
         public $friendsOnly = "Friends only";
         public $uid, $message;
+		private $bLoggedIn = false;
         
         //methods
         public function user ($blank=false) { //get current user's info at initialization of object
@@ -132,6 +133,7 @@
             } 
             if (password_verify($this->password, $result[0]["password"])) { //if their password is valid
                 $_SESSION['uid'] = $result[0]["uid"]; //save their uid in session for use everywhere
+                $this->bLoggedIn = true;
                 $this->message = "User logged in!"; 
             }
         }
