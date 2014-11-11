@@ -81,6 +81,7 @@
             foreach ($left_side as $module) {
                 $this->print_module ($user, $module);
             }
+            $this->display_profile_background($user);
         }
 
         public function print_right ($user) {
@@ -134,7 +135,7 @@
         
         public function display_about_me ($user) { 
             $this->get(array("uid", "name"), array($user->uid, "about me")); ?>
-            <div class="module" id="about_me" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
+            <div class="module" id="about_me" style="background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;">
                 <?php if ($user->uid == $user->getUser()) : ?>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../user/edit.php'">Edit</button>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=about_me'">Personalize</button>
@@ -167,7 +168,7 @@
         
         public function display_contact ($user) {
             $this->get(array("uid", "name"), array($user->uid, "contact")); ?>
-            <div class="module" id="contact" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
+            <div class="module" id="contact" style="style="background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;">
                 <?php if ($user->uid == $user->getUser()) : ?>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../user/edit.php'">Edit</button>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=contact'">Personalize</button>
@@ -186,7 +187,7 @@
         public function display_friends ($user) {
             $friend = new user();
             $this->get(array("uid", "name"), array($user->uid, "friends")); ?>
-            <div class="module" id="friends" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
+            <div class="module" id="friends" style="background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <?php if ($user->uid == $user->getUser()) : ?>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=friends'">Personalize</button>
                 <?php endif; ?>
@@ -210,7 +211,7 @@
         public function display_posts ($user) {
             global $post;
             $this->get(array("uid", "name"), array($user->uid, "posts")); ?>
-            <div class="module" id="posts" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
+            <div class="module" id="posts" style="background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <?php if ($user->uid == $user->getUser()) : ?>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=posts'">Personalize</button>
                 <?php endif; ?>
@@ -237,7 +238,7 @@
         public function display_schools ($user) {
             global $school; 
             $this->get(array("uid", "name"), array($user->uid, "schools")); ?>
-            <div class="module" id="schools" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
+            <div class="module" id="schools" style="background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <?php if ($user->uid == $user->getUser()) : ?>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=schools'">Personalize</button>
                 <?php endif; ?>
@@ -301,7 +302,7 @@
         public function display_work ($user) {
             global $work;
             $this->get(array("uid", "name"), array($user->uid, "work")); ?>
-            <div class="module" id="work" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;"?>
+            <div class="module" id="work" style="background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <?php if ($user->uid == $user->getUser()) : ?>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=work'">Personalize</button>
                 <?php endif; ?>
@@ -364,7 +365,7 @@
         
         public function display_profile_picture ($user) {
             $this->get(array("uid", "name"), array($user->uid, "profile picture")); ?>
-            <div class="module" id="about_me" style="background:<?php echo $this->background; ?>;color:<?php echo $this->fontColor; ?>;">
+            <div class="module" id="profile_picture" style="background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;">
                 <?php if ($user->uid == $user->getUser()) : ?>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../user/edit.php'">Edit</button>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=profile_picture'">Personalize</button>
@@ -376,6 +377,18 @@
                     </tr>
                 </table>
             </div>
+        <?php }
+        
+        public function display_profile_background ($user) {
+            $this->get(array("uid", "name"), array($user->uid, "profile background")); ?>
+            <script type="text/javascript">
+                <?php if (substr($this->background, 0, 1) == "#") : ?>
+                    document.getElementsByTagName("body")[0].style.background = "<?php echo $this->background; ?>";
+                <?php else : ?>
+                    document.body.style.backgroundImage="url('<?php echo $this->background; ?>')";
+                <?php endif; ?>
+                document.getElementsByTagName("body")[0].style.color = "<?php echo $this->fontColor; ?>";
+            </script>
         <?php }
         
     }

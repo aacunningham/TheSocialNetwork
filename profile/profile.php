@@ -15,6 +15,9 @@
 <body style="padding-top:70px">
 <?php nav_bar(); ?>
     <div class="container">
+        <?php if ($user->uid == $user->getUser()) : ?>
+            <button type="button" class="btn btn-primary" onclick="window.location.href='edit.php?m=profile_background'">Personalize</button>
+        <?php endif; ?>
         <div class="row">
             <div class="col-sm-5">
                 <?php $module->print_left ($user); ?>

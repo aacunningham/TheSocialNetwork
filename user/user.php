@@ -76,6 +76,8 @@
             $dao->insert ("modules", $columns, $values);
             $values = array ($userid, "posts", 1, 0, "#FF00FF", "#000000");
             $dao->insert ("modules", $columns, $values);
+            $values = array ($userid, "profile background", 1, 0, "#FFFFFF", "#000000");
+            $dao->insert ("modules", $columns, $values);
         }
 
         public function edit () { //updates a user in the SQL
@@ -247,6 +249,7 @@
             return array_merge ($arr, $arr2);
         }
         
+        //This will get very time-intensive when many users! use suggestions instead
         public function getOthers () {
             $friends = $this->getFriends();
             $all = $this->getPublic ();
@@ -257,6 +260,41 @@
                 }
             }
             return $notFriends;
+        }
+        
+        public function getSuggestions () {
+            $suggestions = array();
+            $friends = $this->getFriends();
+            foreach ($friends as $fid) {
+                $u = new user();
+                $u->uid = $fid;
+                $sugg = $u->getFriends();
+                foreach ($sugg as $sid) {
+                    if (!in_array($sid, $friends) and $sid != $this->uid) {
+                        $s = new user();
+                        $s->uid = $sid;
+                        $s->get();
+                        $suggestions[] = $s;
+                    }
+                }
+            }
+            return $suggestions;
+        }
+        
+        public function getMostPopular () {
+            $users = array();
+            $ppl = $this->getPublic();
+            foreach ($ppl as $person) {
+                if ($person['uid'] != $this->uid) {
+                    $u = new user();
+                    $u->uid = $person['uid'];
+                    if (count($u->getFriends()) > 2) { //above a threshold number
+                        $u->get();
+                        $users[] = $u;
+                    }
+                }
+            }
+            return $users;
         }
         
     }

@@ -2,7 +2,12 @@
 
     require_once "../Layout/header.php";
     
-    if (!empty($_POST['submit'])) { //if edited user submitted
+    if (isset($_GET['del'])) {
+        $user->delete (); //delete this user
+        if (empty($_SESSION['uid'])) { 
+            header("Location: login.php"); //redirect to landing page
+        }
+    } elseif (!empty($_POST['submit'])) { //if edited user submitted
         //Form Validation
         $user->uid = $_POST['uid'];
         $user->email = test_input($_POST['email']);
@@ -47,7 +52,7 @@
 
 <!-- Edit User Form -->
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
-    <button type="button" class="btn btn-danger" onclick="deleteFn('delete.php')">Delete</button>
+    <button type="button" class="btn btn-danger" onclick="deleteFn('?del')">Delete My Account</button>
     <!-- Hidden - User ID -->
     <input type="hidden" name="uid" value="<?php echo $user->uid; ?>">
     <div class='form'>

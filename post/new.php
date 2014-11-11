@@ -6,7 +6,7 @@
         $post->content = test_input($_POST['content']);
         $post->dateTime = date("m-d-Y H:i:s");
         $post->create ();
-        header ("Location: interface.php");
+        header ("Location: ../profile/profile.php");
     }
 ?>
 

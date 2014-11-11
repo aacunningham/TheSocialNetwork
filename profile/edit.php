@@ -10,7 +10,7 @@
         //Form Validation
         $module->mid = test_input($_POST['mid']);
         $module->name = test_input($_POST['name']);
-        $module->background = test_input($_POST['background']);
+        $module->background = !empty($_POST['backgroundLink']) ? test_input($_POST['backgroundLink']) : test_input($_POST['backgroundColor']);
         $module->fontColor = test_input($_POST['fontColor']);
         $module->edit ();
         header ("Location: profile.php");
@@ -46,8 +46,14 @@
                 
                 <!-- Background -->
                 <tr>
-                    <td><b>Background:</b></td>
-                    <td><input type='color' required name="background" value="<?php echo !empty($module->background) ? $module->background : ''; ?>"><?php if (!empty($_POST['background'])) echo $_POST['background']; ?></td>
+                    <td><b>Background Color:</b></td>
+                    <td><input type='color' name="backgroundColor" value="<?php echo (!empty($module->background) and substr($module->background, 0, 1) == "#") ? $module->background : '#FFFFFF'; ?>"><?php if (!empty($_POST['background'])) echo $_POST['background']; ?></td>
+                </tr>
+                
+                <!-- Background Image -->
+                <tr>
+                    <td><b>Background Image:</b></td>
+                    <td><input type="text" name="backgroundLink" value="<?php echo (!empty($module->background) and !(substr($module->background, 0, 1) == "#")) ? $module->background : ''; ?>"></td>
                 </tr>
                 
                 <!-- Font Color -->

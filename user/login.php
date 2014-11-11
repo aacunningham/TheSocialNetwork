@@ -8,7 +8,7 @@
        $user->login (); //log the user in
        if ($user->loggedIn()) { ?>
            <script type="text/javascript">
-               redirect ("interface.php"); //redirec to user interface after login
+               redirect ("../profile/profile.php"); //redirec to user interface after login
            </script>
    <?php }
     }
@@ -16,11 +16,6 @@
 
 <!-- Title -->
 <title>Login</title>
-
-<?php if (!empty($_SESSION['uid'])) : ?>
-    <!-- Back Navigtion -->
-    <a href="interface.php" target="_self">Home</a>
-<?php endif; ?>
 
 <!-- Heading -->
 <h1>Login</h1>
@@ -52,5 +47,6 @@
     </table>
 </form>
 
-<a href="new.php" target="_self">Create an account.</a>
-<a href="../tsn_security/forgot_password.php" target="_self"> Forgot password.</a>
+<a href="new.php" target="_self">Create an account!</a>
+<br>
+<a href="../tsn_security/forgot_password.php" target="_self"> Forgot password?</a>

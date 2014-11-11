@@ -3,15 +3,12 @@
     require_once "../Layout/header.php"; ?>
     
 <title>Testing Modules</title>
+<body>
 <h1>Testing Modules</h1>
-    
-<!-- Back Navigtion -->
-<a href="interface.php" target="_self">Home</a>
-<br>
 
 <?php
     //Get User Information
-    $user->uid = 2; //replace later with method to get user id
+    $user->uid = 1; //replace later with method to get user id
     $user->get (); //get user info
 
     $module->display_about_me($user); 
@@ -20,4 +17,6 @@
     $module->display_posts($user);
     $module->display_schools($user);
     $module->display_work($user);
+    $module->display_profile_background($user);
 ?>
+</body>
