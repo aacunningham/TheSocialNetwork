@@ -9,6 +9,7 @@
        if ($user->loggedIn()) { ?>
            <script type="text/javascript">
                redirect ("../profile/profile.php"); //redirec to user interface after login
+               redirect ("../post/interface.php"); //redirec to user interface after login
            </script>
    <?php }
     }
@@ -16,6 +17,11 @@
 
 <!-- Title -->
 <title>Login</title>
+
+<?php if (!empty($_SESSION['uid'])) : ?>
+    <!-- Back Navigtion -->
+    <a href="../post/interface.php" target="_self">Home</a>
+<?php endif; ?>
 
 <!-- Heading -->
 <h1>Login</h1>

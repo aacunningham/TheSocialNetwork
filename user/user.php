@@ -99,7 +99,7 @@
 			$values = array($this->password);
 			
 			$dao = new SQL();
-			$success = $dao->update( $this->table, $columns, $values, $this->identifier, $this->uid);
+			$success = $dao->update( $this->table, $columns, $values, $this->identifier, $_SESSION['uid']);
 			
             if ($success) {
                 $this->message = "Password changed!";
@@ -134,19 +134,21 @@
             } 
             if (password_verify($this->password, $result[0]["password"])) { //if their password is valid
                 $_SESSION['uid'] = $result[0]["uid"]; //save their uid in session for use everywhere
+                $_SESSION['bLoggedIn'] = true;
                 $this->message = "User logged in!"; 
             }
         }
         
         public function logout () { //log the user out of the system
             $_SESSION['uid'] = NULL; //nullify their session info
+            $_SESSION['bLoggedIn'] = NULL;
             $this->message = "User logged out!";
         }
 		
 		public function forgot_password() { //start the password reset process
 			$dao = new SQL();
 			$result = $dao->select ($this->table, "email", $this->email); //get their password by their email
-			
+
 			if( empty($result)){
 				$this->message = "User not found";
 				return FALSE;
@@ -159,7 +161,7 @@
 
 		public function get_challenge_question() {
 			$dao = new SQL();
-            $result = $dao->select ("security_questions", "uid", $this->uid); //go to the security table and get their challenge question
+            $result = $dao->select ("security_questions", "uid", $_SESSION['uid']); //go to the security table and get their challenge question
             if (empty($result)) {
                 $this->message = "Oops - an error occurred.";
                 return;
@@ -170,7 +172,7 @@
 		}
         
         public function loggedIn () { //check if a valid user is logged in
-            return !empty($_SESSION['uid']);
+            return !empty($_SESSION['uid']) and !empty($_SESSION['bLoggedIn']);
         }
         
         public function listAll () { //list all users
