@@ -14,8 +14,8 @@
     <span class="caption">Create New Folder</span>
 </div>
 <?php 
+    $folders = $folder->listFolders();
     if (!empty($folders)) :
-        $folders = $folder->listFolders();
         foreach ($folders as $folder) : ?>
            <div class="icon_container"> 
                <a href="edit.php?f=<?php echo $folder['fid']; ?>" target="_self"><img class="folder icon" src="../assets/icons/folder.png"></a>
