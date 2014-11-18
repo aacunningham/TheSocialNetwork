@@ -13,13 +13,16 @@
     <a href="new.php" target="_self"><img class="new icon" src="../assets/icons/create_new_doc.png"></a>
     <span class="caption">Create New Folder</span>
 </div>
-<?php $folders = $folder->listFolders();
-    foreach ($folders as $folder) : ?>
-       <div class="icon_container"> 
-           <a href="edit.php?f=<?php echo $folder['fid']; ?>" target="_self"><img class="folder icon" src="../assets/icons/folder.png"></a>
-           <span class='caption'><?php echo $folder["name"]; ?></span>
-       </div>
-    <?php endforeach; ?>
+<?php 
+    if (!empty($folders)) :
+        $folders = $folder->listFolders();
+        foreach ($folders as $folder) : ?>
+           <div class="icon_container"> 
+               <a href="edit.php?f=<?php echo $folder['fid']; ?>" target="_self"><img class="folder icon" src="../assets/icons/folder.png"></a>
+               <span class='caption'><?php echo $folder["name"]; ?></span>
+           </div>
+        <?php endforeach; 
+    endif; ?>
 </body>
 </html>
 

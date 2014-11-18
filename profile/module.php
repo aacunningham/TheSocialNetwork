@@ -197,10 +197,10 @@
                     ?>
                     <table class='friend'>
                     <tr>
-                        <td><a href="profile.php?uid=<?php echo $id; ?>" target="_self"><img src="<?php echo $friend->picture; ?>"></a></td>
+                        <td><a target="_self"><img src="<?php echo $friend->picture; ?>"></a></td>
                     </tr>
                     <tr>
-                        <td><a href="profile.php?uid=<?php echo $id; ?>" target="_self"><?php echo $friend->fname." ".$friend->lname; ?></a><br>
+                        <td><button class="btn btn-primary" href="profile.php?uid=<?php echo $id; ?>" target="_self"><?php echo $friend->fname." ".$friend->lname; ?></a><br>
                         <button type="button" class="btn btn-danger" onclick="deleteFn('../user/unFriend.php?f=<?php echo $id; ?>')">UnFriend</button></td>
                     </tr>
                     </table>

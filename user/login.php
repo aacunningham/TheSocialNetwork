@@ -44,12 +44,11 @@
             <td><b>Password:</b></td>
             <td><input required type="password" name="password"></td>
         </tr>
-    
-        <!-- Submit -->
-        <tr>
-            <td><input type="submit" name="submit" value="Login"></td>
-        </tr>
     </table>
+    
+    <!-- Submit -->
+    <button class="btn btn-success" type="submit" name="submit" value="submit">Login</button>
+    
 </form>
 
 <a href="new.php" target="_self">Create an account!</a>
