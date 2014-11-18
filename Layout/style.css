@@ -40,6 +40,10 @@ button {
    margin: 10px !important; /* need to override bootstrap on this */
 }
 
+button.no-margin {
+    margin: 0 !important;    
+}
+
 .left {
     float: left;
 }

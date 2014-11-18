@@ -60,7 +60,7 @@
                         <div class="form-group">
                             <input name="search" class="form-control" type="text" placeholder="Search Users"></input>
                         </div>
-                        <button class="btn btn-default" name="submit" type="submit" value="submit">Search</button>
+                        <button class="btn btn-default no-margin" name="submit" type="submit" value="submit">Search</button>
                     </form>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
