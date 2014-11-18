@@ -15,12 +15,14 @@
     </div>
     
     <?php $schools = $school->listSchools();
-        foreach ($schools as $s) : ?>
-           <div class="icon_container"> 
-               <a href="edit.php?s=<?php echo $s['sid']; ?>" target="_self"><img class="school icon" src="../assets/icons/school.png"></a>
-               <span class='caption'><?php echo $s["name"]; ?><br><?php echo $s["degree"]; ?></span>
-           </div>
-        <?php endforeach; ?>
+        if (!empty($schools)) :
+            foreach ($schools as $s) : ?>
+               <div class="icon_container"> 
+                   <a href="edit.php?s=<?php echo $s['sid']; ?>" target="_self"><img class="school icon" src="../assets/icons/school.png"></a>
+                   <span class='caption'><?php echo $s["name"]; ?><br><?php echo $s["degree"]; ?></span>
+               </div>
+            <?php endforeach; 
+        endif; ?>
 </body>
 </html>
 
