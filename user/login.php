@@ -8,8 +8,7 @@
        $user->login (); //log the user in
        if ($user->loggedIn()) { ?>
            <script type="text/javascript">
-               redirect ("../profile/profile.php"); //redirec to user interface after login
-               redirect ("../post/interface.php"); //redirec to user interface after login
+               redirect ("../profile/home.php"); //redirect to user interface after login
            </script>
    <?php }
     }
