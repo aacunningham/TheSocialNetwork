@@ -19,10 +19,14 @@
             <button type="button" class="btn btn-primary" onclick="window.location.href='edit.php?m=profile_background'">Personalize</button>
         <?php endif; ?>
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <?php $module->print_left ($user); ?>
             </div>
-            <div class="col-sm-5 col-sm-offset-2">
+            <div class="col-sm-4">
+                <?php $module->display_posts ($user); ?>
+            </div>
+            <div class="col-sm-4">
+
                 <?php $module->print_right ($user); ?>
             </div>
         </div>
