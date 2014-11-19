@@ -9,6 +9,8 @@
     if (!empty($_POST['submit'])) {
         //Form Validation
         $module->mid = test_input($_POST['mid']);
+        $module->font_normal = test_input($_POST['font-normal']);
+        $module->font_header = test_input($_POST['font-header']);
         $module->name = test_input($_POST['name']);
         $module->background = !empty($_POST['backgroundLink']) ? test_input($_POST['backgroundLink']) : test_input($_POST['backgroundColor']);
         $module->fontColor = test_input($_POST['fontColor']);
@@ -43,6 +45,30 @@
                 
                 <!-- Hidden - Module ID -->
                 <input type="hidden" name="name" value="<?php echo $module->name; ?>">
+                
+                <!-- Font size of normal text -->
+                <tr>
+                    <td><b>Font Size (Normal Text):</b></td>
+                    <td><select name='font-normal'>
+                        <option value="12px" <?php echo (!empty($module->font_normal) and $module->font_normal == "12px") ? 'selected' : ''; ?>>Small</option>
+                        <option value="14px" <?php echo (empty($module->font_normal) or $module->font_normal == "14px") ? 'selected' : ''; ?>>Normal</option>
+                        <option value="16px" <?php echo (!empty($module->font_normal) and $module->font_normal == "16px") ? 'selected' : ''; ?>>Large</option>
+                        <option value="18px" <?php echo (!empty($module->font_normal) and $module->font_normal == "18px") ? 'selected' : ''; ?>>Larger</option>
+                        <option value="20px" <?php echo (!empty($module->font_normal) and $module->font_normal == "20px") ? 'selected' : ''; ?>>Largest</option>
+                    </select></td>
+                </tr>
+                
+                <!-- Font size of header -->
+                <tr>
+                    <td><b>Font Size (Header):</b></td>
+                    <td><select name='font-header'>
+                        <option value="20px" <?php echo (!empty($module->font_header) and $module->font_header == "20px") ? 'selected' : ''; ?>>Small</option>
+                        <option value="22px" <?php echo (empty($module->font_header) or $module->font_header == "22px") ? 'selected' : ''; ?>>Normal</option>
+                        <option value="24px" <?php echo (!empty($module->font_header) and $module->font_header == "24px") ? 'selected' : ''; ?>>Large</option>
+                        <option value="28px" <?php echo (!empty($module->font_header) and $module->font_header == "26px") ? 'selected' : ''; ?>>Larger</option>
+                        <option value="30px" <?php echo (!empty($module->font_header) and $module->font_header == "28px") ? 'selected' : ''; ?>>Largest</option>
+                    </select></td>
+                </tr>
                 
                 <!-- Background -->
                 <tr>

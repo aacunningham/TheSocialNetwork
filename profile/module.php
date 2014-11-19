@@ -13,7 +13,7 @@
 
     class module {
         //Properties
-        public $name, $background, $fontColor, $side, $sequence;
+        public $name, $background, $fontColor, $side, $sequence, $font_normal, $font_header;
         private $identifier = "mid";
         public $table = "modules";
         public $mid, $uid;
@@ -46,8 +46,8 @@
         }
 
         public function create () {
-            $columns = array ("uid", "name", "side", "sequence", "background", "fontColor");
-            $values = array ($_SESSION['uid'], $this->name, $this->side, $this->order, $this->background, $this->fontColor);
+            $columns = array ("uid", "name", "side", "sequence", "background", "fontColor", "font_normal", "font_header");
+            $values = array ($_SESSION['uid'], $this->name, $this->side, $this->order, $this->background, $this->fontColor, $this->font_normal, $this->font_header);
             $dao = new SQL ();
             $this->mid = $dao->insert ($this->table, $columns, $values);
             $this->message = "Module created!";
@@ -64,8 +64,8 @@
         }
         
         public function edit () {
-            $columns = array ("background", "fontColor");
-            $values = array ($this->background, $this->fontColor);
+            $columns = array ("background", "fontColor", "font_normal", "font_header");
+            $values = array ($this->background, $this->fontColor, $this->font_normal, $this->font_header);
             $dao = new SQL ();
             $success = $dao->update ($this->table, $columns, $values, $this->identifier, $this->mid);
             if ($success) {
@@ -135,12 +135,12 @@
         
         public function display_about_me ($user) { 
             $this->get(array("uid", "name"), array($user->uid, "about me")); ?>
-            <div class="module" id="about_me" style="background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;">
+            <div class="module" id="about_me" style="font-size:<?php echo $this->font_normal; ?>;background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;">
                 <?php if ($user->uid == $user->getUser()) : ?>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../user/edit.php'">Edit</button>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=about_me'">Personalize</button>
                 <?php endif; ?>
-                <h1 class="title">About Me</h1>
+                <h1 class="title" style="font-size:<?php echo $this->font_header; ?>">About Me</h1>
                 <table class="about_me">
                     <tr class="name">
                         <td class="bolden">Name:</td>
@@ -168,12 +168,12 @@
         
         public function display_contact ($user) {
             $this->get(array("uid", "name"), array($user->uid, "contact")); ?>
-            <div class="module" id="contact" style="style="background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;">
+            <div class="module" id="contact" style="font-size:<?php echo $this->font_normal; ?>;background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;">
                 <?php if ($user->uid == $user->getUser()) : ?>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../user/edit.php'">Edit</button>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=contact'">Personalize</button>
                 <?php endif; ?>
-                <h1 class="title">Contact</h1>
+                <h1 class="title" style="font-size:<?php echo $this->font_header; ?>">Contact</h1>
                 <table>
                     <tr>
                         <td class="bolden">Email:</td>
@@ -187,11 +187,11 @@
         public function display_friends ($user) {
             $friend = new user();
             $this->get(array("uid", "name"), array($user->uid, "friends")); ?>
-            <div class="module" id="friends" style="background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;"?>
+            <div class="module" id="friends" style="font-size:<?php echo $this->font_normal; ?>;background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <?php if ($user->uid == $user->getUser()) : ?>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=friends'">Personalize</button>
                 <?php endif; ?>
-                <h1 class="title">Friends</h1>
+                <h1 class="title" style="font-size:<?php echo $this->font_header; ?>">Friends</h1>
                     <?php foreach ($user->getFriends() as $id) : 
                         $friend->get("uid", $id);
                     ?>
@@ -211,11 +211,11 @@
         public function display_posts ($user) {
             global $post;
             $this->get(array("uid", "name"), array($user->uid, "posts")); ?>
-            <div class="module" id="posts" style="background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;"?>
+            <div class="module" id="posts" style="font-size:<?php echo $this->font_normal; ?>;background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <?php if ($user->uid == $user->getUser()) : ?>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=posts'">Personalize</button>
                 <?php endif; ?>
-                <h1 class="title">Posts</h1>
+                <h1 class="title" style="font-size:<?php echo $this->font_header; ?>">Posts</h1>
                 <table class='posts table table-striped table-hover'>
                     <tbody>
                     <?php foreach ($post->display($user->uid) as $p) : ?>
@@ -238,11 +238,11 @@
         public function display_schools ($user) {
             global $school; 
             $this->get(array("uid", "name"), array($user->uid, "schools")); ?>
-            <div class="module" id="schools" style="background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;"?>
+            <div class="module" id="schools" style="font-size:<?php echo $this->font_normal; ?>;background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <?php if ($user->uid == $user->getUser()) : ?>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=schools'">Personalize</button>
                 <?php endif; ?>
-                <h1 class="title">Schools</h1>
+                <h1 class="title" style="font-size:<?php echo $this->font_header; ?>">Schools</h1>
                 <table>
                     <?php foreach ($school->display($user->uid) as $s) : ?>
                     <tr>
@@ -302,11 +302,11 @@
         public function display_work ($user) {
             global $work;
             $this->get(array("uid", "name"), array($user->uid, "work")); ?>
-            <div class="module" id="work" style="background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;"?>
+            <div class="module" id="work" style="font-size:<?php echo $this->font_normal; ?>;background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;"?>
                 <?php if ($user->uid == $user->getUser()) : ?>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=work'">Personalize</button>
                 <?php endif; ?>
-                <h1 class="title">Work History</h1>
+                <h1 class="title" style="font-size:<?php echo $this->font_header; ?>">Work History</h1>
                 <table>
                     <?php foreach ($work->display($user->uid) as $w) : ?>
                     <tr>
@@ -365,12 +365,12 @@
         
         public function display_profile_picture ($user) {
             $this->get(array("uid", "name"), array($user->uid, "profile picture")); ?>
-            <div class="module" id="profile_picture" style="background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;">
+            <div class="module" id="profile_picture" style="font-size:<?php echo $this->font_normal; ?>;background<?php echo substr($this->background, 0, 1) == "#" ? ':'.$this->background : "-image: url('".$this->background."')"; ?>;color:<?php echo $this->fontColor; ?>;">
                 <?php if ($user->uid == $user->getUser()) : ?>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../user/edit.php'">Edit</button>
                     <button type="button" class="btn btn-primary" onclick="window.location.href='../profile/edit.php?m=profile_picture'">Personalize</button>
                 <?php endif; ?>
-                <h1 class="title"><?php echo $user->fname." ".$user->lname; ?></h1>
+                <h1 class="title" style="font-size:<?php echo $this->font_header; ?>"><?php echo $user->fname." ".$user->lname; ?></h1>
                 <table class="profile_picture">
                     <tr>
                         <td><img src="<?php echo $user->picture; ?>"></td>
