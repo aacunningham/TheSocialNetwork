@@ -2,6 +2,7 @@
 body {
     background: top right no-repeat;
     background-attachment:fixed;
+    padding-top: 70px
 }
 
 h1, h2, h3, h4 {
@@ -42,6 +43,14 @@ button {
 
 button.no-margin {
     margin: 0 !important;    
+}
+
+a.form-helper {
+    position: absolute;
+    right: 12px;
+    top: 4px;
+    font-size: 17px;
+    color: #6464a0;
 }
 
 .left {
