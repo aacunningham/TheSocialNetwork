@@ -197,10 +197,10 @@
                     ?>
                     <table class='friend'>
                     <tr>
-                        <td><a target="_self"><img src="<?php echo $friend->picture; ?>"></a></td>
+                        <td><a target="_self"><?php $this->display_picture($friend->picture); ?></a></td>
                     </tr>
                     <tr>
-                        <td><button class="btn btn-primary" href="profile.php?uid=<?php echo $id; ?>" target="_self"><?php echo $friend->fname." ".$friend->lname; ?></a><br>
+                        <td><button class="btn btn-primary" onclick="window.location.href='profile.php?u=<?php echo $id; ?>'"><?php echo $friend->fname." ".$friend->lname; ?></a><br>
                         <button type="button" class="btn btn-danger" onclick="deleteFn('../user/unFriend.php?f=<?php echo $id; ?>')">UnFriend</button></td>
                     </tr>
                     </table>
@@ -362,6 +362,14 @@
                 </table>
             </div>
         <?php }
+
+        public function display_picture ($picture) { ?>
+            <img src="<?php echo empty($picture) ? "../assets/icons/default.png" : $picture; ?>" class='img-responsive profile-image'>
+        <?php }
+        
+        public function display_thumbnail ($picture) { ?>
+            <img src="<?php echo empty($picture) ? "../assets/icons/default.png" : $picture; ?>" class='img-responsive profile-image thumb thumbnail'>
+        <?php }
         
         public function display_profile_picture ($user) {
             $this->get(array("uid", "name"), array($user->uid, "profile picture")); ?>
@@ -373,7 +381,7 @@
                 <h1 class="title" style="font-size:<?php echo $this->font_header; ?>"><?php echo $user->fname." ".$user->lname; ?></h1>
                 <table class="profile_picture">
                     <tr>
-                        <td><img src="<?php echo $user->picture; ?>"></td>
+                        <td><?php $this->display_picture ($user->picture); ?></td>
                     </tr>
                 </table>
             </div>

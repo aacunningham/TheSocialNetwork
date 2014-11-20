@@ -2,8 +2,8 @@
     require_once "../Layout/header.php"; 
     require_once "module.php";
     
-    if (!empty($_GET['uid'])) {
-        $user->uid = $_GET['uid'];
+    if (!empty($_GET['u'])) {
+        $user->uid = $_GET['u'];
         $user->get ();
     } elseif (!empty($_SESSION['uid'])) {
         //Get User Information

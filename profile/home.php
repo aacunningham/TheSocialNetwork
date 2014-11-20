@@ -65,7 +65,7 @@
             <?php foreach ($feed as $post) : 
                 $user->get ("uid", $post['uid'], true); ?>
             <tr>
-                <td><img class="thumb img-thumbnail" src="<?php echo $user->picture; ?>"></td>
+                <td><?php $module->display_thumbnail ($user->picture); ?></td>
                 <td><?php echo $user->fname." ".$user->lname; ?></td>
                 <td><?php echo $post['content']; ?></td>
                 <td><?php echo $post['dateTime']; ?></td>
@@ -87,7 +87,7 @@
             </tr>
             <?php foreach ($suggestions as $u) : ?>
             <tr>
-                <td><img class="thumb img-thumbnail" src="<?php echo $u->picture; ?>"></td>
+                <td><?php $module->display_thumbnail ($u->picture); ?></td>
                 <td><?php echo $u->fname." ".$u->lname; ?></td>
                 <td><button type="button" class="btn btn-primary" onclick="window.location.href='profile.php?u=<?php echo $u->uid; ?>'">View</button></td>
             </tr>
@@ -108,7 +108,7 @@
             </tr>
             <?php foreach ($popular as $u) : ?>
             <tr>
-                <td><img class="thumb img-thumbnail" src="<?php echo $u->picture; ?>"></td>
+                <td><?php $module->display_thumbnail ($u->picture); ?></td>
                 <td><?php echo $u->fname." ".$u->lname; ?></td>
                 <td><button type="button" class="btn btn-primary" onclick="window.location.href='profile.php?u=<?php echo $u->uid; ?>'">View</button></td>
             </tr>
@@ -129,7 +129,7 @@
             </tr>
             <?php foreach ($notFriends as $u) : ?>
             <tr>
-                <td><img class="thumb img-thumbnail" src="<?php echo $u['picture']; ?>"></td>
+                <td><?php $module->display_thumbnail($u['picture']); ?></td>
                 <td><?php echo $u['fname']." ".$u['lname']; ?></td>
                 <td><button type="button" class="btn btn-primary" onclick="window.location.href='profile.php?u=<?php echo $u['uid']; ?>'">View</button></td>
             </tr>
