@@ -55,6 +55,7 @@
                 </button>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<?php if (!empty ($_SESSION['uid'])) { ?>
                 <ul class="nav navbar-nav">
                     <form action="../user/friends.php" method="POST" class="navbar-form navbar-left" role="search">
                         <div class="form-group">
@@ -63,7 +64,9 @@
                         <button class="btn btn-default no-margin" name="submit" type="submit" value="submit">Search</button>
                     </form>
                 </ul>
+<?php } ?>
                 <ul class="nav navbar-nav navbar-right">
+<?php if (!empty ($_SESSION['uid'])) { ?>
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="#" data-toggle="dropdown">Go to... <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
@@ -78,12 +81,27 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">User <span class="caret"></span></a>
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown"><?php
+
+    if (!empty ($_SESSION['uid'])) {$user = new user (); echo $user->fname.' '.$user->lname;} else {echo "User";}
+
+                        ?><span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="../user/edit.php">Edit Profile</a></li>
                             <li><a href="../user/logout.php">Logout</a></li>
                         </ul>
                     </li>
+<?php } else { ?>
+                    <form action="../user/login.php" method="POST" class="navbar-form navbar-right" role="form">
+                        <div class="form-group">
+                            <input type="email" name="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control" placeholder="Password">
+                        </div>
+                        <button class="btn btn-success no-margin" type="submit" name="submit" value="submit" style="margin-right:5px !important">Login</button>
+                    </form>
+<?php } ?>
                 </ul>
             </div>
         </div>
