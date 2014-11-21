@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php 
+
+require_once "../layout/header.php";
+?>
 <html>
     <head>
 		<title>Photo Uploads</title>
@@ -16,8 +20,9 @@
                 <form enctype="multipart/form-data" action="" method="post">
                     Use Jpeg,Png,Jpg format ONLY. Image Size Should Be Less Than 2000KB.
                     <hr/>
-                    <div id="filediv"><input name="file[]" type="file" id="file"/></div><br/>
-           
+
+                    <div id="filediv" style="display: inline;"><input name="file[]" type="file" id="file"/></div>
+                    <br id="test">
                     <input type="button" id="add_more" class="upload" value="Add More Files"/>
                     <input type="submit" value="Upload File" name="submit" id="upload" class="upload"/>
                 </form>
