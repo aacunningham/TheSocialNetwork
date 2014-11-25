@@ -8,6 +8,7 @@
     <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
     <script src="../Layout/js/jquery-1.11.1.min.js"></script>
     <script src="../Layout/js/bootstrap.min.js"></script>
+    <script src="../Layout/js/typeahead.bundle.min.js"></script>
 <?php
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
@@ -43,6 +44,7 @@
     <?php }
 
     function nav_bar () { ?>
+
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -59,11 +61,96 @@
                 <ul class="nav navbar-nav">
                     <form action="../user/friends.php" method="POST" class="navbar-form navbar-left" role="search">
                         <div class="form-group">
-                            <input name="search" class="form-control" type="text" placeholder="Search Users"></input>
+                            <input name="search" class="form-control" id="navbar-search-input" type="text" placeholder="Search Users" autocomplete="off" data-provide="typeahead"></input>
+                        	<button class="btn btn-default no-margin" name="submit" id="navbar-btn-search" type="submit" value="submit">Search</button>
                         </div>
-                        <button class="btn btn-default no-margin" name="submit" type="submit" value="submit">Search</button>
                     </form>
                 </ul>
+                <script>
+                var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+  'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+  'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+  'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+  'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+  'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+  'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+  'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+];	
+	            	var substringMatcher = function(strs) {
+				  		return function findMatches(q, cb) {
+					    var matches, substrRegex;
+						    // an array that will be populated with substring matches
+						    matches = [];
+						 
+						    // regex used to determine if a string contains the substring `q`
+						    substrRegex = new RegExp(q, 'i');
+						 
+						    // iterate through the pool of strings and for any string that
+						    // contains the substring `q`, add it to the `matches` array
+						    $.each(strs, function(i, str) {
+						      if (substrRegex.test(str)) {
+						        // the typeahead jQuery plugin expects suggestions to a
+						        // JavaScript object, refer to typeahead docs for more info
+						        matches.push({ value: str });
+						      }
+						    });
+						 
+						    cb(matches);
+					  };
+					};
+					
+                 
+			    	$(document).ready(function(){
+			    		var dispNames = [];
+			    		var res_count = 0;   
+			    		$("#navbar-search-input").keyup(function(){
+			    			// Because assets/functions.php has some javascript in it
+			    			// We can't directly expect back a JSON element and need to parseout
+			    			// that bit of code then parse the remaining string as JSON
+				    		$.ajax({	//TODO - add some debounce to this action to save bandwidth
+					            type : 'POST',
+				    			url : '../user/search_res.php',
+					            dataType: 'text',
+					            data: {
+					                search : $("#navbar-search-input").val()
+					            },
+					            success:function (response) {
+					                dispNames = [];
+					                res_count = 0;
+					                var data_raw = response.split("/script>\r\n")[1];	//get JSON string
+					                var data = JSON.parse(data_raw);
+					                
+					                //console log for debugging
+					                if( data['search_result1'] !== undefined ){
+					                	console.log(data['search_result1']);
+					                	res_count += 1;
+					                }
+					                if( data['search_result2'] !== undefined ){
+					                	console.log(data['search_result2']);
+					                	res_count += 1;
+					                }
+					                
+					                //
+				            	},
+				            	error:function(){
+				            		$("#navbar-btn-search").html( 'nope' );
+				            	}  
+				       		});	//ajax
+			    		});//keyup
+			    		
+			   			$('#navbar-search-input').typeahead({
+						  hint: true,
+						  highlight: true,
+						  minLength: 1
+						},
+						{
+						  name: 'friend_search',
+						  displayKey: 'value',
+						  source: substringMatcher(states)
+						});
+			    	});	//document ready
+    			</script>
 <?php } ?>
                 <ul class="nav navbar-nav navbar-right">
 <?php if (!empty ($_SESSION['uid'])) { ?>
