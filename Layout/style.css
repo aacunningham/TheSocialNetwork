@@ -230,3 +230,9 @@ img.thumb {
 img.profile-image {
     
 }
+
+/* nav-bar dropdown suggestions */
+#nav-suggestions{
+	background-color: #ADCEFF;
+	visibility: hidden;
+}

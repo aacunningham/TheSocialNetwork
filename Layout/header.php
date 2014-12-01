@@ -61,48 +61,14 @@
                 <ul class="nav navbar-nav">
                     <form action="../user/friends.php" method="POST" class="navbar-form navbar-left" role="search">
                         <div class="form-group">
-                            <input name="search" class="form-control" id="navbar-search-input" type="text" placeholder="Search Users" autocomplete="off" data-provide="typeahead"></input>
+                            <input name="search" class="form-control" id="navbar-search-input" type="text" placeholder="Search Users" autocomplete="off"></input>
+                            <div id="nav-suggestions" >aoeu</div>
                         	<button class="btn btn-default no-margin" name="submit" id="navbar-btn-search" type="submit" value="submit">Search</button>
                         </div>
                     </form>
                 </ul>
                 <script>
-                var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-  'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
-  'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-  'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-  'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-  'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-  'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-  'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-  'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-];	
-	            	var substringMatcher = function(strs) {
-				  		return function findMatches(q, cb) {
-					    var matches, substrRegex;
-						    // an array that will be populated with substring matches
-						    matches = [];
-						 
-						    // regex used to determine if a string contains the substring `q`
-						    substrRegex = new RegExp(q, 'i');
-						 
-						    // iterate through the pool of strings and for any string that
-						    // contains the substring `q`, add it to the `matches` array
-						    $.each(strs, function(i, str) {
-						      if (substrRegex.test(str)) {
-						        // the typeahead jQuery plugin expects suggestions to a
-						        // JavaScript object, refer to typeahead docs for more info
-						        matches.push({ value: str });
-						      }
-						    });
-						 
-						    cb(matches);
-					  };
-					};
-					
-                 
 			    	$(document).ready(function(){
-			    		var dispNames = [];
 			    		var res_count = 0;   
 			    		$("#navbar-search-input").keyup(function(){
 			    			// Because assets/functions.php has some javascript in it
@@ -131,24 +97,25 @@
 					                	res_count += 1;
 					                }
 					                
-					                //
+					                //show the suggestions bar
+					                console.log("res_count: " + res_count);
+					                if( res_count >= 1) {
+					                	$("#nav-suggestions").css('visibility', 'visible');
+					                	//build suggestions bar list
+					                	var suggest_out = data['search_result1']['fname'] + " " + data['search_result1']['lname'];
+					                	if( res_count >= 2) {
+					                		suggest_out = suggest_out + "<br>" + data['search_result2']['fname'] + " " + data['search_result2']['lname'];
+					                	}
+					                	$("#nav-suggestions").html(suggest_out);
+					                } else {
+										$("#nav-suggestions").css('visibility', 'hidden');					                		
+					                }
 				            	},
 				            	error:function(){
 				            		$("#navbar-btn-search").html( 'nope' );
 				            	}  
 				       		});	//ajax
 			    		});//keyup
-			    		
-			   			$('#navbar-search-input').typeahead({
-						  hint: true,
-						  highlight: true,
-						  minLength: 1
-						},
-						{
-						  name: 'friend_search',
-						  displayKey: 'value',
-						  source: substringMatcher(states)
-						});
 			    	});	//document ready
     			</script>
 <?php } ?>
