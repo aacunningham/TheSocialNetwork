@@ -62,7 +62,10 @@
                     <form action="../user/friends.php" method="POST" class="navbar-form navbar-left" role="search">
                         <div class="form-group">
                             <input name="search" class="form-control" id="navbar-search-input" type="text" placeholder="Search Users" autocomplete="off"></input>
-                            <div id="nav-suggestions" >aoeu</div>
+                            <div id="nav-suggestions" ></div>
+                            <div id="nav-suggestions1" ></div>
+                            <div id="nav-suggestions2" ></div>
+                            <div id="nav-suggestions3" ></div>
                         	<button class="btn btn-default no-margin" name="submit" id="navbar-btn-search" type="submit" value="submit">Search</button>
                         </div>
                     </form>
@@ -99,16 +102,35 @@
 					                
 					                //show the suggestions bar
 					                console.log("res_count: " + res_count);
-					                if( res_count >= 1) {
-					                	$("#nav-suggestions").css('visibility', 'visible');
-					                	//build suggestions bar list
-					                	var suggest_out = data['search_result1']['fname'] + " " + data['search_result1']['lname'];
-					                	if( res_count >= 2) {
-					                		suggest_out = suggest_out + "<br>" + data['search_result2']['fname'] + " " + data['search_result2']['lname'];
-					                	}
-					                	$("#nav-suggestions").html(suggest_out);
+					                if( res_count >= 1 ){
+					                	var suggest_out1 = data['search_result1']['fname'] + " " + data['search_result1']['lname'];
+					                	$("#nav-suggestions1").html(suggest_out1);
+					                	$("#nav-suggestions1").css('visibility', 'visible');
+					                	$("#nav-suggestions1").click(function(){
+					                		 redirect ("../profile/profile.php?u="+data['search_result1']['uid']);
+					                	});
 					                } else {
-										$("#nav-suggestions").css('visibility', 'hidden');					                		
+					                	$("#nav-suggestions1").css('visibility', 'hidden');
+					                }
+					                if( res_count >= 2 ){
+					                	var suggest_out2 = data['search_result2']['fname'] + " " + data['search_result2']['lname'];
+					                	$("#nav-suggestions2").html(suggest_out2);
+					                	$("#nav-suggestions2").css('visibility', 'visible');
+					                	$("#nav-suggestions2").click(function(){
+					                		 redirect ("../profile/profile.php?u="+data['search_result2']['uid']);
+					                	});
+					                } else {
+					                	$("#nav-suggestions2").css('visibility', 'hidden');
+					                }
+					                if( res_count >= 3 ){
+					                	var suggest_out3 = data['search_result3']['fname'] + " " + data['search_result3']['lname'];
+					                	$("#nav-suggestions3").html(suggest_out3);
+					                	$("#nav-suggestions3").css('visibility', 'visible');
+					                	$("#nav-suggestions3").click(function(){
+					                		 redirect ("../profile/profile.php?u="+data['search_result3']['uid']);
+					                	});
+					                } else {
+					                	$("#nav-suggestions3").css('visibility', 'hidden');
 					                }
 				            	},
 				            	error:function(){

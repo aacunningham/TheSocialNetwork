@@ -232,7 +232,17 @@ img.profile-image {
 }
 
 /* nav-bar dropdown suggestions */
-#nav-suggestions{
+#nav-suggestions1{
+	background-color: #ADCEFF;
+	visibility: hidden;
+}
+
+#nav-suggestions2{
+	background-color: #ADCEFF;
+	visibility: hidden;
+}
+
+#nav-suggestions3{
 	background-color: #ADCEFF;
 	visibility: hidden;
 }
