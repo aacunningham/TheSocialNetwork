@@ -2,8 +2,8 @@
     if (session_status() == PHP_SESSION_NONE) {
         session_start(); //for login and logout using session vars
     }
-    require_once "/assets/functions.php";
-    require_once "/sql/sql.php";
+    require_once "../assets/functions.php";
+    require_once "../sql/sql.php";
 
     class user {
         //properties 
