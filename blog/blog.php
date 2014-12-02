@@ -32,13 +32,21 @@
             return $results; //useful for later fxns
         }
         
-        public function create () { //saves a new blog in the SQL
+        public function create ($uid=NULL) { //saves a new blog in the SQL
+            if (empty($uid)) $uid = $_SESSION['uid'];
             $columns = array ("uid", "title", "content", "cid", "fid");
-            $values = array ($_SESSION['uid'], $this->title, $this->content, $this->cid, $this->fid);
+            $values = array ($uid, $this->title, $this->content, $this->cid, $this->fid);
            
             $dao = new SQL (); //data access object
             $this->bid = $dao->insert ($this->table, $columns, $values); //insert to SQL
-            $this->message = "Blog created!";
+            if (!empty($this->bid)) {
+                $this->message = "Blog created!";
+                return true;
+            } else {
+                $this->message = "Oops - an error occurred.";
+                return false;
+            }
+            
         }
         
         public function edit () { //updates a blog in the SQL
@@ -50,8 +58,10 @@
            
             if ($success) {
                 $this->message = "Blog updated!";
+                return true;
             } else {
                 $this->message = "Oops - an error occurred.";
+                return false;
             }
         }
         
@@ -61,8 +71,10 @@
            
             if ($success) {
                 $this->message = "Blog deleted!";
+                return true;
             } else {
                 $this->message = "Oops - an error occurred.";
+                return false;
             }
         }
         
@@ -71,11 +83,12 @@
             return $dao->selectAll($this->table);
         }
         
-        public function listBlogs ($fid=NULL) { //list all Blogs for this user in this folder (or, if none provided, for that user in all folders)
+        public function listBlogs ($fid=NULL, $uid=NULL) { //list all Blogs for this user in this folder (or, if none provided, for that user in all folders)
+            if (empty($uid)) $uid = $_SESSION['uid'];
             if (!empty($fid)) {
-                return $this->get (array ('uid', 'fid'), array ($_SESSION['uid'], $fid));
+                return $this->get (array ('uid', 'fid'), array ($uid, $fid));
             } else {
-                return $this->get ('uid', $_SESSION['uid'], false);
+                return $this->get ('uid', $uid, false);
             }
             
         }
@@ -91,8 +104,8 @@
             return $blogs;
         }
         
-        public function display ($fid) { //returns list of blogs for this user in this folder for display
-            return $this->sortBlogs ($this->listBlogs($fid));
+        public function display ($fid, $uid=NULL) { //returns list of blogs for this user in this folder for display
+            return $this->sortBlogs ($this->listBlogs($fid, $uid));
         }
         
         

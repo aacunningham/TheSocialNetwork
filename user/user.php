@@ -2,8 +2,8 @@
     if (session_status() == PHP_SESSION_NONE) {
         session_start(); //for login and logout using session vars
     }
-    require_once "../assets/functions.php";
-    require_once "../sql/sql.php";
+    require_once "/assets/functions.php";
+    require_once "/sql/sql.php";
 
     class user {
         //properties 
@@ -57,27 +57,34 @@
             $dao = new SQL (); //data access object
             $this->uid = $dao->insert ($this->table, $columns, $values); //send insert to SQL
             $this->create_default ($this->uid);
-            $this->message = "User created!";
+            if (!empty($this->uid)) {
+                $this->message = "User created!";
+                return true;
+            } else {
+                $this->message = "Oops - an error occurred.";
+                return false;
+            }
         } 
 
         //Create default modules on user creation
-        public function create_default ($userid) {
-            $columns = array ("uid", "name", "side", "sequence", "background", "fontColor");
-            $values = array ($userid, "about me", 0, 0, "#FF00FF", "#000000");
+        public function create_default ($uid) {
             $dao = new SQL ();
+            $columns = array ("uid", "name", "side", "sequence", "background", "fontColor");
+            $values = array ($uid, "about me", 0, 0, "#FF00FF", "#000000");
             $dao->insert ("modules", $columns, $values);
-            $values = array ($userid, "contact", 1, 0, "#FF00FF", "#000000");
+            $values = array ($uid, "contact", 1, 0, "#FF00FF", "#000000");
             $dao->insert ("modules", $columns, $values);
-            $values = array ($userid, "schools", 1, 0, "#FF00FF", "#000000");
+            $values = array ($uid, "schools", 1, 0, "#FF00FF", "#000000");
             $dao->insert ("modules", $columns, $values);
-            $values = array ($userid, "work", 1, 0, "#FF00FF", "#000000");
+            $values = array ($uid, "work", 1, 0, "#FF00FF", "#000000");
             $dao->insert ("modules", $columns, $values);
-            $values = array ($userid, "friends", 1, 0, "#FF00FF", "#000000");
+            $values = array ($uid, "friends", 1, 0, "#FF00FF", "#000000");
             $dao->insert ("modules", $columns, $values);
-            $values = array ($userid, "posts", 1, 0, "#FF00FF", "#000000");
+            $values = array ($uid, "posts", 1, 0, "#FF00FF", "#000000");
             $dao->insert ("modules", $columns, $values);
-            $values = array ($userid, "profile background", 1, 0, "#FFFFFF", "#000000");
+            $values = array ($uid, "profile background", 1, 0, "#FFFFFF", "#000000");
             $dao->insert ("modules", $columns, $values);
+            return true;
         }
 
         public function edit () { //updates a user in the SQL
@@ -89,17 +96,20 @@
             
             if ($success) {
                 $this->message = "User updated!";
+                return true;
             } else {
                 $this->message = "Oops - an error occurred.";
+                return false;
             }
         }
 		
-		public function update_password()	{ //update the user password in SQL
+		public function update_password($uid=NULL) { //update the user password in SQL
+		    if (empty($uid)) $uid = $_SESSION['uid'];
 			$columns = array("password");
 			$values = array($this->password);
 			
 			$dao = new SQL();
-			$success = $dao->update( $this->table, $columns, $values, $this->identifier, $_SESSION['uid']);
+			$success = $dao->update($this->table, $columns, $values, $this->identifier, $uid);
 			
             if ($success) {
                 $this->message = "Password changed!";
@@ -117,11 +127,14 @@
                 if ($user_success) {
                     $this->message = "User deleted!";
                     $this->logout ();
+                    return true;
                 } else {
                     $this->message = "User could not be deleted.";
+                    return false;
                 }
             } else {
                 $this->message = "Modules could not be deleted.";
+                return false;
             }
         }
         
@@ -130,12 +143,13 @@
             $result = $dao->select ($this->table, "email", $this->email); //get their password by their email
             if (empty($result)) {
                 $this->message = "Error - email not in database.";
-                return;
+                return false;
             } 
             if (password_verify($this->password, $result[0]["password"])) { //if their password is valid
                 $_SESSION['uid'] = $result[0]["uid"]; //save their uid in session for use everywhere
                 $_SESSION['bLoggedIn'] = true;
                 $this->message = "User logged in!"; 
+                return true;
             }
         }
         
@@ -143,13 +157,14 @@
             $_SESSION['uid'] = NULL; //nullify their session info
             $_SESSION['bLoggedIn'] = NULL;
             $this->message = "User logged out!";
+            return true;
         }
 		
 		public function forgot_password() { //start the password reset process
 			$dao = new SQL();
 			$result = $dao->select ($this->table, "email", $this->email); //get their password by their email
 
-			if( empty($result)){
+			if(empty($result)){
 				$this->message = "User not found";
 				return FALSE;
 			} else {
@@ -159,16 +174,16 @@
 			}
 		}
 
-		public function get_challenge_question() {
+		public function get_challenge_question($uid=NULL) {
+		    if (empty($uid)) $uid = $_SESSIOn['uid'];
 			$dao = new SQL();
-            $result = $dao->select ("security_questions", "uid", $_SESSION['uid']); //go to the security table and get their challenge question
+            $result = $dao->select ("security_questions", "uid", $uid); //go to the security table and get their challenge question
             if (empty($result)) {
                 $this->message = "Oops - an error occurred.";
-                return;
             } else {
-                return $result;
                 $this->message = "Found Question"; 
             }		
+            return $result;
 		}
         
         public function loggedIn () { //check if a valid user is logged in
@@ -186,6 +201,7 @@
             $dao = new SQL ();
             $dao->insert ($this->friends, array ("uid1", "uid2"), array ($this->uid, $user->uid));
             $this->message = "Friend added!";
+            return true;
         }
         
         public function unFriend ($email) {
@@ -194,6 +210,7 @@
             $dao = new SQL ();
             $dao->delete ($this->friends, array ("uid1", "uid2"), array ($this->uid, $user->uid));
             $this->message = "Friend removed!";
+            return true;
         }
         
         public function search ($search) {

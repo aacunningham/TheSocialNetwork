@@ -1,0 +1,68 @@
+11-25-14 Jennifer
+note - you have to remove the .. from the front of paths for it to work.
+also, javascript will show up between the command and the results, because it prints out the javascript functions at the end
+of the common functions php file.
+
+C:\Users\stell_000\Documents\GitHub\TheSocialNetwork>phpunit tests/PostTest.php
+
+PHPUnit 3.7.21 by Sebastian Bergmann.
+
+.23.......
+
+Time: 0 seconds, Memory: 1.75Mb
+
+OK (8 tests, 8 assertions)
+
+C:\Users\stell_000\Documents\GitHub\TheSocialNetwork>phpunit tests/BlogTest.php
+
+PHPUnit 3.7.21 by Sebastian Bergmann.
+
+........
+
+Time: 0 seconds, Memory: 1.75Mb
+
+OK (8 tests, 8 assertions)
+
+C:\Users\stell_000\Documents\GitHub\TheSocialNetwork>phpunit tests/FolderTest.ph
+p
+
+PHPUnit 3.7.21 by Sebastian Bergmann.
+
+........
+
+Time: 0 seconds, Memory: 1.75Mb
+
+OK (8 tests, 8 assertions)
+
+C:\Users\stell_000\Documents\GitHub\TheSocialNetwork>phpunit tests/CategoryTest.
+php
+
+PHPUnit 3.7.21 by Sebastian Bergmann.
+
+.......
+
+Time: 0 seconds, Memory: 1.75Mb
+
+OK (7 tests, 7 assertions)
+
+C:\Users\stell_000\Documents\GitHub\TheSocialNetwork>phpunit tests/SchoolTest.ph
+p
+
+PHPUnit 3.7.21 by Sebastian Bergmann.
+
+.......
+
+Time: 0 seconds, Memory: 1.75Mb
+
+OK (8 tests, 8 assertions)
+
+C:\Users\stell_000\Documents\GitHub\TheSocialNetwork>phpunit tests/WorkTest.php
+
+PHPUnit 3.7.21 by Sebastian Bergmann.
+
+........
+
+Time: 0 seconds, Memory: 1.75Mb
+
+OK (8 tests, 8 assertions)
+

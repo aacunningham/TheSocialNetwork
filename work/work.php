@@ -33,13 +33,20 @@
             return $results;
         }
         
-        public function create () { //create a new Work in the SQL
+        public function create ($uid=NULL) { //create a new Work in the SQL
+            if (empty($uid)) $uid = $_SESSION['uid'];
             $columns = array ("uid", "company", "position", "address", "city", "state", "zipCode", "startDate", "endDate", "phone", "boss", "duties");
-            $values = array ($_SESSION['uid'], $this->company, $this->position, $this->address, $this->city, $this->state, $this->zipCode, $this->startDate, $this->endDate, $this->phone, $this->boss, $this->duties);
+            $values = array ($uid, $this->company, $this->position, $this->address, $this->city, $this->state, $this->zipCode, $this->startDate, $this->endDate, $this->phone, $this->boss, $this->duties);
            
             $dao = new SQL (); //data access object
             $this->wid = $dao->insert ($this->table, $columns, $values); //send insert command
-            $this->message = "Work history created!";
+            if (!empty($this->wid)) {
+                $this->message = "Work history created!";
+                return true;
+            } else {
+                $this->message = "Oops - an error occurred";
+                return false;
+            }
         } 
         
         public function edit () { //update a Work in the SQL
@@ -51,8 +58,10 @@
            
             if ($success) {
                 $this->message = "Work history updated!";
+                return true;
             } else {
                 $this->message = "Oops - an error occurred.";
+                return false;
             }
         }
         
@@ -62,8 +71,10 @@
            
             if ($success) {
                 $this->message = "Work history deleted!";
+                return true;
             } else {
                 $this->message = "Oops - an error occurred.";
+                return false;
             }
         }
         

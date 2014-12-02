@@ -33,11 +33,11 @@
     $school = new school ();
     $work = new work ();
 
-    if (!$user->loggedIn() and $_SERVER['PHP_SELF'] != "/user/login.php" 
-    	and $_SERVER['PHP_SELF'] != "/user/new.php" 
-    	and $_SERVER['PHP_SELF'] != "/tsn_security/forgot_password.php"
-		and $_SERVER['PHP_SELF'] != "/tsn_security/password_challenge.php"
-		and $_SERVER['PHP_SELF'] != "/user/change_password.php") { ?>
+    if (!$user->loggedIn() and $_SERVER['PHP_SELF'] != $subdir."user/login.php" 
+    	and $_SERVER['PHP_SELF'] != $subdir."user/new.php" 
+    	and $_SERVER['PHP_SELF'] != $subdir."tsn_security/forgot_password.php"
+		and $_SERVER['PHP_SELF'] != $subdir."tsn_security/password_challenge.php"
+		and $_SERVER['PHP_SELF'] != $subdir."user/change_password.php") { ?>
         <script type="text/javascript">
             redirect ("../user/login.php");
         </script>

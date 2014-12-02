@@ -40,7 +40,13 @@
             
             $dao = new SQL (); //data access object
             $this->cid = $dao->insert ($this->table, $columns, $values); //send insert command
-            $this->message = "Category created!";
+            if (!empty($this->cid)) {
+                $this->message = "Category created!";
+                return true;
+            } else {
+                $this->message = "Oops - an error occurred.";
+                return false;
+            }
         } 
         
         public function edit () { //Update a category in the SQL
@@ -52,8 +58,10 @@
             
             if ($success) {
                 $this->message = "Category updated!";
+                return true;
             } else {
                 $this->message = "Oops - an error occurred.";
+                return false;
             }
         }
         
@@ -63,8 +71,10 @@
             
             if ($success) {
                 $this->message = "Category deleted!";
+                return true;
             } else {
                 $this->message = "Oops - an error occurred.";
+                return false;
             }
         }
         

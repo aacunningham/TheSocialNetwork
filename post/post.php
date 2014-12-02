@@ -32,14 +32,20 @@
             return $results;
         }
         
-        public function create () { //create a new post in the SQL
+        public function create ($uid=NULL) { //create a new post in the SQL
+            if (empty($uid)) $uid = $_SESSION['uid'];
             $columns = array ("uid", "content");
-            $values = array ($_SESSION['uid'], $this->content);
+            $values = array ($uid, $this->content);
             
             $dao = new SQL (); //data access object
             $this->pid = $dao->insert ($this->table, $columns, $values); //send insert command
-            $this->message = "Post created!";
-        
+            if (!empty($this->pid)) {
+                $this->message = "Post created!";
+                return true;
+            } else {
+                $this->message = "Oops - an error occurred.";
+                return false;
+            }
         }
         
         public function delete () { //delete a row in the SQL
@@ -48,8 +54,10 @@
             
             if ($success) {
                 $this->message = "Post deleted!";
+                return true;
             } else {
                 $this->message = "Oops - an error occurred.";
+                return false;
             }
         }
         
@@ -62,8 +70,10 @@
             
             if ($success) {
                 $this->message = "Post updated!";
+                return true;
             } else {
                 $this->message = "Oops - an error occurred.";
+                return false;
             }
         }
         

@@ -33,13 +33,21 @@
             return $results;
         }
         
-        public function create () { //create a new School in the SQL
+        public function create ($uid=NULL) { //create a new School in the SQL
+            if (empty($uid)) $uid = $_SESSION['uid'];
             $columns = array ("uid", "name", "type", "address", "city", "state", "zipCode", "startDate", "endDate", "major", "minor", "degree");
-            $values = array ($_SESSION['uid'], $this->name, $this->type, $this->address, $this->city, $this->state, $this->zipCode, $this->startDate, $this->endDate, $this->major, $this->minor, $this->degree);
+            $values = array ($uid, $this->name, $this->type, $this->address, $this->city, $this->state, $this->zipCode, $this->startDate, $this->endDate, $this->major, $this->minor, $this->degree);
            
             $dao = new SQL (); //data access object
             $this->sid = $dao->insert ($this->table, $columns, $values); //send insert command
-            $this->message = "School created!";
+            if (!empty($this->sid)) {
+                $this->message = "School created!"; 
+                return true;
+            } else {
+                $this->message = "Oops - an error occurred.";
+                return false;
+            }
+            
         } 
         
         public function edit () { //update a School in the SQL
@@ -51,8 +59,10 @@
            
             if ($success) {
                 $this->message = "School updated!";
+                return true;
             } else {
                 $this->message = "Oops - an error occurred.";
+                return false;
             }
         }
         
@@ -62,8 +72,10 @@
            
             if ($success) {
                 $this->message = "School deleted!";
+                return true;
             } else {
                 $this->message = "Oops - an error occurred.";
+                return false;
             }
         }
         
@@ -73,7 +85,7 @@
         }
         
         public function listSchools ($uid=NULL) { //list all schools for this user
-            $uid = empty($uid) ? $_SESSION['uid'] : $uid;
+            if(empty($uid)) $uid = $_SESSION['uid'];
             return $this->get ('uid', $uid, false);
         }
         

@@ -34,13 +34,21 @@
             return $results;
         }
         
-        public function create () { //create a new folder in the SQL
+        public function create ($uid=NULL) { //create a new folder in the SQL
+            if (empty($uid)) $uid = $_SESSION['uid'];
             $columns = array ("uid", "name");
-            $values = array ($_SESSION['uid'], $this->name);
+            $values = array ($uid, $this->name);
            
             $dao = new SQL (); //data access object
             $this->fid = $dao->insert ($this->table, $columns, $values); //send insert command
-            $this->message = "Folder created!";
+            if (!empty($this->fid)) {
+                $this->message = "Folder created!";
+                return true;  
+            } else {
+                $this->message = "Oops - an error occurred.";
+                return false;  
+            }
+            
         } 
         
         public function edit () { //update a folder in the SQL
@@ -52,8 +60,10 @@
            
             if ($success) {
                 $this->message = "Folder updated!";
+                return true;  
             } else {
                 $this->message = "Oops - an error occurred.";
+                return false;  
             }
         }
         
@@ -63,8 +73,10 @@
            
             if ($success) {
                 $this->message = "Folder deleted!";
+                return true;  
             } else {
                 $this->message = "Oops - an error occurred.";
+                return false;  
             }
         }
         
@@ -73,8 +85,9 @@
             return $dao->selectAll($this->table); //select all columns and rows in the table
         }
         
-        public function listFolders () { //list all folders for this user
-            return $this->get ('uid', $_SESSION['uid'], false);
+        public function listFolders ($uid=NULL) { //list all folders for this user
+            if (empty($uid)) $uid = $_SESSION['uid'];
+            return $this->get ('uid', $uid, false);
         }
         
         public function sortFolders ($folders) { //sorts folders by name for display
@@ -88,14 +101,9 @@
             return $folders;
         }
         
-        public function display () { //returns list of this user's folders sorted by name for display
-            return $this->sortFolders ($this->listFolders());
+        public function display ($uid=NULL) { //returns list of this user's folders sorted by name for display
+            return $this->sortFolders ($this->listFolders($uid));
         }
-        
-        
-        
-        
-        
         
     }
 ?>
