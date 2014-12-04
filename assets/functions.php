@@ -74,18 +74,26 @@
     }
     
     function deleteFolder ($dir) { //deletes a folder by directory (and all its contents)
-      if (is_dir($dir)) {
-        $objects = scandir($dir);
-        foreach ($objects as $object) {
-          if ($object != "." && $object != "..") {
-            if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
-          }
+        if (!file_exists($dir)) {
+            return true;
         }
-        reset($objects);
-        rmdir($dir);
-      }
-    }
 
+        if (!is_dir($dir)) {
+            return unlink($dir);
+        }
+
+        foreach (scandir($dir) as $item) {
+            if ($item == '.' || $item == '..') {
+                continue;
+            }
+
+            if (!deleteFolder($dir . "/" . $item)) {
+                return false;
+            }
+        }
+
+        return rmdir ($dir);
+    }
 
 ?>
     <script type="text/javascript">
