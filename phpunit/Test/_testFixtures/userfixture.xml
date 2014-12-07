@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="thesocialnetwork">
+  <table_data name="users">
+		<row>
+			<field name="uid">1</field>
+			<field name="fname">test1fname</field>
+			<field name="lname">test1lname</field>
+			<field name="email">test1@example.com</field>
+			<field name="password">$2y$10$VbZYzwe142OvwuzIuU57G.68L6CwzPwT3aVoXo66831WZkcZY8Vqy</field>
+			<field name="picture"></field>
+			<field name="interests">interest 1</field>
+			<field name="hobbies">hobbies 1</field>
+			<field name="bio">bio 1</field>
+			<field name="rel">rel 1</field>
+			<field name="privacy">Friends only</field>
+		</row>
+		<row>
+			<field name="uid">2</field>
+			<field name="fname">test2fname</field>
+			<field name="lname">test2lname</field>
+			<field name="email">test2@example.com</field>
+			<field name="password">$2y$10$VbZYzwe142OvwuzIuU57G.68L6CwzPwT3aVoXo66831WZkcZY8Vqy</field>
+			<field name="picture"></field>
+			<field name="interests">interest 2</field>
+			<field name="hobbies">hobbies 2</field>
+			<field name="bio">bio 2</field>
+			<field name="rel">rel 2</field>
+			<field name="privacy">Friends only</field>
+		</row>
+		<row>
+			<field name="uid">3</field>
+			<field name="fname">test3fname</field>
+			<field name="lname">test3lname</field>
+			<field name="email">test3@example.com</field>
+			<field name="password">$2y$10$VbZYzwe142OvwuzIuU57G.68L6CwzPwT3aVoXo66831WZkcZY8Vqy</field>
+			<field name="picture"></field>
+			<field name="interests">interest 3</field>
+			<field name="hobbies">hobbies 3</field>
+			<field name="bio">bio 3</field>
+			<field name="rel">rel 3</field>
+			<field name="privacy">Friends only</field>
+		</row>
+
+	</table_data>
+</database>
+</mysqldump>
