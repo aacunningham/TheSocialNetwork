@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php 
-
-require_once "../layout/header.php";
+    require_once "../Layout/header.php";
 ?>
 <html>
     <head>
