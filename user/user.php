@@ -138,7 +138,7 @@
             }
         }
         
-        public function login () { //log the user into the system
+        /*public function login () { //log the user into the system
             $dao = new SQL ();  //data access object
             $result = $dao->select ($this->table, "email", $this->email); //get their password by their email
             if (empty($result)) {
@@ -151,7 +151,16 @@
                 $this->message = "User logged in!"; 
                 return true;
             }
+        }*/
+        
+        public function login ($user_entered_password, $stored_password_hash, $uid) { //check the passwords and set the session id
+            if (password_verify($user_entered_password, $stored_password_hash)) { //if their password is valid
+                $_SESSION['uid'] = $uid; //save their uid in session for use everywhere
+                $_SESSION['bLoggedIn'] = true; 
+                return true;
+            }
         }
+        
         
         public function logout () { //log the user out of the system
             $_SESSION['uid'] = NULL; //nullify their session info

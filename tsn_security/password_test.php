@@ -1,5 +1,5 @@
 <?php
-	echo "pass word hash=",PHP_EOL;
+	echo "password hash=",PHP_EOL;
 	$hashpass = password_hash("password", PASSWORD_BCRYPT);
 	echo "\r\n".$hashpass;
 	/*
