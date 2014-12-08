@@ -52,7 +52,7 @@
         
         public function create () { //creates a new user in the SQL
             $columns = array ("password", "email", "fname", "lname", "picture", "interests", "hobbies", "bio", "rel", "privacy");
-            $values = array ($this->password, $this->email, $this->fname, $this->lname, $this->picture, $this->interests, $this->hobbies, $this->bio, $this->rel, $this->privacy);
+            $values = array (password_hash($this->password, PASSWORD_BCRYPT), $this->email, $this->fname, $this->lname, $this->picture, $this->interests, $this->hobbies, $this->bio, $this->rel, $this->privacy);
             
             $dao = new SQL (); //data access object
             $this->uid = $dao->insert ($this->table, $columns, $values); //send insert to SQL
@@ -74,11 +74,11 @@
             $dao->insert ("modules", $columns, $values);
             $values = array ($uid, "contact", 1, 0, "#FF00FF", "#000000");
             $dao->insert ("modules", $columns, $values);
-            $values = array ($uid, "schools", 1, 0, "#FF00FF", "#000000");
+            $values = array ($uid, "schools", 0, 1, "#FF00FF", "#000000");
             $dao->insert ("modules", $columns, $values);
-            $values = array ($uid, "work", 1, 0, "#FF00FF", "#000000");
+            $values = array ($uid, "work", 0, 2, "#FF00FF", "#000000");
             $dao->insert ("modules", $columns, $values);
-            $values = array ($uid, "friends", 1, 0, "#FF00FF", "#000000");
+            $values = array ($uid, "friends", 1, 1, "#FF00FF", "#000000");
             $dao->insert ("modules", $columns, $values);
             $values = array ($uid, "posts", 1, 0, "#FF00FF", "#000000");
             $dao->insert ("modules", $columns, $values);
@@ -123,13 +123,38 @@
             $dao = new SQL (); //data access object
             $module_success = $dao->delete ("modules", $this->identifier, $_SESSION['uid']);
             if ($module_success) {
-                $user_success = $dao->delete ($this->table, $this->identifier, $_SESSION['uid']);
-                if ($user_success) {
-                    $this->message = "User deleted!";
-                    $this->logout ();
-                    return true;
+                $asset_success = deleteFolder ("../assets/".$this->email);
+
+                if ($asset_success) {
+                    $other_success = true;
+                    if (!$dao->delete ('folders', $this->identifier, $_SESSION['uid']) ||
+                        !$dao->delete ('blogs', $this->identifier, $_SESSION['uid']) ||
+                        !$dao->delete ('posts', $this->identifier, $_SESSION['uid']) ||
+                        !$dao->delete ('schools', $this->identifier, $_SESSION['uid']) ||
+                        !$dao->delete ('security_questions', $this->identifier, $_SESSION['uid']) ||
+                        !$dao->delete ('workplaces', $this->identifier, $_SESSION['uid']) ||
+                        !$dao->delete ('friends', 'uid1', $_SESSION['uid']) ||
+                        !$dao->delete ('friends', 'uid2', $_SESSION['uid'])) {
+                        $other_success = false;
+                    }
+
+                    if ($other_success) {
+                        $user_success = $dao->delete ($this->table, $this->identifier, $_SESSION['uid']);
+
+                        if ($user_success) {
+                            $this->message = "User deleted!";
+                            $this->logout ();
+                            return true;
+                        } else {
+                            $this->message = "User could not be deleted.";
+                            return false;
+                        }
+                    } else {
+                        $this->message = "Could not delete other things";
+                        return false;
+                    }
                 } else {
-                    $this->message = "User could not be deleted.";
+                    $this->message = "Could not delete assets";
                     return false;
                 }
             } else {
