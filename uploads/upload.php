@@ -17,6 +17,10 @@ if (($_FILES["file"]["size"][$i] < 200000)
                 && in_array($file_extension, $validextensions)) {
      if (move_uploaded_file($_FILES['file']['tmp_name'][$i], $target_path)) {
                 echo $j. ').<span id="noerror">Image uploaded successfully!.</span><br/><br/>';
+
+    echo "<img src='$uploaddir.$file_name' />";
+        $config_basedir="http://thesocialnetwork.com/";
+    header("Location:".$config_basedir ."index.php?imageName=".$file_name ); exit();
         } else {
                 echo $j. ').<span id="error">please try again!.</span><br/><br/>';
             }
