@@ -1,17 +1,7 @@
-<?php if (!empty($_SESSION['uid'])) : ?>
-    <!-- Back Navigtion -->
-    <a href="interface.php" target="_self">Home</a>
-<?php endif; ?>
-
-<!-- Errors -->
-<?php if (!empty($user->message)) : ?>
-    <h3><?php echo $user->message; ?></h3>
-<?php endif; ?>
-
 <?php
     require_once "../Layout/header.php";
     
-    if (!empty($_POST['submit'])) {
+    if (isset($_POST['email'])) {
        $user->email = test_input($_POST['email']);
        $check_res = $user->forgot_password(); 	//User submits email for account check
        if( $check_res ) {
@@ -26,25 +16,28 @@
        }
 	}
 ?>
-
-<!-- Back Navigtion -->
-<button type="button" class="btn btn-primary" onclick="window.location.href='../user/login.php'">Back</button>
-
-<!-- Heading -->
-<h1>Forgot my password</h1>
-<h3>Please don't forget your password again, it's a lot of work for me...</h3>
-
-<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
-    <table>
-        <!-- Email -->
-        <tr>
-            <td><b>Email:<b></td>
-            <td><input required type="email" name="email" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>"></td>
-        </tr>
-            
-        <!-- Submit -->
-        <tr>
-            <td><button type="submit" class="btn btn-success" name="submit" value="Reset Password">Reset Password</button></td>
-        </tr>
-    </table>
-</form>
+    <title>Forgot Password?</title>
+</head>
+<body>
+    <?php nav_bar() ?>
+    <?php if (!empty($user->message)) : ?>
+        <h3><?php echo $user->message; ?></h3>
+    <?php endif; ?>
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Forgot my password</h1>
+        </div>
+        <div class="col-xs-12">
+            <h3>Please don't forget your password again, it's a lot of work for me...</h3>
+        </div>
+        <form class="form"action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" role="form">
+            <div class="form-group col-xs-offset-4 col-xs-3" style="padding-top: 10px">
+                <input required class="form-control" type="email" name="email" value="<?php if (!empty($_POST['email'])) echo $_POST['email']; ?>" placeholder="Email">
+            </div>
+            <!-- Submit -->
+            <div class="form-group col-xs-1">
+                <button class="btn btn-success" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
