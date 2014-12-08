@@ -35,6 +35,7 @@
 
     if (!$user->loggedIn() and $_SERVER['PHP_SELF'] != "/user/login.php" 
     	and $_SERVER['PHP_SELF'] != "/user/new.php" 
+    	and $_SERVER['PHP_SELF'] != "/user/addphoto.php" 
     	and $_SERVER['PHP_SELF'] != "/tsn_security/forgot_password.php"
 		and $_SERVER['PHP_SELF'] != "/tsn_security/password_challenge.php"
 		and $_SERVER['PHP_SELF'] != "/user/change_password.php") { ?>
@@ -57,7 +58,7 @@
                 </button>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-<?php if (!empty ($_SESSION['uid'])) { ?>
+<?php if ($_SESSION['bLoggedIn']) { ?>
                 <ul class="nav navbar-nav">
                     <form action="../user/friends.php" method="POST" class="navbar-form navbar-left" role="search">
                         <div class="form-group">
@@ -142,7 +143,7 @@
     			</script>
 <?php } ?>
                 <ul class="nav navbar-nav navbar-right">
-<?php if (!empty ($_SESSION['uid'])) { ?>
+<?php if ($_SESSION['bLoggedIn']) { ?>
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="#" data-toggle="dropdown">Go to... <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
@@ -160,7 +161,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" href="#" data-toggle="dropdown"><?php
 
-    if (!empty ($_SESSION['uid'])) {$user = new user (); echo $user->fname.' '.$user->lname;} else {echo "User";}
+    if ($_SESSION['bLoggedIn']) {$user = new user (); echo $user->fname.' '.$user->lname;} else {echo "User";}
 
                         ?><span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
