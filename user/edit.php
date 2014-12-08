@@ -39,9 +39,6 @@
 <body style="padding-top:70px">
 <?php nav_bar(); ?>
 
-<!-- Back Navigtion -->
-<button type="button" class="left btn btn-primary" onclick="window.location.href='../profile/profile.php'">My Profile</button>
-
 <!-- Heading -->
 <h1>Edit User</h1>
 
