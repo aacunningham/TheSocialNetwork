@@ -175,7 +175,7 @@
 		}
 
 		public function get_challenge_question($uid=NULL) {
-		    if (empty($uid)) $uid = $_SESSIOn['uid'];
+		    if (empty($uid)) $uid = $_SESSION['uid'];
 			$dao = new SQL();
             $result = $dao->select ("security_questions", "uid", $uid); //go to the security table and get their challenge question
             if (empty($result)) {

@@ -28,7 +28,7 @@
 ?>
 
 <!-- Back Navigtion -->
-<a href="interface.php" target="_self">Home</a>
+<button type="button" class="btn btn-primary" onclick="window.location.href='../user/login.php'">Back</button>
 
 <!-- Heading -->
 <h1>Forgot my password</h1>
@@ -44,7 +44,8 @@
             
         <!-- Submit -->
         <tr>
-            <td><input type="submit" name="submit" value="Reset Password"></td>
+            <td>
+        <button type="submit" class="btn btn-success" name="submit" value="Reset Password">Reset Password</button></td>
         </tr>
     </table>
 </form>
