@@ -61,12 +61,12 @@
                 <ul class="nav navbar-nav">
                     <form action="../user/friends.php" method="POST" class="navbar-form navbar-left" role="search">
                         <div class="form-group">
-                            <input name="search" class="form-control" id="navbar-search-input" type="text" placeholder="Search Users" autocomplete="off"></input>
-                            <div id="nav-suggestions" ></div>
-                            <div id="nav-suggestions1" ></div>
-                            <div id="nav-suggestions2" ></div>
-                            <div id="nav-suggestions3" ></div>
-                        	<button class="btn btn-default no-margin" name="submit" id="navbar-btn-search" type="submit" value="submit">Search</button>
+                            <input name="search" style="display:inline-block;" class="form-control" id="navbar-search-input" type="text" placeholder="Search Users" autocomplete="off"></input>
+                            <div style="display:inline-block;" id="nav-suggestions" ></div>
+                            <div style="display:inline-block;" id="nav-suggestions1" ></div>
+                            <div style="display:inline-block;" id="nav-suggestions2" ></div>
+                            <div style="display:inline-block;" id="nav-suggestions3" ></div>
+                        	<button style="display:inline-block;"class="btn btn-default no-margin" name="submit" id="navbar-btn-search" type="submit" value="submit">Search</button>
                         </div>
                     </form>
                 </ul>

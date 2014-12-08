@@ -16,11 +16,11 @@
 
 <!-- Title -->
 <title>Login</title>
-
+<!--
 <?php if (!empty($_SESSION['uid'])) : ?>
-    <!-- Back Navigtion -->
+    <!-- Back Navigtion --
     <a href="../post/interface.php" target="_self">Home</a>
-<?php endif; ?>
+<?php endif; ?>-->
 
 <!-- Heading -->
 <h1>Login</h1>
