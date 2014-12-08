@@ -156,6 +156,7 @@
                             <li><a href="../school/interface.php">Schools</a></li>
                             <li><a href="../work/interface.php">Work</a></li>
                             <li><a href="../uploads/multiupload.php">Photo Upload</a></li>
+                            <li><a href="../videoupload/embedded.php">Videos</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
