@@ -5,7 +5,7 @@
 //use user\user;	//namespace of file being tested
 //use \PDO;
 
-class fixtureTestSupport extends \PHPUnit_Extensions_Database_TestCase
+class fixtureDbTest extends \PHPUnit_Extensions_Database_TestCase
 {
     //list of the xml files to use for this test file
     public $fixtures = array(
@@ -70,6 +70,29 @@ class fixtureTestSupport extends \PHPUnit_Extensions_Database_TestCase
             $create .= '('.implode(',',$cols).');';
             $pdo->exec($create);
         }
+        
+        if (!isset($_SESSION))
+          {
+             // If we are run from the command line interface then we do not care
+             // about headers sent using the session_start.
+             if (PHP_SAPI === 'cli')
+             {
+                $_SESSION = array();
+                $this->assertTrue(TRUE);
+             }
+             elseif (!headers_sent())
+             {
+                if (!session_start())
+                {
+                   throw new Exception(__METHOD__ . 'session_start failed.');
+                }
+             }
+             else
+             {
+                throw new Exception(
+                   __METHOD__ . 'Session started after headers sent.');
+             }
+          }
         parent::setUp();
     }
     
@@ -83,6 +106,7 @@ class fixtureTestSupport extends \PHPUnit_Extensions_Database_TestCase
             $pdo = $conn->getConnection();
             $pdo->exec("DROP TABLE IF EXISTS `$table`;");
         }
+        $_SESSION = null;
         parent::tearDown();
     }
 

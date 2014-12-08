@@ -3,40 +3,11 @@
 require_once '../phpunit/Test/_testSupport/fixtureSupport.php';
 require_once '../user/user.php';
 
-class userTest extends PHPUnit_Framework_TestCase
+class userTest extends fixtureDbTest
 {
-    public function setUp(){
-          if (!isset($_SESSION))
-          {
-             // If we are run from the command line interface then we do not care
-             // about headers sent using the session_start.
-             if (PHP_SAPI === 'cli')
-             {
-                $_SESSION = array();
-                $this->assertTrue(TRUE);
-             }
-             elseif (!headers_sent())
-             {
-                if (!session_start())
-                {
-                   throw new Exception(__METHOD__ . 'session_start failed.');
-                }
-             }
-             else
-             {
-                throw new Exception(
-                   __METHOD__ . 'Session started after headers sent.');
-             }
-          }
-          print_r($_SESSION);
-    }
-    
-    public function tearDown(){
-        $_SESSION = null;
-    }
-    
     public function testLogin(){
-        $u = new user();
+        $db = new SQL();
+        $u = new user($db);
         $password = 'password';
         $passwordHash = '$2y$10$dFa0flATAN5/s2VCLvSpsO0FU1fsMMRrj2DO9KXm328OWrqFshLui';
         $uid = 2;
@@ -53,9 +24,51 @@ class userTest extends PHPUnit_Framework_TestCase
      * @depends testLogin 
      */
     public function testLoggedIn(array $sessionAfterLogin){
-        $u = new user();
+        $db = new SQL();
+        $u = new user($db);
         $_SESSION = $sessionAfterLogin;
         
         $this->assertTrue($u->loggedIn());
+    }
+    
+    /**
+     *  This really just tests the update password function params
+     *  It still needs integration testing with the SQL class
+     */
+    public function testUpdatePassword(){
+        $uid = 1;
+        $new_password = 'password';        
+        $expected_password_hash = password_hash($new_password, PASSWORD_BCRYPT);
+        $columns = array('password');
+        $values = array($expected_password_hash);
+        $mockDb = \Mockery::mock('SQL');
+        $mockDb->shouldReceive('update')
+                ->with('users', $columns, $values, 'uid', $uid)
+                ->once()
+                ->andReturn(TRUE);
+        
+        $u = new user($mockDb);       
+        $this->assertTrue($u->update_password($uid, $expected_password_hash, $mockDb));
+    }
+    
+    public function testCreate(){
+        $columns = array ("password", "email", "fname", "lname", "picture", "interests", "hobbies", "bio", "rel", "privacy");
+        $values = array ("test","test","test","test","test","test","test","test","test","test");
+        $uid = 1;
+        
+        $mockDb = \Mockery::mock('SQL');
+        $mockDb ->shouldReceive('insert')
+                ->with('users', $columns, $values)
+                ->once()
+                ->andReturn($uid);
+                
+        $u = new user($mockDb);
+        $mockUser = \Mockery::mock($u);
+        $mockUser->shouldReceive('create_default')
+                 ->with($uid)
+                 ->andReturn(true);
+                 
+        $mockUser->password = $mockUser->email = $mockUser->fname = $mockUser->lname = $mockUser->interests = $mockUser->hobbies = $mockUser->bio = $mockUser->rel = $mockUser->privacy = "test";              
+        $this->assertTrue($mockUser->create());
     }
 }

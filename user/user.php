@@ -16,7 +16,13 @@
         public $public = "Public, not signed in";
         public $friendsOnly = "Friends only";
         public $uid, $message;
+        private $db;
         
+        
+        public function __construct($db) {
+           $this->db = $db;
+        }
+            
         //methods
         public function user ($blank=false) { //get current user's info at initialization of object
             if (!$blank and $this->loggedIn()) {
@@ -50,7 +56,7 @@
             return $results;
         }
         
-        public function create () { //creates a new user in the SQL
+        /*public function create () { //creates a new user in the SQL
             $columns = array ("password", "email", "fname", "lname", "picture", "interests", "hobbies", "bio", "rel", "privacy");
             $values = array ($this->password, $this->email, $this->fname, $this->lname, $this->picture, $this->interests, $this->hobbies, $this->bio, $this->rel, $this->privacy);
             
@@ -64,7 +70,22 @@
                 $this->message = "Oops - an error occurred.";
                 return false;
             }
-        } 
+        }*/
+        public function create(){
+            $columns = array ("password", "email", "fname", "lname", "picture", "interests", "hobbies", "bio", "rel", "privacy");
+            $values = array ($this->password, $this->email, $this->fname, $this->lname, $this->picture, $this->interests, $this->hobbies, $this->bio, $this->rel, $this->privacy);
+            
+            $this->uid = $this->db->insert ($this->table, $columns, $values); //send insert to SQL
+            $this->create_default ($this->uid);
+            
+            if (!empty($this->uid)) {
+                $this->message = "User created!";
+                return true;
+            } else {
+                $this->message = "Oops - an error occurred.";
+                return false;
+            }
+        }
 
         //Create default modules on user creation
         public function create_default ($uid) {
@@ -103,21 +124,20 @@
             }
         }
 		
-		public function update_password($uid=NULL) { //update the user password in SQL
-		    if (empty($uid)) $uid = $_SESSION['uid'];
-			$columns = array("password");
-			$values = array($this->password);
-			
-			$dao = new SQL();
-			$success = $dao->update($this->table, $columns, $values, $this->identifier, $uid);
-			
+        public function update_password($uid=NULL, $hashed_password, $db) { //update the user password in SQL
+            if (empty($uid)) $uid = $_SESSION['uid'];
+            $columns = array("password");
+            $values = array($hashed_password);
+            
+            $success = $db->update($this->table, $columns, $values, $this->identifier, $uid);
+            
             if ($success) {
                 $this->message = "Password changed!";
             } else {
                 $this->message = "Oops - an error occurred.";
             }
-			return $success;
-		}
+            return $success;
+        }
         
         public function delete () { //deletes a row in the SQL
             $dao = new SQL (); //data access object
@@ -138,21 +158,6 @@
             }
         }
         
-        /*public function login () { //log the user into the system
-            $dao = new SQL ();  //data access object
-            $result = $dao->select ($this->table, "email", $this->email); //get their password by their email
-            if (empty($result)) {
-                $this->message = "Error - email not in database.";
-                return false;
-            } 
-            if (password_verify($this->password, $result[0]["password"])) { //if their password is valid
-                $_SESSION['uid'] = $result[0]["uid"]; //save their uid in session for use everywhere
-                $_SESSION['bLoggedIn'] = true;
-                $this->message = "User logged in!"; 
-                return true;
-            }
-        }*/
-        
         public function login ($user_entered_password, $stored_password_hash, $uid) { //check the passwords and set the session id
             if (password_verify($user_entered_password, $stored_password_hash)) { //if their password is valid
                 $_SESSION['uid'] = $uid; //save their uid in session for use everywhere
@@ -169,7 +174,7 @@
             return true;
         }
 		
-		public function forgot_password() { //start the password reset process
+		public function forgot_password() {
 			$dao = new SQL();
 			$result = $dao->select ($this->table, "email", $this->email); //get their password by their email
 

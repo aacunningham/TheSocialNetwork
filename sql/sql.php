@@ -126,7 +126,9 @@ class SQL {
     }
     
     public function __destruct() { //destroy SQL connection
-        mysql_close($this->connection);
+        if( $this->connection != null){
+            mysql_close($this->connection);
+        }
         unset($this->connection);
     }
 }
