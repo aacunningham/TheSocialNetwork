@@ -7,7 +7,7 @@
         $post->get ();
         if (isset($_GET['del'])) {
             $post->delete();
-            header ("Location: ../profile/profile.php");
+            header ("Location: interface.php");
         }
     }
     if (!empty($_POST['submit'])) { //if edited post submitted
@@ -16,10 +16,10 @@
         $post->content = test_input($_POST['content']);
         $post->edit ();
         if ($_POST['redirect']) {
-            header ("Location: ../profile/profile.php");
+            header ("Location: interface.php");
         }
     } elseif (!empty($_POST['cancel'])) {
-          header ("Location: ../profile/profile.php");
+          header ("Location: interface.php");
     }
     $list = $post->listPosts(); //list this user's posts
 ?>

@@ -47,10 +47,10 @@
         $school->degree = test_input($_POST['degree']);
         $school->edit ();
         if ($_POST['redirect']) {
-            header ("Location: ../profile/profile.php");
+            header ("Location: interface.php");
         }
     } elseif (!empty($_POST['cancel'])) {
-          header ("Location: ../profile/profile.php");
+          header ("Location: interface.php");
     }
     $list = $school->listSchools (); //list all of this user's folders
 ?>
