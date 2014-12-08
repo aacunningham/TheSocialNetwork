@@ -58,17 +58,17 @@ class userTest extends fixtureDbTest
         
         $mockDb = \Mockery::mock('SQL');
         $mockDb ->shouldReceive('insert')
-                ->with('users', $columns, $values)
+                ->with("users", $columns, $values)
                 ->once()
                 ->andReturn($uid);
                 
-        $u = new user($mockDb);
-        $mockUser = \Mockery::mock($u);
+        $mockUser = \Mockery::mock('user[create_default]',array($mockDb));
         $mockUser->shouldReceive('create_default')
                  ->with($uid)
                  ->andReturn(true);
-                 
-        $mockUser->password = $mockUser->email = $mockUser->fname = $mockUser->lname = $mockUser->interests = $mockUser->hobbies = $mockUser->bio = $mockUser->rel = $mockUser->privacy = "test";              
+        
+        $mockUser->password = $mockUser->email = $mockUser->fname = $mockUser->lname = $mockUser->picture = $mockUser->interests = $mockUser->hobbies = $mockUser->bio = $mockUser->rel = $mockUser->privacy = "test";
+             
         $this->assertTrue($mockUser->create());
     }
 }
