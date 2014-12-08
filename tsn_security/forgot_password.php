@@ -44,8 +44,7 @@
             
         <!-- Submit -->
         <tr>
-            <td>
-        <button type="submit" class="btn btn-success" name="submit" value="Reset Password">Reset Password</button></td>
+            <td><button type="submit" class="btn btn-success" name="submit" value="Reset Password">Reset Password</button></td>
         </tr>
     </table>
 </form>

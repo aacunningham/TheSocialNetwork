@@ -154,6 +154,7 @@
                             <li><a href="../category/interface.php">Categories</a></li>
                             <li><a href="../school/interface.php">Schools</a></li>
                             <li><a href="../work/interface.php">Work</a></li>
+                            <li><a href="../uploads/multiupload.php">Upload Images/videos</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

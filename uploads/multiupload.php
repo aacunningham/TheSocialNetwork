@@ -1,34 +1,36 @@
 <!DOCTYPE html>
+<html>
 <?php 
     require_once "../Layout/header.php";
+    include "upload.php";
 ?>
-<html>
     <head>
-		<title>Photo Uploads</title>
-		<!-------Including jQuery from google------>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="script.js"></script>
-		
-		<!-------Including CSS File------>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Photo Uploads</title>
+        </head>
 <body>
-        <div id="maindiv">
+<?php nav_bar(); ?>
+       <div id="maindiv"> 
 
             <div id="formdiv">
                 <h2>Image Upload</h2>
+                <div class="rounded container-fluid" id="post">
+                
+                    <p>Use Jpeg,Png,Jpg format ONLY. Image Size Should Be Less Than 2000KB.</p>
                 <form enctype="multipart/form-data" action="" method="post">
-                    Use Jpeg,Png,Jpg format ONLY. Image Size Should Be Less Than 2000KB.
-                    <hr/>
-
-                    <div id="filediv" style="display: inline;"><input name="file[]" type="file" id="file"/></div>
-                    <br id="test">
-                    <input type="button" id="add_more" class="upload" value="Add More Files"/>
-                    <input type="submit" value="Upload File" name="submit" id="upload" class="upload"/>
+                    <div id="uploadButton">
+                        <button type="button" class="btn btn-primary upload" id="add_more">Add More Files</button>
+                        <button type="submit" name="submit" id="upload" class="upload btn btn-primary">Upload File</button>
+                    </div>
+                    <div id="filediv"><input name="file[]" type="file" id="file"></div>
                 </form>
+                <br id="test">
                 <br/>
                 <br/>
-                <?php include "upload.php"; ?>
+                </div>
             </div>
         </div>
+        <!-------Including jQuery from google------>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="script.js"></script>
     </body>
 </html>
