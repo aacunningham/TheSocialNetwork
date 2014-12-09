@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-offset-2 col-xs-8">
-                <div class="rounded" style="background-color: #EEE">
+                <div class="rounded" style="background-color: #5F5">
                     <div class="row">
                         <div class="col-xs-12">
                             <h1>You're all set up!</h1>
