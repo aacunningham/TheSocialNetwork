@@ -45,6 +45,13 @@
                             <label class="radio-inline" for="single"><input type="radio" name="rel" value="Single">Single</label>
                             <label class="radio-inline" for="taken"><input type="radio" name="rel" value="Taken">Taken</label>
                         </div>
+                        <div class="col-xs-offset-4 col-xs-4" style="padding-bottom: 10px !important;">
+                            <select class="form-control" name="privacy">
+                                <option value="Public, not signed in">Public, not signed in</option>
+                                <option value="Public, signed in">Public, signed in users</option>
+                                <option value="Friends only">Friends Only</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <div class="col-xs-offset-2 col-xs-4">
                                 <button class="btn btn-success" style="margin: 0px !important" type="submit">Submit</button>

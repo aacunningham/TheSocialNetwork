@@ -5,12 +5,22 @@
     $user->interests = test_input($_POST['int']);
     $user->bio = test_input($_POST['bio']);
     $user->hobbies = test_input($_POST['hob']);
-    $user->rel = test_input($_POST['rel']);
+    if (empty($_POST['rel'])) {
+        $user->rel = "Single";
+    } else {
+        $user->rel = test_input($_POST['rel']);
+    }
+    if (empty($_POST['privacy'])) {
+        $user->privacy = "Friends only";
+    } else {
+        $user->privacy = test_input($_POST['privacy']);
+    }
 
     if ($dao->update ("users", ['interests'], [$user->interests], "uid", $user->uid)) {}
     if ($dao->update ("users", ['bio'], [$user->bio], "uid", $user->uid)) {}
     if ($dao->update ("users", ['hobbies'], [$user->hobbies], "uid", $user->uid)) {}
     if ($dao->update ("users", ['rel'], [$user->rel], "uid", $user->uid)) {}
+    if ($dao->update ("users", ['privacy'], [$user->privacy], "uid", $user->uid)) {}
 
     $states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"];
 
