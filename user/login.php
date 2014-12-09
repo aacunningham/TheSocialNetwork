@@ -93,7 +93,7 @@
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group some-gutter">
-                                <input name="password1" class="form-control" type="password" placeholder="Re-enter Password"
+                                <input name="password1" class="form-control" type="password" placeholder="Re-type Password"
                                     data-bv-notempty="true"
                                     data-bv-notempty-message="Your password is required and cannot be empty"
 
