@@ -41,7 +41,7 @@
             </div>
             <form class="form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" role="form">
                 <div class="form-group col-xs-offset-4 col-xs-3" style="padding-top: 10px">
-                    <input required class="form-control" type="text" name="challenge_answer" value="<?php if (!empty($_POST['challenge_answer'])) echo $_POST['challenge_answer']; ?>">
+                    <input required class="form-control" type="password" name="challenge_answer" value="<?php if (!empty($_POST['challenge_answer'])) echo $_POST['challenge_answer']; ?>" placeholder="Answer">
                 </div>
                 <div class="form-group col-xs-1">
                     <button class="btn btn-success" type="submit" name="submit">Submit</button>
