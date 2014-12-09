@@ -70,17 +70,17 @@
         public function create_default ($uid) {
             $dao = new SQL ();
             $columns = array ("uid", "name", "side", "sequence", "background", "fontColor");
-            $values = array ($uid, "about me", 0, 0, "#FF00FF", "#000000");
+            $values = array ($uid, "about me", 0, 0, "#9F9", "#000000");
             $dao->insert ("modules", $columns, $values);
-            $values = array ($uid, "contact", 1, 0, "#FF00FF", "#000000");
+            $values = array ($uid, "contact", 1, 0, "#FC9", "#000000");
             $dao->insert ("modules", $columns, $values);
-            $values = array ($uid, "schools", 0, 1, "#FF00FF", "#000000");
+            $values = array ($uid, "schools", 0, 1, "#FC9", "#000000");
             $dao->insert ("modules", $columns, $values);
-            $values = array ($uid, "work", 0, 2, "#FF00FF", "#000000");
+            $values = array ($uid, "work", 0, 2, "#9F9", "#000000");
             $dao->insert ("modules", $columns, $values);
-            $values = array ($uid, "friends", 1, 1, "#FF00FF", "#000000");
+            $values = array ($uid, "friends", 1, 1, "#9F9", "#000000");
             $dao->insert ("modules", $columns, $values);
-            $values = array ($uid, "posts", 1, 0, "#FF00FF", "#000000");
+            $values = array ($uid, "posts", 2, 0, "#99F", "#000000");
             $dao->insert ("modules", $columns, $values);
             $values = array ($uid, "profile background", 1, 0, "#FFFFFF", "#000000");
             $dao->insert ("modules", $columns, $values);

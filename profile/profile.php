@@ -26,7 +26,6 @@
                 <?php $module->display_posts ($user); ?>
             </div>
             <div class="col-sm-4">
-
                 <?php $module->print_right ($user); ?>
             </div>
         </div>
