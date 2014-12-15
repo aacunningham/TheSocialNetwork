@@ -61,7 +61,8 @@ class userTest extends fixtureDbTest
                 ->with("users", $columns, $values)
                 ->once()
                 ->andReturn($uid);
-                
+        
+        //$u = new user( $mockDb );        
         $mockUser = \Mockery::mock('user[create_default]',array($mockDb));
         $mockUser->shouldReceive('create_default')
                  ->with($uid)
